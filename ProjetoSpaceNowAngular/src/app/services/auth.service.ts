@@ -1,6 +1,8 @@
+// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { StorageService } from './storage.service';
 
 export interface LoginRequest {
   email: string;
@@ -20,33 +22,30 @@ export interface LoginResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:5001/api/auth'; // ajuste conforme o endpoint da sua API
+  private apiUrl = 'https://localhost:5001/api/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private storage: StorageService) {}
 
   login(dados: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiUrl}/login`, dados).pipe(
       tap((res) => {
-        // salva o token no localStorage
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('usuario', JSON.stringify(res.usuario));
+        this.storage.setItem('token', res.token);
+        this.storage.setObject('usuario', res.usuario);
       })
     );
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
+    this.storage.removeItem('token');
+    this.storage.removeItem('usuario');
   }
 
   get usuarioLogado() {
-    return localStorage.getItem('usuario')
-      ? JSON.parse(localStorage.getItem('usuario')!)
-      : null;
+    return this.storage.getObject<any>('usuario');
   }
 
-  get token() {
-    return localStorage.getItem('token');
+  get token(): string | null {
+    return this.storage.getItem('token');
   }
 
   estaAutenticado(): boolean {
