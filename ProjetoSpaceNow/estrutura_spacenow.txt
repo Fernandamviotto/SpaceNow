@@ -1,0 +1,171 @@
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:10                ProjetoSpaceNow.Api
+d----          29/08/2025    20:53                ProjetoSpaceNow.App
+-a---          04/09/2025    21:27              0 estrutura_spacenow.txt
+-a---          29/08/2025    21:10           2916 ProjetoSpaceNow.sln
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:00                bin
+d----          29/08/2025    21:28                Controllers
+d----          29/08/2025    21:21                obj
+d----          29/08/2025    20:57                Properties
+-a---          29/08/2025    20:57            127 appsettings.Development.json
+-a---          29/08/2025    20:57            151 appsettings.json
+-a---          29/08/2025    20:57           1067 Program.cs
+-a---          29/08/2025    20:57            333 ProjetoSpaceNow.Api.csproj
+-a---          29/08/2025    21:10            238 ProjetoSpaceNow.Api.csproj.user
+-a---          29/08/2025    20:57            151 ProjetoSpaceNow.Api.http
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\bin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:00                Debug
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\bin\Debug
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:21                net9.0
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\Controllers
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          29/08/2025    21:28            532 HomeController.cs
+-a---          29/08/2025    21:28           1285 LoginController.cs
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\obj
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:00                Debug
+-a---          29/08/2025    21:00           4931 project.assets.json
+-a---          29/08/2025    21:21            487 project.nuget.cache
+-a---          29/08/2025    21:00           2874 ProjetoSpaceNow.Api.csproj.nuget.dgspec.json
+-a---          29/08/2025    21:16           1321 ProjetoSpaceNow.Api.csproj.nuget.g.props
+-a---          29/08/2025    20:58            150 ProjetoSpaceNow.Api.csproj.nuget.g.targets
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\obj\Debug
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:21                net9.0
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\obj\Debug\net9.0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:21                ref
+d----          29/08/2025    21:21                refint
+d----          29/08/2025    21:00                staticwebassets
+-a---          29/08/2025    21:00            198 .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+-a---          29/08/2025    21:16         155648 apphost.exe
+-a---          29/08/2025    21:21           1116 ProjetoSpaceNow.Api.AssemblyInfo.cs
+-a---          29/08/2025    21:21             66 ProjetoSpaceNow.Api.AssemblyInfoInputs.cache
+-a---          29/08/2025    21:00           1835 ProjetoSpaceNow.Api.assets.cache
+-a---          29/08/2025    21:21            968 ProjetoSpaceNow.Api.csproj.AssemblyReference.cache
+-a---          29/08/2025    21:21             66 ProjetoSpaceNow.Api.csproj.CoreCompileInputs.cache
+-a---          29/08/2025    21:21           3554 ProjetoSpaceNow.Api.csproj.FileListAbsolute.txt
+-a---          29/08/2025    21:21           1052 ProjetoSpaceNow.Api.GeneratedMSBuildEditorConfig.editorconfig
+-a---          29/08/2025    21:00            770 ProjetoSpaceNow.Api.GlobalUsings.g.cs
+-a---          29/08/2025    21:21              0 ProjetoSpaceNow.Api.MvcApplicationPartsAssemblyInfo.cache
+-a---          29/08/2025    21:21            665 ProjetoSpaceNow.Api.MvcApplicationPartsAssemblyInfo.cs
+-a---          29/08/2025    21:21            142 ProjetoSpaceNow.Api.sourcelink.json
+-a---          29/08/2025    21:21            379 rpswa.dswa.cache.json
+-a---          29/08/2025    21:16              0 staticwebassets.references.upToDateCheck.txt
+-a---          29/08/2025    21:11              0 staticwebassets.removed.txt
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.Api\Properties
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          29/08/2025    20:57            644 launchSettings.json
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    20:53                bin
+d----          29/08/2025    21:21                obj
+-a---          28/08/2025    21:28            105 Program.cs
+-a---          28/08/2025    21:28            252 ProjetoSpaceNow.App.csproj
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    20:53                Debug
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:16                net9.0
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          29/08/2025    21:16            449 ProjetoSpaceNow.App.deps.json
+-a---          29/08/2025    21:16           5120 ProjetoSpaceNow.App.dll
+-a---          29/08/2025    21:16         155648 ProjetoSpaceNow.App.exe
+-a---          29/08/2025    21:16          10752 ProjetoSpaceNow.App.pdb
+-a---          29/08/2025    21:16            268 ProjetoSpaceNow.App.runtimeconfig.json
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    20:53                Debug
+-a---          29/08/2025    21:00           2541 project.assets.json
+-a---          29/08/2025    21:21            228 project.nuget.cache
+-a---          29/08/2025    21:00           2597 ProjetoSpaceNow.App.csproj.nuget.dgspec.json
+-a---          29/08/2025    21:05           1321 ProjetoSpaceNow.App.csproj.nuget.g.props
+-a---          28/08/2025    21:28            150 ProjetoSpaceNow.App.csproj.nuget.g.targets
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:16                net9.0
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2025    21:16                ref
+d----          29/08/2025    21:16                refint
+-a---          29/08/2025    20:53            198 .NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+-a---          29/08/2025    21:16         155648 apphost.exe
+-a---          29/08/2025    21:16           1116 ProjetoSpaceNow.App.AssemblyInfo.cs
+-a---          29/08/2025    21:16             66 ProjetoSpaceNow.App.AssemblyInfoInputs.cache
+-a---          29/08/2025    21:00            237 ProjetoSpaceNow.App.assets.cache
+-a---          29/08/2025    21:16             66 ProjetoSpaceNow.App.csproj.CoreCompileInputs.cache
+-a---          29/08/2025    21:16           1571 ProjetoSpaceNow.App.csproj.FileListAbsolute.txt
+-a---          29/08/2025    21:16           5120 ProjetoSpaceNow.App.dll
+-a---          29/08/2025    21:16            702 ProjetoSpaceNow.App.GeneratedMSBuildEditorConfig.editorconfig
+-a---          29/08/2025    21:16             66 ProjetoSpaceNow.App.genruntimeconfig.cache
+-a---          29/08/2025    20:53            295 ProjetoSpaceNow.App.GlobalUsings.g.cs
+-a---          29/08/2025    21:16          10752 ProjetoSpaceNow.App.pdb
+-a---          29/08/2025    21:16            142 ProjetoSpaceNow.App.sourcelink.json
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ref
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          29/08/2025    21:16           6144 ProjetoSpaceNow.App.dll
+
+    Directory: C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\refint
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          29/08/2025    21:16           6144 ProjetoSpaceNow.App.dll
+

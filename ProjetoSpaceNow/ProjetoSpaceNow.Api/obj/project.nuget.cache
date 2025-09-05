@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "rpsrN/iGu1Q=",
+  "success": true,
+  "projectFilePath": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\fernanda.silva\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.8\\microsoft.aspnetcore.openapi.9.0.8.nupkg.sha512",
+    "C:\\Users\\fernanda.silva\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}

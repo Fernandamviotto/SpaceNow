@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|c:\\src\\spacenow\\projetospacenow\\projetospacenow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|solutionrelative:projetospacenow.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|c:\\src\\spacenow\\projetospacenow\\projetospacenow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|solutionrelative:projetospacenow.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|c:\\src\\spacenow\\projetospacenow\\projetospacenow.api\\projetosalas.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|solutionrelative:projetospacenow.api\\projetosalas.api.csproj||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|c:\\src\\spacenow\\projetospacenow\\projetospacenow.api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|solutionrelative:projetospacenow.api\\controllers\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|c:\\src\\spacenow\\projetospacenow\\projetospacenow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3AB12435-0FC6-4BFC-AB3E-98CD4B0D21D6}|ProjetoSpaceNow.Api\\ProjetoSpaceNow.Api.csproj|solutionrelative:projetospacenow.api\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 218,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "ProjetoSpaceNow.Api\\appsettings.json",
+              "ToolTip": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\appsettings.json",
+              "RelativeToolTip": "ProjetoSpaceNow.Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-05T00:47:12.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Program.cs",
+              "RelativeDocumentMoniker": "ProjetoSpaceNow.Api\\Program.cs",
+              "ToolTip": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Program.cs",
+              "RelativeToolTip": "ProjetoSpaceNow.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T00:46:45.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProjetoSalas.Api.csproj",
+              "DocumentMoniker": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\ProjetoSalas.Api.csproj",
+              "RelativeDocumentMoniker": "ProjetoSpaceNow.Api\\ProjetoSalas.Api.csproj",
+              "ToolTip": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\ProjetoSalas.Api.csproj",
+              "RelativeToolTip": "ProjetoSpaceNow.Api\\ProjetoSalas.Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-09-05T00:46:13.578Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Controllers\\LoginController.cs",
+              "RelativeDocumentMoniker": "ProjetoSpaceNow.Api\\Controllers\\LoginController.cs",
+              "ToolTip": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Controllers\\LoginController.cs",
+              "RelativeToolTip": "ProjetoSpaceNow.Api\\Controllers\\LoginController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T00:28:09.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "ProjetoSpaceNow.Api\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\SRC\\SpaceNow\\ProjetoSpaceNow\\ProjetoSpaceNow.Api\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "ProjetoSpaceNow.Api\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T00:21:16.736Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

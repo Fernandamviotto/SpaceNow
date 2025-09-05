@@ -1,0 +1,15 @@
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0\ProjetoSpaceNow.App.exe
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0\ProjetoSpaceNow.App.deps.json
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0\ProjetoSpaceNow.App.runtimeconfig.json
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0\ProjetoSpaceNow.App.dll
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\bin\Debug\net9.0\ProjetoSpaceNow.App.pdb
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.AssemblyInfoInputs.cache
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.AssemblyInfo.cs
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.csproj.CoreCompileInputs.cache
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.sourcelink.json
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.dll
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\refint\ProjetoSpaceNow.App.dll
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.pdb
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ProjetoSpaceNow.App.genruntimeconfig.cache
+C:\SRC\SpaceNow\ProjetoSpaceNow\ProjetoSpaceNow.App\obj\Debug\net9.0\ref\ProjetoSpaceNow.App.dll
