@@ -1,54 +1,59 @@
-// src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { Observable, tap } from 'rxjs';
-import { StorageService } from './storage.service';
 
 export interface LoginRequest {
   email: string;
-  senha: string;
+  password: string;
 }
 
 export interface LoginResponse {
-  token: string;
-  usuario: {
-    id: number;
-    nome: string;
-    email: string;
-  };
+  email?: string;
+  userId?: string;
+  accessToken?: string;
+  expiresAt?: string | null;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://localhost:5001/api/auth';
+  private readonly apiUrl = environment.apiUrl;
+  private readonly tokenKey = 'ps_auth_token';
+  private readonly userKey = 'ps_user_email';
 
-  constructor(private http: HttpClient, private storage: StorageService) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  login(dados: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, dados).pipe(
-      tap((res) => {
-        this.storage.setItem('token', res.token);
-        this.storage.setObject('usuario', res.usuario);
-      })
-    );
+  login(email: string, password: string): Observable<LoginResponse> {
+    const payload: LoginRequest = { email, password };
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, payload)
+      .pipe(
+        tap(response => {
+          if (response && response.accessToken) {
+            localStorage.setItem(this.tokenKey, response.accessToken);
+            if (response.email) localStorage.setItem(this.userKey, response.email);
+          }
+        })
+      );
   }
 
-  logout() {
-    this.storage.removeItem('token');
-    this.storage.removeItem('usuario');
+  logout(): void {
+    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.userKey);
+    this.router.navigate(['/login']);
   }
 
-  get usuarioLogado() {
-    return this.storage.getObject<any>('usuario');
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
   }
 
-  get token(): string | null {
-    return this.storage.getItem('token');
+  getUserEmail(): string | null {
+    return localStorage.getItem(this.userKey);
   }
 
-  estaAutenticado(): boolean {
-    return !!this.token;
+  isAuthenticated(): boolean {
+    return !!this.getToken();
   }
 }

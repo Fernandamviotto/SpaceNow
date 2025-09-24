@@ -1,0 +1,132 @@
+/* Container centralizado e responsivo */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4a90e2, #6a11cb);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Card de login */
+.login-card {
+  background: #fff;
+  padding: 40px 30px 30px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Logo */
+.login-logo {
+  width: 120px;        
+  height: 120px;  
+  margin-top: 10px;      
+  margin-bottom: 10px;     
+  border-radius: 16px; 
+  object-fit: contain;  
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Título e subtítulo */
+h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 24px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+/* Inputs */
+.form-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 12px 0px 12px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 6px rgba(74, 144, 226, 0.5);
+}
+
+/* Botão */
+button {
+  width: 100%;
+  padding: 14px;
+  background: #4a90e2;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+button:hover:not([disabled]) {
+  background: #357ab7;
+  transform: scale(1.03);
+}
+
+button[disabled] {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Mensagem de erro */
+.error {
+  margin-top: 15px;
+  color: #e63946;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Animação do card */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+  .login-card {
+    padding: 25px 20px;
+  }
+  
+  .login-logo {
+    width: 80px;
+    height: 80px;
+  }
+  
+  h2 {
+    font-size: 22px;
+  }
+}
