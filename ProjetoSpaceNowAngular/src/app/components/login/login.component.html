@@ -1,21 +1,36 @@
 <div class="login-container">
-  <h2>Login</h2>
+  <div class="login-card">
+    <img src="assets/outro.png" alt="Login" class="login-logo" />
 
-  <form (ngSubmit)="onSubmit()">
-    <div>
-      <label>Email</label>
-      <input type="email" [(ngModel)]="email" name="email" required />
-    </div>
+    <h2>Bem-vindo</h2>
+    <p class="subtitle">Entre com suas credenciais para continuar</p>
 
-    <div>
-      <label>Senha</label>
-      <input type="password" [(ngModel)]="senha" name="senha" required />
-    </div>
+    <form (ngSubmit)="onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <input
+          name="email"
+          type="email"
+          [(ngModel)]="email"
+          required
+          placeholder="Digite seu email"
+        />
+      </div>
 
-    <button type="submit">Entrar</button>
-  </form>
+      <div class="form-group">
+        <input
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          required
+          placeholder="Digite sua senha"
+        />
+      </div>
 
-  <div *ngIf="erro" style="color: red; margin-top: 10px;">
-    {{ erro }}
+      <button type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Entrando...' : 'Entrar' }}
+      </button>
+
+      <p *ngIf="error" class="error">{{ error }}</p>
+    </form>
   </div>
 </div>
