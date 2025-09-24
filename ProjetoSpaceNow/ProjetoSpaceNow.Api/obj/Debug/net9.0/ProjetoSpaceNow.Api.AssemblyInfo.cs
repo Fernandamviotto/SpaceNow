@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjetoSpaceNow.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+57893eb32efd2908c425fbd00570c57c322962d1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+71421e4c76a223b5673e23633c8631119bb15383")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjetoSpaceNow.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjetoSpaceNow.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
