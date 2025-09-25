@@ -5,7 +5,6 @@
 ![Backend](https://img.shields.io/badge/tecnologia-.NET%208-blue)
 ![Banco](https://img.shields.io/badge/banco-Supabase-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
-![Build](https://github.com/Fernandamviotto/SpaceNow/actions/workflows/build.yml/badge.svg)
 ---
 
 ## 📖 Descrição do Projeto
