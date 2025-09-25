@@ -1,36 +1,51 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { Component } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
-  selector: 'app-login',
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.css"],
   standalone: true,
-  imports: [CommonModule, FormsModule], 
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  imports: [FormsModule, CommonModule],
 })
 export class LoginComponent {
-  email = '';
-  password = '';
-  isLoading = false;
-  error = '';
+  email: string = "";
+  password: string = "";
+  error: string = "";
+  isLoading: boolean = false;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(): void {
-    this.error = '';
+  async onSubmit() {
+    this.error = "";
     this.isLoading = true;
-    this.auth.login(this.email, this.password).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.error = err?.error?.message ?? 'Erro ao autenticar. Verifique credenciais.';
-      }
-    });
+
+    const token = await this.authService.login(this.email, this.password);
+    this.isLoading = false;
+
+    if (!token) {
+      this.error = "Email ou senha inválidos";
+      return;
+    }
+
+    this.router.navigate(["/home"]);
+  }
+
+  async onSignup() {
+    this.error = "";
+    this.isLoading = true;
+
+    const success = await this.authService.signup(this.email, this.password);
+    this.isLoading = false;
+
+    if (!success) {
+      this.error = "Não foi possível criar a conta";
+      return;
+    }
+
+    this.error = "Conta criada com sucesso! Faça login agora.";
   }
 }
