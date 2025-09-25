@@ -16,6 +16,11 @@ export interface LoginResponse {
   expiresAt?: string | null;
 }
 
+export interface User {
+  name: string;
+  email: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,5 +60,15 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return !!this.getToken();
+  }
+
+  getUser(): User | null {
+    const email = this.getUserEmail();
+    if (email) {
+      // Extrair o nome do email (parte antes do @) ou usar um nome padrão
+      const name = email.split('@')[0] || 'Usuário';
+      return { name, email };
+    }
+    return null;
   }
 }

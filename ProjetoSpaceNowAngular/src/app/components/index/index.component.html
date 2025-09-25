@@ -1,0 +1,76 @@
+<div class="index-container">
+  <!-- Topo com menu -->
+  <header class="index-header">
+    <div class="logo-title">
+      <img src="assets/logo-spacenow.png" alt="Logo SpaceNow" class="logo" />
+      <h2>SpaceNow</h2>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/reservas">Reservas</a>
+      <a routerLink="/salas">Salas</a>
+      <a routerLink="/gestao">Gestão</a>
+      <a routerLink="/relatorios">Relatórios</a>
+      <a routerLink="/alertas" class="alertas">
+        Alertas <span class="badge">12</span>
+      </a>
+    </nav>
+
+    <div class="user-info">
+      <span>Olá, {{ username }}</span>
+      <img src="assets/avatar.png" alt="Usuário" class="avatar" />
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <section class="filtros">
+    <input type="text" placeholder="Qual o tipo de reserva?" />
+    <input type="text" placeholder="Onde?" />
+    <input type="text" placeholder="Quando?" />
+    <input type="text" placeholder="Quantas pessoas?" />
+  </section>
+
+  <!-- Agenda / timeline -->
+  <section class="agenda">
+    <div class="agenda-header">
+      <button (click)="prevDay()">&lt;</button>
+      <h3>{{ dataAtual | date: 'dd/MM/yyyy' }}</h3>
+      <button (click)="nextDay()">&gt;</button>
+
+      <div class="periodos">
+        <button [class.active]="periodo === 'manha'" (click)="setPeriodo('manha')">Manhã</button>
+        <button [class.active]="periodo === 'tarde'" (click)="setPeriodo('tarde')">Tarde</button>
+        <button [class.active]="periodo === 'noite'" (click)="setPeriodo('noite')">Noite</button>
+      </div>
+    </div>
+
+    <!-- Tabela com reservas -->
+    <table class="agenda-table">
+      <thead>
+        <tr>
+          <th>Salas</th>
+          <th *ngFor="let hora of horarios">{{ hora }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sala of salas">
+          <td>{{ sala.nome }}</td>
+          <td *ngFor="let hora of horarios">
+            <div
+              *ngIf="temReserva(sala, hora)"
+              class="reserva"
+              [ngClass]="getTipoReserva(sala, hora)"
+            >
+              {{ getNomeReserva(sala, hora) }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Alerta fixo -->
+  <div class="alerta-fixo" *ngIf="alertasPendentes > 0">
+    Existem {{ alertasPendentes }} alertas a serem tratados
+  </div>
+</div>
