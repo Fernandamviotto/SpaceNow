@@ -1,67 +1,144 @@
 .home-container {
-  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: #fff;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8f9fa;
 }
 
+/* Cabeçalho */
 .home-header {
-  background: #0b0d39;
-  color: #fff;
-  padding: 16px 24px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  h1 {
-    font-size: 20px;
-    font-weight: 600;
-    margin: 0;
-  }
+  align-items: center;
+  background: #b4002d;
+  color: #fff;
+  padding: 12px 24px;
 
   .logo {
-    width: 50px;
-    margin-right: 16px;
+    width: 40px;
+    margin-right: 12px;
+  }
+
+  .menu a {
+    margin: 0 12px;
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    position: relative;
+
+    &.alertas .badge {
+      background: #fff;
+      color: #b4002d;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 12px;
+      position: absolute;
+      top: -8px;
+      right: -12px;
+    }
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-right: 8px;
+    }
+
+    .avatar {
+      width: 36px;
+      border-radius: 50%;
+    }
   }
 }
 
-.home-content {
-  flex: 1;
-  padding: 32px;
-}
-
-.welcome-card {
-  margin-bottom: 32px;
-  padding: 20px;
-}
-
-.shortcuts {
+/* Filtros */
+.filtros {
   display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 24px;
+
+  input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+  }
 }
 
-.shortcut-card {
-  flex: 1 1 200px;
+/* Agenda */
+.agenda {
+  flex: 1;
+  padding: 24px;
+  overflow: auto;
+
+  .agenda-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+
+    .periodos button {
+      margin: 0 4px;
+      padding: 6px 12px;
+      border: none;
+      background: #eee;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &.active {
+        background: #b4002d;
+        color: #fff;
+      }
+    }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+
+    .reserva {
+      padding: 6px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .academico {
+      background: #f39c12;
+      color: #fff;
+    }
+
+    .reuniao {
+      background: #8e44ad;
+      color: #fff;
+    }
+
+    .evento {
+      background: #27ae60;
+      color: #fff;
+    }
+  }
+}
+
+/* Alerta fixo */
+.alerta-fixo {
+  background: #c0392b;
+  color: #fff;
+  padding: 10px;
   text-align: center;
-  cursor: pointer;
-  padding: 20px;
-  transition: transform 0.2s ease-in-out;
-  background: #ffffff;
-
-  mat-icon {
-    font-size: 48px;
-    color: #0b0d39;
-  }
-
-  p {
-    margin-top: 8px;
-    font-weight: bold;
-    color: #1d2d50;
-  }
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
-  }
+  font-weight: bold;
 }

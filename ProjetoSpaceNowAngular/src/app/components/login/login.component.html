@@ -26,11 +26,15 @@
         />
       </div>
 
-      <button type="submit" [disabled]="isLoading">
-        {{ isLoading ? 'Entrando...' : 'Entrar' }}
+      <button type="submit" [disabled]="isLoading || !f.form.valid">
+        {{ isLoading ? "Entrando..." : "Entrar" }}
       </button>
 
       <p *ngIf="error" class="error">{{ error }}</p>
     </form>
+
+    <!-- <button class="signup-btn" (click)="onSignup()" [disabled]="isLoading">
+      Criar Conta
+    </button> -->
   </div>
 </div>
