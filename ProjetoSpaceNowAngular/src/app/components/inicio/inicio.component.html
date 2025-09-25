@@ -1,0 +1,36 @@
+<div class="inicio-container">
+  <header class="inicio-header">
+    <img src="assets/logo-spacenow.png" alt="SpaceNow Logo" class="logo" />
+    <h1>Bem-vindo ao SpaceNow</h1>
+    <button class="logout-btn" (click)="logout()">Sair</button>
+  </header>
+
+  <main class="inicio-content">
+    <div class="welcome-card">
+      <div class="card-header">
+        <h2>Olá, {{ username }}</h2>
+      </div>
+      <div class="card-content">
+        <p>
+          Você está autenticado no sistema. Aqui será a tela inicial onde vamos
+          colocar dashboards, gráficos e menus futuramente.
+        </p>
+      </div>
+    </div>
+
+    <div class="shortcuts">
+      <div class="shortcut-card" routerLink="/reservas">
+        <span class="icon">📅</span>
+        <p>Reservas</p>
+      </div>
+      <div class="shortcut-card" routerLink="/salas">
+        <span class="icon">🏢</span>
+        <p>Salas</p>
+      </div>
+      <div class="shortcut-card" routerLink="/usuarios">
+        <span class="icon">👥</span>
+        <p>Usuários</p>
+      </div>
+    </div>
+  </main>
+</div>
