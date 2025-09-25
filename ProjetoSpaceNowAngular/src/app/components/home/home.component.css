@@ -1,6 +1,6 @@
-.home-container {
+home-container {
   font-family: 'Segoe UI', sans-serif;
-  background: #fff;
+  background: #10134E;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,25 +11,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #b4002d;
-  color: #fff;
+  background: #92d2f5c9;
+  color: #10134E;
   padding: 12px 24px;
 
   .logo {
-    width: 40px;
+    width: 150px;
     margin-right: 12px;
   }
 
   .menu a {
     margin: 0 12px;
-    color: #fff;
+    color: #10134E;
     font-weight: 500;
     text-decoration: none;
     position: relative;
 
     &.alertas .badge {
       background: #fff;
-      color: #b4002d;
+      color: #10134E;
       padding: 2px 6px;
       border-radius: 10px;
       font-size: 12px;
@@ -48,7 +48,7 @@
     }
 
     .avatar {
-      width: 36px;
+      width: 45px;
       border-radius: 50%;
     }
   }
@@ -89,8 +89,8 @@
       cursor: pointer;
 
       &.active {
-        background: #b4002d;
-        color: #fff;
+        background: #92d2f5c9;
+        color: #10134E;
       }
     }
   }
@@ -119,25 +119,25 @@
 
     .academico {
       background: #f39c12;
-      color: #fff;
+      color: #10134E;
     }
 
     .reuniao {
       background: #8e44ad;
-      color: #fff;
+      color: #10134E;
     }
 
     .evento {
       background: #27ae60;
-      color: #fff;
+      color: #10134E;
     }
   }
 }
 
 /* Alerta fixo */
 .alerta-fixo {
-  background: #c0392b;
-  color: #fff;
+  background: #92d2f5c9;
+  color: #10134E;
   padding: 10px;
   text-align: center;
   font-weight: bold;
