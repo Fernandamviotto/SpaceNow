@@ -1,10 +1,25 @@
-### Angular ###
-## Angular ##
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.vscode/*.code-snippets
+
 # compiled output
 dist/
 tmp/
 app/**/*.js
 app/**/*.js.map
+
+# Visual Studio
+/ProjetoSpaceNow/.vs/
+*.user
+*.suo
+*.cache
+bin/
+obj/
+
 
 # dependencies
 node_modules/

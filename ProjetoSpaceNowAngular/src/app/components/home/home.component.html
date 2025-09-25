@@ -22,7 +22,6 @@
     </div>
   </header>
 
-  <!-- Filtros -->
   <section class="filtros">
     <input type="text" placeholder="Qual o tipo de reserva?" />
     <input type="text" placeholder="Onde?" />
@@ -34,13 +33,28 @@
   <section class="agenda">
     <div class="agenda-header">
       <button (click)="prevDay()">&lt;</button>
-      <h3>{{ dataAtual | date: 'dd/MM/yyyy' }}</h3>
+      <h3>{{ dataAtual | date : "dd/MM/yyyy" }}</h3>
       <button (click)="nextDay()">&gt;</button>
 
       <div class="periodos">
-        <button [class.active]="periodo === 'manha'" (click)="setPeriodo('manha')">Manhã</button>
-        <button [class.active]="periodo === 'tarde'" (click)="setPeriodo('tarde')">Tarde</button>
-        <button [class.active]="periodo === 'noite'" (click)="setPeriodo('noite')">Noite</button>
+        <button
+          [class.active]="periodo === 'manha'"
+          (click)="setPeriodo('manha')"
+        >
+          Manhã
+        </button>
+        <button
+          [class.active]="periodo === 'tarde'"
+          (click)="setPeriodo('tarde')"
+        >
+          Tarde
+        </button>
+        <button
+          [class.active]="periodo === 'noite'"
+          (click)="setPeriodo('noite')"
+        >
+          Noite
+        </button>
       </div>
     </div>
 
@@ -68,9 +82,4 @@
       </tbody>
     </table>
   </section>
-
-  <!-- Alerta fixo -->
-  <div class="alerta-fixo" *ngIf="alertasPendentes > 0">
-    Existem {{ alertasPendentes }} alertas a serem tratados
-  </div>
 </div>
