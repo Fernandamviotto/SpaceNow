@@ -53,6 +53,33 @@ ProjetoSpaceNow/
 
 ---
 
+⚠️ Pré-requisitos
+
+- Node.js >= 18.x
+- NPM >= 9.x
+- Angular CLI >= 17.x
+- .NET SDK >= 8.0
+
+---
+
+## 🚀 Instalação de Dependências
+
+### 🔹 Frontend (Angular)
+Dentro da raiz do projeto do frontend execute o passo:
+
+```
+./install-frontend.sh
+```
+
+### 🔹 Backend (A.NET C#)
+Dentro da raiz do projeto do backend execute o passo:
+
+```
+./install-backend.ps1
+```
+
+---
+
 ## 💻 Como Rodar o Projeto
 
 ### Backend
