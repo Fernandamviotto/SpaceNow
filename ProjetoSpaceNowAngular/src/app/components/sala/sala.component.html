@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="form-group">
+    <label for="nome">Nome</label>
+    <input
+      id="nome"
+      type="text"
+      formControlName="nome"
+      placeholder="Digite o nome da sala"
+      [class.ng-invalid]="form.get('nome')?.invalid && form.get('nome')?.touched"
+      [class.ng-valid]="form.get('nome')?.valid && form.get('nome')?.touched"
+    />
+    <div *ngIf="form.get('nome')?.invalid && form.get('nome')?.touched" class="error-message">
+      Nome é obrigatório
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="capacidade">Capacidade</label>
+    <input
+      id="capacidade"
+      type="number"
+      formControlName="capacidade"
+      placeholder="Digite a capacidade da sala"
+      min="1"
+      [class.ng-invalid]="form.get('capacidade')?.invalid && form.get('capacidade')?.touched"
+      [class.ng-valid]="form.get('capacidade')?.valid && form.get('capacidade')?.touched"
+    />
+    <div *ngIf="form.get('capacidade')?.invalid && form.get('capacidade')?.touched" class="error-message">
+      <span *ngIf="form.get('capacidade')?.errors?.['required']">Capacidade é obrigatória</span>
+      <span *ngIf="form.get('capacidade')?.errors?.['min']">Capacidade deve ser no mínimo 1</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="checkbox" id="disponivel" formControlName="disponivel" />
+    <label for="disponivel">Disponível</label>
+  </div>
+
+  <button class="btn btn-primary" type="submit" [disabled]="form.invalid">
+    {{ editingId ? 'Atualizar' : 'Salvar' }}
+  </button>
+</form>
