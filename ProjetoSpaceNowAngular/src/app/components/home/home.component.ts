@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   periodo: string = "manha";
 
   horarios = ["07:00", "08:00", "09:00", "10:00", "11:00"];
-  salas: Sala[] = [];
+  sala: Sala[] = [];
   reservas: Reserva[] = [];
   usuario: Usuario | null = null;
 
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getHome(usuarioId).subscribe((data) => {
       this.usuario = data.usuario;
       this.username = data.usuario.nome;
-      this.salas = data.salas;
+      this.sala = data.sala;
       this.reservas = data.reservas;
     });
   }

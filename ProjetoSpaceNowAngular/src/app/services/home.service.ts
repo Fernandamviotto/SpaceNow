@@ -30,7 +30,7 @@ export interface Reserva {
 
 export interface HomeDto {
   usuario: Usuario;
-  salas: Sala[];
+  sala: Sala[];
   reservas: Reserva[];
 }
 

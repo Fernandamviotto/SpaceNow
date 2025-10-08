@@ -7,7 +7,7 @@
 
     <nav class="menu">
       <a routerLink="/reservas">Reservas</a>
-      <a routerLink="/sala">Salas</a>
+      <a routerLink="/sala">sala</a>
       <a routerLink="/gestao">Gestão</a>
       <a routerLink="/relatorios">Relatórios</a>
     </nav>
@@ -59,12 +59,12 @@
     <table class="agenda-table">
       <thead>
         <tr>
-          <th>Salas</th>
+          <th>sala</th>
           <th *ngFor="let hora of horarios">{{ hora }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let sala of salas">
+        <tr *ngFor="let sala of sala">
           <td>{{ sala.nome }}</td>
           <td *ngFor="let hora of horarios">
             <div

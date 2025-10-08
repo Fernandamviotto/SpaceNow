@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { SalaService } from '../../services/room.servise';
 import { Sala } from '../../Models/sala.dto';
 
 @Component({
   selector: 'app-cadastro-sala',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HttpClientModule],
   templateUrl: './sala.component.html',
   styleUrls: ['./sala.component.css']
 })
@@ -41,9 +42,9 @@ export class CadastroSalaComponent implements OnInit {
     const payload: Sala = this.form.value;
     if (this.editingId) {
       payload.id = this.editingId;
-      this.service.update(payload).subscribe(() => this.router.navigate(['/salas']));
+      this.service.update(payload).subscribe(() => this.router.navigate(['/sala']));
     } else {
-      this.service.create(payload).subscribe(() => this.router.navigate(['/salas']));
+      this.service.create(payload).subscribe(() => this.router.navigate(['/sala']));
     }
   }
 }

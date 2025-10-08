@@ -8,11 +8,11 @@ import { Sala } from '../Models/sala.dto';
   providedIn: 'root'
 })
 export class SalaService {
-  private apiUrl = `${environment.apiUrl}/salas`;
+  private apiUrl = `${environment.apiUrl}/sala`;
 
   constructor(private http: HttpClient) {}
 
-  // Buscar todas as salas
+  // Buscar todas as sala
   getAll(): Observable<Sala[]> {
     return this.http.get<Sala[]>(this.apiUrl);
   }
@@ -37,12 +37,12 @@ export class SalaService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  // Buscar salas disponíveis
+  // Buscar sala disponíveis
   getAvailable(): Observable<Sala[]> {
     return this.http.get<Sala[]>(`${this.apiUrl}/disponivel`);
   }
 
-  // Buscar salas por capacidade mínima
+  // Buscar sala por capacidade mínima
   getByCapacity(minCapacity: number): Observable<Sala[]> {
     return this.http.get<Sala[]>(`${this.apiUrl}/capacidade/${minCapacity}`);
   }
