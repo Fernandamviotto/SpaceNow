@@ -1,0 +1,74 @@
+/*
+  Estilos do modal de detalhes da sala
+  - Layout limpo e responsivo
+  - Tipografia clara
+  - Espaçamentos coerentes
+*/
+
+:host {
+  display: block;
+}
+
+.modal-header,
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+.modal-body {
+  padding: 1rem;
+  color: #343a40;
+}
+
+.modal-body p {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.modal-body strong {
+  color: #212529;
+}
+
+h6 {
+  margin: 1rem 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #212529;
+}
+
+ul {
+  margin: 0 0 0.5rem 1rem;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 0.25rem;
+}
+
+.btn.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn.btn-secondary:hover {
+  background-color: #5c636a;
+  border-color: #565e64;
+}
+
+/* Responsividade básica */
+@media (min-width: 576px) {
+  .modal-body {
+    padding: 1.25rem 1.5rem;
+  }
+}

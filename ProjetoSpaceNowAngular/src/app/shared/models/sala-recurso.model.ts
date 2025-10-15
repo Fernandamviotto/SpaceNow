@@ -1,4 +1,4 @@
-export interface SalaRecurso {
+export interface SalaRecursoModel {
   recursoId: number;
   qtdRecurso: number;
 }

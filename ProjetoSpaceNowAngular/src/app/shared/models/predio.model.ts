@@ -1,4 +1,4 @@
-export interface Predio {
+export interface PredioModel {
   predioId: number;
   nome?: string;
   apelido?: string;
