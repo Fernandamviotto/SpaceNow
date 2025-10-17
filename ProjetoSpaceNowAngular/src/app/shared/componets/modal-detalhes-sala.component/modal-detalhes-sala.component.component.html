@@ -5,8 +5,8 @@
 <div class="modal-body" *ngIf="sala">
   <p><strong>Apelido:</strong> {{ sala.apelido }}</p>
   <p><strong>Capacidade:</strong> {{ sala.capacidade }}</p>
-  <p><strong>Prédio:</strong> {{ sala.andar?.predio?.nome || sala.andar?.predio?.apelido }}</p>
-  <p><strong>Andar:</strong> {{ sala.andar?.apelido }}</p>
+  <p><strong>Prédio:</strong> {{ sala.andar.predio?.nome || sala.andar.predio?.apelido }}</p>
+  <p><strong>Andar:</strong> {{ sala.andar.apelido }}</p>
   <p><strong>Tipo:</strong> {{ sala.salaTipo?.nomeTipo }}</p>
   <p><strong>Público externo:</strong> {{ sala.publicoExterno ? 'Sim' : 'Não' }}</p>
 

@@ -1,0 +1,78 @@
+.gestao-salas-container {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gestao-header {
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.gestao-header h2 {
+  margin: 0 0 1rem 0;
+  color: #212529;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.gestao-nav {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  padding: 0.75rem 1.5rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #495057;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link:hover {
+  background-color: #e9ecef;
+  color: #212529;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.nav-link.active:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+
+.nav-link i {
+  font-size: 1.1rem;
+}
+
+.gestao-content {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .gestao-salas-container {
+    padding: 1rem;
+  }
+
+  .gestao-nav {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    width: 100%;
+    justify-content: center;
+  }
+}

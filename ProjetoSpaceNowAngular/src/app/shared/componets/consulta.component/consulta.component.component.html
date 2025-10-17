@@ -133,8 +133,8 @@
           <div class="row col-md-12 row-reserve d-none d-md-flex"
                *ngFor="let item of salas | paginate : { itemsPerPage: ITENS_POR_PAGINA, currentPage: currentPage, totalItems: totalItems }">
             <div class="col-md-3 item-detail summaryze" (click)="getRoomDetail(item.salaId)">{{ item.apelido }}</div>
-            <div class="col-md-1">{{ item.andar?.apelido }}</div>
-            <div class="col-md-1">{{ item.andar?.predio?.apelido || item.andar?.predio?.nome }}</div>
+            <div class="col-md-1">{{ item.andar.apelido }}</div>
+            <div class="col-md-1">{{ item.andar.predio?.apelido || item.andar.predio?.nome }}</div>
             <div class="col-md-1">{{ item.capacidade }}</div>
             <div class="col-md-2">{{ item.publicoExterno ? 'Sim' : 'Não' }}</div>
             <div class="col-md-1">{{ item.salaTipo?.nomeTipo }}</div>
@@ -145,8 +145,8 @@
         <div class="row col-md-12 row-reserve d-md-none separator-mobile"
              *ngFor="let item of salas | paginate : { itemsPerPage: ITENS_POR_PAGINA, currentPage: currentPage, totalItems: totalItems }">
           <div class="col-md-3 item-detail summaryze" (click)="getRoomDetail(item.salaId)"><i class="fas fa-chalkboard space-icon-s"></i>{{ item.apelido }}</div>
-          <div class="col-md-1"><i class="fas fa-layer-group space-icon-s"></i>{{ item.andar?.apelido }}</div>
-          <div class="col-md-1"><i class="far fa-building space-icon-s"></i>{{ item.andar?.predio?.apelido || item.andar?.predio?.nome }}</div>
+          <div class="col-md-1"><i class="fas fa-layer-group space-icon-s"></i>{{ item.andar.apelido }}</div>
+          <div class="col-md-1"><i class="far fa-building space-icon-s"></i>{{ item.andar.predio?.apelido || item.andar.predio?.nome }}</div>
           <div class="col-md-1"><i class="fas fa-users space-icon-s"></i>{{ item.capacidade }}</div>
           <div class="col-md-2"><i class="fas fa-map-marker-alt space-icon-s"></i>{{ item.publicoExterno ? 'Sim' : 'Não' }}</div>
           <div class="col-md-1"><i class="fab fa-tumblr-square space-icon-s"></i>{{ item.salaTipo?.nomeTipo }}</div>
@@ -169,3 +169,15 @@
   </div>
 </form>
 <div class="clear"></div>
+
+<!-- Modal de Detalhes da Sala -->
+<div class="modal-backdrop" *ngIf="showModal" (click)="closeModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <app-modal-detalhes-sala [sala]="salaDetalhes"></app-modal-detalhes-sala>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>

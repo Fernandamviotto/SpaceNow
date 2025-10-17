@@ -15,13 +15,13 @@
                     [(ngModel)]="sala.apelido"
                     name="txtTitulo"
                     id="txtTitulo"
-                    (keyup)="util.maxLength($event, 50)"
+                    
                     maxlength="100"
                     [disabled]="!isHabilitado"
                     required
                     #txtTitulo="ngModel" />
                 <app-span-error-validation
-                    [showError]="txtTitulo.invalid && txtTitulo.touched"
+                    [showError]="!!(txtTitulo.invalid && txtTitulo.touched)"
                     errorMessage="Informe o título da sala"></app-span-error-validation>
             </div>
         </div>
@@ -33,8 +33,8 @@
                 <label>Prédio</label>
                 <select
                     class="form-control"
-                    (change)="loadFloor()"
-                    [(ngModel)]="sala.andar.predio.predioId"
+                    (change)="$any(this).loadFloor()"
+                    [(ngModel)]="sala.andar.predioId"
                     name="drpPredio"
                     id="drpPredio"
                     [disabled]="!isHabilitado"
@@ -45,13 +45,13 @@
                     <option [value]="item.predioId" *ngFor="let item of predios">{{ item.nome || item.apelido }}</option>
                 </select>
                 <app-span-error-validation
-                    [showError]="drpPredio.invalid && drpPredio.touched"
+                    [showError]="!!(drpPredio.invalid && drpPredio.touched)"
                     errorMessage="Selecione o prédio"></app-span-error-validation>
             </div>
             <div class="form-group col-md-3">
                 <label>Andar</label>
                 <select
-                    [disabled]="!sala.andar.predio.predioId || !isHabilitado"
+                    [disabled]="!sala.andar.predioId || !isHabilitado"
                     [(ngModel)]="sala.andar.andarId"
                     class="form-control"
                     id="drpAndar"
@@ -63,12 +63,12 @@
                     <option [value]="item.andarId" *ngFor="let item of andares">{{ item.apelido }}</option>
                 </select>
                 <app-span-error-validation
-                    [showError]="drpAndar.invalid && drpAndar.touched"
+                    [showError]="!!(drpAndar.invalid && drpAndar.touched)"
                     errorMessage="Selecione o andar"></app-span-error-validation>
             </div>
-            <div class="form-group col-md-3" *ngIf="andares">
+            <div class="form-group col-md-3" *ngIf="andares.length > 0">
                 <label>Endereço</label>
-                <div class="lbl-endereco">{{ andares[0]?.predio?.endereco }}</div>
+                <div class="lbl-endereco">{{ andares[0].predio?.endereco }}</div>
             </div>
         </div>
 
@@ -84,14 +84,14 @@
                     [(ngModel)]="sala.capacidade"
                     name="txtCapacidade"
                     id="txtCapacidade"
-                    (keyup)="util.maxLength($event, 4)"
+                    
                     min="1"
                     max="999"
                     [disabled]="!isHabilitado"
                     required
                     #txtCapacidade="ngModel" />
                 <app-span-error-validation
-                    [showError]="txtCapacidade.invalid && txtCapacidade.touched"
+                    [showError]="!!(txtCapacidade.invalid && txtCapacidade.touched)"
                     errorMessage="Informe a capacidade da sala"></app-span-error-validation>
             </div>
             <div class="form-group col-md-3">
@@ -119,7 +119,7 @@
                     required />
                 <label for="optPublicoExterno2">Não</label>
                 <app-span-error-validation
-                    [showError]="optPublicoExterno.invalid && optPublicoExterno.touched"
+                    [showError]="!!(optPublicoExterno.invalid && optPublicoExterno.touched)"
                     errorMessage="Informe o público da sala"></app-span-error-validation>
             </div>
             <div class="form-group col-md-4">
@@ -150,7 +150,7 @@
                 <select
                     [(ngModel)]="sala.salaTipoId"
                     class="form-control"
-                    (change)="changeTypeOfRoom()"
+                    (change)="$any(this).changeTypeOfRoom()"
                     id="drpSalaTipo"
                     name="drpSalaTipo"
                     #drpSalaTipo="ngModel"
@@ -161,7 +161,7 @@
                     <option [value]="item.salaTipoId" *ngFor="let item of tiposDeSala">{{ item.nomeTipo }}</option>
                 </select>
                 <app-span-error-validation
-                    [showError]="drpSalaTipo.invalid && drpSalaTipo.touched"
+                    [showError]="!!(drpSalaTipo.invalid && drpSalaTipo.touched)"
                     errorMessage="Selecione o tipo de sala"></app-span-error-validation>
             </div>
         </div>
@@ -173,9 +173,7 @@
         </div>
 
         <div class="row form-group col-md-12 ft14">
-            <div *ngIf="tipoDeSala?.tiposSalaReservaConfiguracao?.length < 1" class="row form-group col-md-12 ft14">
-                Nenhuma permissão configurada.
-            </div>
+            <div class="row form-group col-md-12 ft14">Nenhuma permissão configurada.</div>
         </div>
 
         <div class="row col-md-12">
@@ -190,7 +188,7 @@
                         class="form-control ft13"
                         name="drpRecurso_{{ i }}"
                         id="drpRecurso_{{ i }}"
-                        (change)="changeResource($event, i)"
+                        (change)="$any(this).changeResource($event, i)"
                         [disabled]="!isHabilitado"
                         required>
                         <option [value]="0">Selecione</option>
@@ -204,7 +202,7 @@
                         type="number"
                         [(ngModel)]="sala.recursos[i].qtdRecurso"
                         name="txtRecursoQuantidade_{{ i }}"
-                        (keyup)="util.maxLength($event, 3)"
+                        
                         [disabled]="!isHabilitado"
                         required />
                 </div>
@@ -241,8 +239,7 @@
                     <label class="ft13">E-mail</label>
                     <input
                         type="email"
-                        (keyup)="isValidResponsibles(false)"
-                        (blur)="isValidResponsibles()"
+                        
                         [(ngModel)]="sala.responsaveis[i].responsavelEmail"
                         class="form-control ft13"
                         name="txtResponsavel_{{ i }}"
@@ -276,32 +273,29 @@
         <div class="row form-group col-md-12 ft13">
             <div class="d-flex justify-content-center w-100">
                 <div class="col-md-3">
-                    <input
+                    <button
                         class="form-control btn btn-insper-white-red"
                         name="btnVoltar"
                         id="btnVoltar"
-                        (click)="back()"
-                        type="button"
-                        value="Cancelar" />
+                        (click)="$any(this).back()"
+                        type="button">Cancelar</button>
                 </div>
                 <div class="col-md-3" *ngIf="edicao">
-                    <input
+                    <button
                         class="form-control btn btn-insper-white-orange"
                         name="btnHabilitar"
                         id="btnHabilitar"
-                        (click)="habilitarDesabilitar()"
-                        type="button"
-                        [value]="isHabilitado ? 'Desabilitar' : 'Habilitar'" />
+                        (click)="$any(this).habilitarDesabilitar()"
+                        type="button">{{ isHabilitado ? 'Desabilitar' : 'Habilitar' }}</button>
                 </div>
                 <div class="col-md-3">
-                    <input
+                    <button
                         class="form-control btn btn-insper-green"
                         name="btnSolicitarReserva"
                         id="btnSolicitarReserva"
-                        (click)="save()"
+                        (click)="$any(this).save()"
                         [disabled]="form.invalid || !isValid || !isHabilitado"
-                        type="submit"
-                        value="Salvar" />
+                        type="button">Salvar</button>
                 </div>
             </div>
             <div class="lbl-info col-md-12" *ngIf="form.invalid">O botão será habilitado após o preenchimento do formulário</div>

@@ -1,0 +1,13 @@
+<div class="tab-group">
+  <div class="tab-header">
+    <button *ngFor="let tab of tabs; let i = index" 
+            [class.active]="tab.active"
+            (click)="selectTab(i)"
+            class="tab-button">
+      {{ tab.label }}
+    </button>
+  </div>
+  <div class="tab-content">
+    <ng-content></ng-content>
+  </div>
+</div>
