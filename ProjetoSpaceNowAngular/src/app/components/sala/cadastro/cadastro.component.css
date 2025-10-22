@@ -1,0 +1,104 @@
+/* Estilos para cadastro.component.html
+   Paleta e padrões visuais alinhados com login.component.css e home.component.css
+   - Cor primária azul: #4a90e2
+   - Gradiente de fundo do login quando aplicável
+   - Bordas arredondadas e sombras suaves como no card de login
+*/
+
+:host {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #10134E;
+}
+
+.box-classroom {
+  background: linear-gradient(135deg, #4a90e2, #6a11cb);
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(16,19,78,0.12);
+  margin-bottom: 14px;
+}
+
+.box-classroom h4 { margin: 0; color: #fff; font-weight: 700; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px;
+}
+
+.tit-section-form { font-weight: 700; color: #10134E; margin-bottom: 8px; }
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  box-shadow: none;
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 8px rgba(74,144,226,0.18);
+}
+
+/* Labels e pequenas legendas */
+.lbl-endereco { color: #333; font-size: 14px; margin-top: 6px; }
+.lbl-info { color: #666; margin-top: 8px; }
+
+/* Botões seguindo o padrão de login */
+.btn-insper-green {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+}
+.btn-insper-green:hover:not([disabled]) { background: #357ab7; transform: translateY(-1px); }
+
+.btn-insper-white-orange {
+  background: linear-gradient(90deg, #fff 0%, #ffefec 100%);
+  color: #d35400;
+  border: 1px solid #f0a070;
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.btn-insper-white-red, .btn-insper-white-red input {
+  background: #fff;
+  color: #e63946;
+  border: 1px solid rgba(230,57,70,0.12);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.thin-button { padding: 6px 8px; font-size: 13px; display: inline-flex; align-items: center; }
+
+.ft-white { color: #fff; }
+.ft-green { color: #27ae60; }
+.ft-red { color: #e63946; }
+
+/* Galeria de imagens */
+.gallery { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.picture { position: relative; border-radius: 8px; overflow: hidden; background: #fafafa; padding: 6px; }
+.picture img { display: block; border-radius: 6px; cursor: pointer; }
+.btn-remove { position: absolute; bottom: 8px; left: 8px; background: rgba(230,57,70,0.9); color: #fff; padding: 6px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+
+/* Erros e validação */
+.invalid { border-color: #e63946 !important; box-shadow: 0 0 6px rgba(230,57,70,0.12); }
+.error { color: #e63946; font-size: 13px; }
+
+/* Pequenos utilitários */
+.space-icon-m { margin-right: 8px; }
+.space-icon-s { margin-right: 6px; }
+.clear { clear: both; }
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .box-classroom { padding: 12px; border-radius: 10px; }
+  .form-control { padding: 10px; }
+  .gallery { gap: 8px; }
+}

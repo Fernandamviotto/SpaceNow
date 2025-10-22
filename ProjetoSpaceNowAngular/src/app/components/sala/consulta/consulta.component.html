@@ -1,0 +1,195 @@
+<form #form="ngForm" novalidate>
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="row col-md-12">
+                <div class="col-md-10">
+                    <h4><i class="fas fa-chalkboard-teacher space-icon-m"></i>Consultar Salas</h4>
+                </div>
+                <div class="col-md-2">
+                    <div (click)="addRoom()" class="form-control btn btn-insper-white-orange ft13">
+                        <i class="fas fa-plus space-icon-s"></i>Criar nova sala
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="break-line"></div>
+        <div class="break-line"></div>
+        <div class="row col-md-12 justify-content-center">
+            <div class="col-md-3 text-center">
+                <div class="col-md-12">
+                    <label class="bolder ft-rose ft16"> <i class="far fa-building space-icon-m"></i>Prédio </label>
+                </div>
+                <div class="form-group col-md-12">
+                    <ng-select
+                        class="ng-select-style"
+                        [items]="predios"
+                        [multiple]="true"
+                        placeholder="Todos"
+                        bindLabel="nome"
+                        bindValue="id"
+                        [(ngModel)]="prediosSelecionados"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="setFilterPredio($event)">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="col-md-12">
+                    <label class="bolder ft-rose ft16"> <i class="fas fa-layer-group space-icon-m"></i>Andar </label>
+                </div>
+                <div class="form-group col-md-12">
+                    <ng-select
+                        class="ng-select-style"
+                        [items]="andares"
+                        [multiple]="true"
+                        placeholder="Todos"
+                        bindLabel="text"
+                        groupBy="groupBy"
+                        bindValue="id"
+                        [(ngModel)]="andaresSelecionados"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="setFilterAndar($event)"></ng-select>
+                </div>
+            </div>
+            <div class="col-md-3 text-center">
+                <div class="col-md-12 text-center">
+                    <label class="bolder ft-rose ft16"> <i class="fas fa-sliders-h space-icon-m"></i>Tipo de sala </label>
+                </div>
+                <div class="form-group col-md-12">
+                    <ng-select
+                        class="ng-select-style"
+                        [items]="tiposDeSala"
+                        [multiple]="true"
+                        placeholder="Todos"
+                        bindLabel="text"
+                        bindValue="id"
+                        [(ngModel)]="tiposDeSalaSelecionados"
+                        [ngModelOptions]="{ standalone: true }"
+                        (change)="setFilterTipoDeSala($event)">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="col-md-12 text-center">
+                    <label class="bolder ft-rose ft16"> <i class="fas fa-chalkboard space-icon-m"></i>Sala </label>
+                </div>
+                <div class="form-group col-md-12 text-center">
+                    <ng-select
+                        class="ng-select-style"
+                        [items]="salasFiltro"
+                        [multiple]="true"
+                        placeholder="Todas"
+                        bindLabel="text"
+                        bindValue="id"
+                        [(ngModel)]="salasSelecionadas"
+                        [ngModelOptions]="{ standalone: true }"
+                        groupBy="groupBy"
+                        (change)="setFilterSala($event)"></ng-select>
+                </div>
+            </div>
+
+            <div class="col-md-12"></div>
+            <div class="form-group col-md-2 text-md-left" *ngIf="verificaFiltros()">
+                <div (click)="limparFiltro()" class="form-control btn btn-insper-black ft13">Limpar</div>
+            </div>
+            <div class="form-group col-md-2 text-md-right">
+                <div (click)="aplicarFiltro()" class="form-control btn btn-insper-green ft13">Aplicar</div>
+            </div>
+        </div>
+
+        <app-tab-group (selectedTabChange)="onTabClicked($event)">
+            <app-tab label="Ativas" />
+            <app-tab label="Inativas" />
+        </app-tab-group>
+
+        <div *ngIf="salas.length > 0; then contentSala; else contentVazio"></div>
+        <ng-template #contentSala>
+            <div class="row table-reserve">
+                <div class="row col-md-12 column-reserve d-none d-md-flex">
+                    <div class="col-md-3 bold">Salas</div>
+                    <div class="col-md-1 bold">Andar</div>
+                    <div class="col-md-1 bold">Prédio</div>
+                    <div class="col-md-1 bold">Capacidade</div>
+                    <div class="col-md-2 bold">Aceita público externo?</div>
+                    <div class="col-md-1 bold">Tipo</div>
+                </div>
+                <div class="row col-md-12 column-reserve d-md-none separator-mobile borderless">
+                    <div class="col-md-3 bold"><i class="fas fa-chalkboard space-icon-s"></i>Salas</div>
+                    <div class="col-md-1 bold"><i class="fas fa-layer-group space-icon-s"></i>Andar</div>
+                    <div class="col-md-1 bold"><i class="far fa-building space-icon-s"></i>Prédio</div>
+                    <div class="col-md-1 bold"><i class="fas fa-users space-icon-s"></i>Capacidade</div>
+                    <div class="col-md-2 bold"><i class="fas fa-map-marker-alt space-icon-s"></i>Aceita público externo?</div>
+                    <div class="col-md-2 bold"><i class="fab fa-tumblr-square space-icon-s"></i>Tipo</div>
+                </div>
+                <div class="row table-freeze">
+                    <div
+                        class="row col-md-12 row-reserve d-none d-md-flex"
+                        *ngFor="
+                            let item of salas
+                                | paginate
+                                    : {
+                                          itemsPerPage: appSettings.ITENS_POR_PAGINA,
+                                          currentPage: currentPage,
+                                          totalItems: totalItems
+                                      }
+                        ">
+                        <div class="col-md-3 item-detail summaryze" (click)="getRoomDetail(item.salaId)">
+                            {{ item.apelido }}
+                        </div>
+                        <div class="col-md-1">{{ item.andar.apelido }}</div>
+                        <div class="col-md-1">{{ item.andar.predio.apelido }}</div>
+                        <div class="col-md-1">{{ item.capacidade }}</div>
+                        <div class="col-md-2">
+                            {{ item.publicoExterno ? 'Sim' : 'Não' }}
+                        </div>
+                        <div class="col-md-1">{{ item.salaTipo.nomeTipo }}</div>
+                        <div class="col-md-1">
+                            <button class="btn btn-insper-green ft13 btn-row-time" (click)="editRoom(item.salaId)">Editar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="row col-md-12 row-reserve d-md-none separator-mobile"
+                    *ngFor="
+                        let item of salas
+                            | paginate
+                                : {
+                                      itemsPerPage: appSettings.ITENS_POR_PAGINA,
+                                      currentPage: currentPage,
+                                      totalItems: totalItems
+                                  }
+                    ">
+                    <div class="col-md-3 item-detail summaryze" (click)="getRoomDetail(item.salaId)">
+                        <i class="fas fa-chalkboard space-icon-s"></i>
+                        {{ item.apelido }}
+                    </div>
+                    <div class="col-md-1"><i class="fas fa-layer-group space-icon-s"></i>{{ item.andar.apelido }}</div>
+                    <div class="col-md-1"><i class="far fa-building space-icon-s"></i>{{ item.andar.predio.apelido }}</div>
+                    <div class="col-md-1"><i class="fas fa-users space-icon-s"></i>{{ item.capacidade }}</div>
+                    <div class="col-md-2"><i class="fas fa-map-marker-alt space-icon-s"></i>{{ item.publicoExterno ? 'Sim' : 'Não' }}</div>
+                    <div class="col-md-1"><i class="fab fa-tumblr-square space-icon-s"></i>{{ item.salaTipo.nomeTipo }}</div>
+                    <div class="col-md-1">
+                        <button class="btn btn-insper-green ft13 btn-row-time" (click)="editRoom(item.salaId)">Editar</button>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-none d-lg-flex">
+                    <pagination-controls (pageChange)="changePage($event)" previousLabel="Anterior" nextLabel="Próximo"> </pagination-controls>
+                </div>
+                <div class="col-md-12 d-lg-none">
+                    <pagination-controls
+                        class="ft11"
+                        (pageChange)="changePage($event)"
+                        previousLabel="Anterior"
+                        nextLabel="Próximo"></pagination-controls>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template #contentVazio>
+            <div class="row col-md-12 row-reserve">Nenhuma sala encontrada.</div>
+        </ng-template>
+        <div class="break-line"></div>
+    </div>
+</form>
+<div class="clear"></div>
