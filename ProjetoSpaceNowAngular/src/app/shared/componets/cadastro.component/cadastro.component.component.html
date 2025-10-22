@@ -1,0 +1,326 @@
+<form #form="ngForm" novalidate>
+    <div class="box-classroom">
+        <h4 class="ft22 ft-white"><i class="fas fa-university space-icon-m"></i>{{ sala.apelido ? sala.apelido : titulo }}</h4>
+    </div>
+    <div class="container">
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form"><i class="fas fa-chalkboard space-icon-m"></i>Sala</h6>
+        </div>
+        <div class="row form-group col-md-12">
+            <div class="form-group col-md-12">
+                <label>Nome</label>
+                <input
+                    class="form-control"
+                    type="text"
+                    [(ngModel)]="sala.apelido"
+                    name="txtTitulo"
+                    id="txtTitulo"
+                    (keyup)="util.maxLength($event, 50)"
+                    maxlength="100"
+                    [disabled]="!isHabilitado"
+                    required
+                    #txtTitulo="ngModel" />
+                <app-span-error-validation
+                    [showError]="txtTitulo.invalid && txtTitulo.touched"
+                    errorMessage="Informe o título da sala"></app-span-error-validation>
+            </div>
+        </div>
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form"><i class="fas fa-map-marker-alt space-icon-m"></i>Localização</h6>
+        </div>
+        <div class="row form-group col-md-12">
+            <div class="form-group col-md-6">
+                <label>Prédio</label>
+                <select
+                    class="form-control"
+                    (change)="loadFloor()"
+                    [(ngModel)]="sala.andar.predio.predioId"
+                    name="drpPredio"
+                    id="drpPredio"
+                    [disabled]="!isHabilitado"
+                    #drpPredio="ngModel"
+                    minlength="1"
+                    required>
+                    <option value="0">Selecione</option>
+                    <option [value]="item.predioId" *ngFor="let item of predios">{{ item.nome || item.apelido }}</option>
+                </select>
+                <app-span-error-validation
+                    [showError]="drpPredio.invalid && drpPredio.touched"
+                    errorMessage="Selecione o prédio"></app-span-error-validation>
+            </div>
+            <div class="form-group col-md-3">
+                <label>Andar</label>
+                <select
+                    [disabled]="!sala.andar.predio.predioId || !isHabilitado"
+                    [(ngModel)]="sala.andar.andarId"
+                    class="form-control"
+                    id="drpAndar"
+                    name="drpAndar"
+                    #drpAndar="ngModel"
+                    required
+                    minlength="1">
+                    <option value="0">Selecione</option>
+                    <option [value]="item.andarId" *ngFor="let item of andares">{{ item.apelido }}</option>
+                </select>
+                <app-span-error-validation
+                    [showError]="drpAndar.invalid && drpAndar.touched"
+                    errorMessage="Selecione o andar"></app-span-error-validation>
+            </div>
+            <div class="form-group col-md-3" *ngIf="andares">
+                <label>Endereço</label>
+                <div class="lbl-endereco">{{ andares[0]?.predio?.endereco }}</div>
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form"><i class="fas fa-chalkboard space-icon-m"></i>Informações</h6>
+        </div>
+        <div class="row form-group col-md-12">
+            <div class="form-group col-md-3">
+                <label>Capacidade</label>
+                <input
+                    class="form-control"
+                    type="number"
+                    [(ngModel)]="sala.capacidade"
+                    name="txtCapacidade"
+                    id="txtCapacidade"
+                    (keyup)="util.maxLength($event, 4)"
+                    min="1"
+                    max="999"
+                    [disabled]="!isHabilitado"
+                    required
+                    #txtCapacidade="ngModel" />
+                <app-span-error-validation
+                    [showError]="txtCapacidade.invalid && txtCapacidade.touched"
+                    errorMessage="Informe a capacidade da sala"></app-span-error-validation>
+            </div>
+            <div class="form-group col-md-3">
+                <label class="clearBlock">Aceita público externo?</label>
+                <input
+                    class=""
+                    type="radio"
+                    [(ngModel)]="sala.publicoExterno"
+                    [value]="true"
+                    name="optPublicoExterno"
+                    id="optPublicoExterno1"
+                    [disabled]="!isHabilitado"
+                    #optPublicoExterno="ngModel"
+                    required />
+                <label for="optPublicoExterno1">Sim</label>
+
+                <input
+                    class=""
+                    type="radio"
+                    [(ngModel)]="sala.publicoExterno"
+                    [value]="false"
+                    name="optPublicoExterno"
+                    id="optPublicoExterno2"
+                    [disabled]="!isHabilitado"
+                    required />
+                <label for="optPublicoExterno2">Não</label>
+                <app-span-error-validation
+                    [showError]="optPublicoExterno.invalid && optPublicoExterno.touched"
+                    errorMessage="Informe o público da sala"></app-span-error-validation>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="clearBlock">Bloquear solicitação se houver público diferente do selecionado?</label>
+                <input
+                    type="radio"
+                    [(ngModel)]="sala.bitBloqueiaPublicoExterno"
+                    [value]="true"
+                    name="optBitBloqueiaPublicoExterno"
+                    id="optBitBloqueiaPublicoExterno1"
+                    [disabled]="!isHabilitado"
+                    #optBitBloqueiaPublicoExterno="ngModel"
+                    required />
+                <label for="optBitBloqueiaPublicoExterno1">Sim</label>
+
+                <input
+                    type="radio"
+                    [(ngModel)]="sala.bitBloqueiaPublicoExterno"
+                    [value]="false"
+                    name="optBitBloqueiaPublicoExterno"
+                    id="optBitBloqueiaPublicoExterno2"
+                    [disabled]="!isHabilitado"
+                    required />
+                <label for="optBitBloqueiaPublicoExterno2">Não</label>
+            </div>
+            <div class="form-group col-md-2">
+                <label>Tipo de sala</label>
+                <select
+                    [(ngModel)]="sala.salaTipoId"
+                    class="form-control"
+                    (change)="changeTypeOfRoom()"
+                    id="drpSalaTipo"
+                    name="drpSalaTipo"
+                    #drpSalaTipo="ngModel"
+                    [disabled]="!isHabilitado"
+                    required
+                    minlength="1">
+                    <option value="0">Selecione</option>
+                    <option [value]="item.salaTipoId" *ngFor="let item of tiposDeSala">{{ item.nomeTipo }}</option>
+                </select>
+                <app-span-error-validation
+                    [showError]="drpSalaTipo.invalid && drpSalaTipo.touched"
+                    errorMessage="Selecione o tipo de sala"></app-span-error-validation>
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form">
+                <i class="fas fa-gavel space-icon-m"></i>Permissões <span class="ft12">(por tipo de sala)</span>
+            </h6>
+        </div>
+
+        <div class="row form-group col-md-12 ft14">
+            <div *ngIf="tipoDeSala?.tiposSalaReservaConfiguracao?.length < 1" class="row form-group col-md-12 ft14">
+                Nenhuma permissão configurada.
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form"><i class="fas fa-desktop space-icon-m"></i>Recursos</h6>
+        </div>
+        <ng-container *ngFor="let recurso of sala.recursos; let i = index">
+            <div class="row form-group col-md-12 ft13">
+                <div class="col-md-3">
+                    <label class="ft13">Recurso</label>
+                    <select
+                        [(ngModel)]="sala.recursos[i].recursoId"
+                        class="form-control ft13"
+                        name="drpRecurso_{{ i }}"
+                        id="drpRecurso_{{ i }}"
+                        (change)="changeResource($event, i)"
+                        [disabled]="!isHabilitado"
+                        required>
+                        <option [value]="0">Selecione</option>
+                        <option [value]="item.recursoId" *ngFor="let item of recursos">{{ item.nomeRecurso }}</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="ft13">Quantidade</label>
+                    <input
+                        class="form-control ft13"
+                        type="number"
+                        [(ngModel)]="sala.recursos[i].qtdRecurso"
+                        name="txtRecursoQuantidade_{{ i }}"
+                        (keyup)="util.maxLength($event, 3)"
+                        [disabled]="!isHabilitado"
+                        required />
+                </div>
+                <div class="col-md-1">
+                    <label class="ft12">&nbsp;</label>
+                    <div
+                        *ngIf="sala.recursos.length > 0 && isHabilitado"
+                        class="btn btn-insper-white-red ft12 thin-button"
+                        (click)="removeResource(i)">
+                        <i class="far fa-trash-alt space-icon-m"></i>Remover
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="row form-group col-md-12">
+            <div class="row form-group col-md-2">
+                <div
+                    class="form-control btn btn-insper-green ft12"
+                    (click)="addResource()"
+                    [ngClass]="{ disabled: !isHabilitado }"
+                    [style.pointer-events]="!isHabilitado ? 'none' : 'auto'">
+                    <i class="fas fa-plus space-icon-m"></i>Adicionar recurso
+                </div>
+            </div>
+        </div>
+
+        <div class="row col-md-12">
+            <h6 class="col-md-12 tit-section-form"><i class="fas fa-user-tie space-icon-m"></i>Responsáveis</h6>
+        </div>
+        <ng-container *ngFor="let resp of sala.responsaveis; let i = index">
+            <div class="row form-group col-md-12 ft13">
+                <div class="col-md-3">
+                    <label class="ft13">E-mail</label>
+                    <input
+                        type="email"
+                        (keyup)="isValidResponsibles(false)"
+                        (blur)="isValidResponsibles()"
+                        [(ngModel)]="sala.responsaveis[i].responsavelEmail"
+                        class="form-control ft13"
+                        name="txtResponsavel_{{ i }}"
+                        id="txtResponsavel_{{ i }}"
+                        [disabled]="!isHabilitado" />
+                </div>
+                <div class="col-md-1">
+                    <label class="ft12">&nbsp;</label>
+                    <div
+                        *ngIf="sala.responsaveis.length > 0 && isHabilitado"
+                        class="btn btn-insper-white-red ft12 thin-button"
+                        (click)="removeResponsible(i)">
+                        <i class="far fa-trash-alt space-icon-m"></i>Remover
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+
+        <div class="row form-group col-md-12">
+            <div class="row form-group col-md-3">
+                <div
+                    class="form-control btn btn-insper-green ft12"
+                    (click)="addResponsible()"
+                    [ngClass]="{ disabled: !isHabilitado }"
+                    [style.pointer-events]="!isHabilitado ? 'none' : 'auto'">
+                    <i class="fas fa-plus space-icon-m"></i>Adicionar responsável
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group col-md-12 ft13">
+            <div class="d-flex justify-content-center w-100">
+                <div class="col-md-3">
+                    <input
+                        class="form-control btn btn-insper-white-red"
+                        name="btnVoltar"
+                        id="btnVoltar"
+                        (click)="back()"
+                        type="button"
+                        value="Cancelar" />
+                </div>
+                <div class="col-md-3" *ngIf="edicao">
+                    <input
+                        class="form-control btn btn-insper-white-orange"
+                        name="btnHabilitar"
+                        id="btnHabilitar"
+                        (click)="habilitarDesabilitar()"
+                        type="button"
+                        [value]="isHabilitado ? 'Desabilitar' : 'Habilitar'" />
+                </div>
+                <div class="col-md-3">
+                    <input
+                        class="form-control btn btn-insper-green"
+                        name="btnSolicitarReserva"
+                        id="btnSolicitarReserva"
+                        (click)="save()"
+                        [disabled]="form.invalid || !isValid || !isHabilitado"
+                        type="submit"
+                        value="Salvar" />
+                </div>
+            </div>
+            <div class="lbl-info col-md-12" *ngIf="form.invalid">O botão será habilitado após o preenchimento do formulário</div>
+            <div class="lbl-info col-md-12" *ngIf="!isHabilitado && form.valid">Para editar os dados da sala, é necessário habilitá-la primeiro</div>
+
+            <div class="form-group col-md-12 mt-4" *ngIf="sala.aliasCadastro">
+                <label class="float-right ft13">
+                    Sala criada por <b>{{ sala.aliasCadastro }}</b> em
+                    <b>{{ sala.dtCadastro | date : 'dd/MM/yyyy HH:mm' }}</b>
+                </label>
+            </div>
+            <div class="form-group col-md-12" *ngIf="sala.nomeAlteracao || sala.aliasAlteracao">
+                <label class="float-right ft13">
+                    Última alteração realizada por <b>{{ sala.nomeAlteracao || sala.aliasAlteracao }}</b> em
+                    <b>{{ sala.dtAlteracao | date : 'dd/MM/yyyy HH:mm' }}</b>
+                </label>
+            </div>
+        </div>
+        <div class="break-line"></div>
+    </div>
+</form>
+<div class="clear"></div>

@@ -1,1 +1,11 @@
-<router-outlet></router-outlet>
+<header class="app-header">
+  <h1>{{ title }}</h1>
+  <nav class="app-menu">
+    <a routerLink="/sala/consulta" routerLinkActive="active">Consultar Salas</a>
+    <a routerLink="/sala/cadastro" routerLinkActive="active">Cadastrar Sala</a>
+  </nav>
+</header>
+
+<main class="app-container">
+  <router-outlet></router-outlet>
+</main>
