@@ -45,7 +45,7 @@ namespace ProjetoSpaceNow.Api.Services
 
             return reservas.Select(r => new ReservaDto
             {
-                SalaNome = salas.FirstOrDefault(s => s.Id == r.SalaId)?.Nome ?? "Sala desconhecida",
+                SalaNome = salas.FirstOrDefault(s => s.Id == r.SalaId)?.Nome ?? "SalaModel desconhecida",
                 UsuarioNome = r.UsuarioNome,
                 Nome = r.Nome,
                 Tipo = r.Tipo,
