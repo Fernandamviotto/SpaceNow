@@ -1,43 +1,45 @@
-﻿using ProjetoSpaceNow.Api.Models;
+﻿using ProjetoSpaceNow.Api.Interfaces;
+using ProjetoSpaceNow.Api.Models;
 
 namespace ProjetoSpaceNow.Api.Services
 {
-    public class SalaService : IBaseService<SalaModel>
+    public class SalaService
     {
-        private readonly List<SalaModel> _salas = new();
+        private readonly ISalaRepository _repository;
 
-        public Task<IEnumerable<SalaModel>> GetAll() =>
-            Task.FromResult<IEnumerable<SalaModel>>(_salas);
-
-        public Task<SalaModel> GetById(int id) =>
-            Task.FromResult(_salas.FirstOrDefault(s => s.Id.GetHashCode() == id));
-
-        public Task<SalaModel> Create(SalaModel sala)
+        public SalaService(ISalaRepository repository)
         {
-            sala.Id = Guid.NewGuid();
-            _salas.Add(sala);
-            return Task.FromResult(sala);
+            _repository = repository;
         }
 
-        public Task<SalaModel> Update(SalaModel sala)
-        {
-            var existing = _salas.FirstOrDefault(s => s.Id.GetHashCode() == sala.Id.GetHashCode());
-            if (existing == null) return Task.FromResult<SalaModel>(null);
+        public async Task<IEnumerable<SalaModel>> GetAllAsync() =>
+            await _repository.GetAllAsync();
 
-            existing.Apelido = sala.Apelido;
-            existing.Capacidade = sala.Capacidade;
-            existing.PublicoExterno = sala.PublicoExterno;
-            existing.AndarId = sala.AndarId;
-            existing.SalaTipoId = sala.SalaTipoId;
-            return Task.FromResult(existing);
-        }
+        public async Task<SalaModel> GetByIdAsync(Guid id) =>
+            await _repository.GetByIdAsync(id);
 
-        public Task<bool> Delete(int id)
-        {
-            var sala = _salas.FirstOrDefault(s => s.Id.GetHashCode() == id);
-            if (sala == null) return Task.FromResult(false);
-            _salas.Remove(sala);
-            return Task.FromResult(true);
-        }
+        public async Task<SalaModel> CreateAsync(SalaModel sala) =>
+            await _repository.CreateAsync(sala);
+
+        public async Task<SalaModel> UpdateAsync(SalaModel sala) =>
+            await _repository.UpdateAsync(sala);
+
+        public async Task<bool> DeleteAsync(Guid id) =>
+            await _repository.DeleteAsync(id);
+
+        public async Task<IEnumerable<SalaModel>> GetByAndarIdAsync(Guid andarId) =>
+            await _repository.GetByAndarIdAsync(andarId);
+
+        public async Task<IEnumerable<SalaModel>> GetByPredioAsync(Guid predioId) =>
+            await _repository.GetByPredioAsync(predioId);
+
+        public async Task<SalaModel?> GetByNomeAsync(string nome) =>
+            await _repository.GetByNomeAsync(nome);
+
+        public async Task<IEnumerable<SalaModel>> GetBySalaTipoIdAsync(Guid salaTipoId) =>
+            await _repository.GetBySalaTipoIdAsync(salaTipoId);
+
+        public async Task<IEnumerable<SalaModel>> GetDisponiveisAsync() =>
+            await _repository.GetDisponiveisAsync();
     }
 }

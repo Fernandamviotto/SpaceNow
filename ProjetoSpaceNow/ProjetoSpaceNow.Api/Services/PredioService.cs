@@ -1,44 +1,33 @@
-﻿using ProjetoSpaceNow.Api.Models;
+﻿using ProjetoSpaceNow.Api.Interfaces;
+using ProjetoSpaceNow.Api.Models;
 
 namespace ProjetoSpaceNow.Api.Services
 {
-    public class PredioService : IBaseService<PredioModel>
+    public class PredioService
     {
-        private readonly List<PredioModel> _predios = new();
+        private readonly IPredioRepository _repository;
 
-        public Task<PredioModel> Create(PredioModel entity)
+        public PredioService(IPredioRepository repository)
         {
-            entity.Id = Guid.NewGuid(); 
-            _predios.Add(entity);
-            return Task.FromResult(entity);
+            _repository = repository;
         }
 
-        public Task<bool> Delete(int id)
-        {
-            var item = _predios.FirstOrDefault(p => p.Id.GetHashCode() == id);
-            if (item == null) return Task.FromResult(false);
-            _predios.Remove(item);
-            return Task.FromResult(true);
-        }
+        public async Task<IEnumerable<PredioModel>> GetAllAsync() =>
+            await _repository.GetAllAsync();
 
-        public Task<IEnumerable<PredioModel>> GetAll()
-        {
-            return Task.FromResult<IEnumerable<PredioModel>>(_predios);
-        }
+        public async Task<PredioModel> GetByIdAsync(Guid id) =>
+            await _repository.GetByIdAsync(id);
 
-        public Task<PredioModel> GetById(int id)
-        {
-            var item = _predios.FirstOrDefault(p => p.Id.GetHashCode() == id);
-            return Task.FromResult(item);
-        }
+        public async Task<PredioModel> CreateAsync(PredioModel predio) =>
+            await _repository.CreateAsync(predio);
 
-        public Task<PredioModel> Update(PredioModel entity)
-        {
-            var existing = _predios.FirstOrDefault(p => p.Id == entity.Id);
-            if (existing == null) return Task.FromResult<PredioModel>(null);
+        public async Task<PredioModel> UpdateAsync(PredioModel predio) =>
+            await _repository.UpdateAsync(predio);
 
-            existing.Apelido = entity.Apelido;
-            return Task.FromResult(existing);
-        }
+        public async Task<bool> DeleteAsync(Guid id) =>
+            await _repository.DeleteAsync(id);
+
+        public async Task<PredioModel> GetByApelidoAsync(string apelido) =>
+            await _repository.GetByApelidoAsync(apelido);
     }
 }
