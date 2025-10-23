@@ -11,9 +11,9 @@ namespace ProjetoSpaceNow.Api.Repositories
             _client = client;
         }
 
-        public async Task<IEnumerable<Reserva>> GetReservas(DateTime data)
+        public async Task<IEnumerable<ReservaModel>> GetReservas(DateTime data)
         {
-            var table = _client.From<Reserva>();
+            var table = _client.From<ReservaModel>();
 
             var response = await table
                 .Where(r => r.DataInicio.Date == data.Date)

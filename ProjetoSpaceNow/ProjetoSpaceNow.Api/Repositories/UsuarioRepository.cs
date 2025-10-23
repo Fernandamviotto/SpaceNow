@@ -11,9 +11,9 @@ namespace ProjetoSpaceNow.Api.Repositories
             _client = client;
         }
 
-        public async Task<Usuario> GetUserById(Guid id)
+        public async Task<UsuarioModel> GetUserById(Guid id)
         {
-            var table = _client.From<Usuario>();
+            var table = _client.From<UsuarioModel>();
 
             var users = await table
                 .Where(u => u.Id == id)

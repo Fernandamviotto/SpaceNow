@@ -23,32 +23,34 @@ namespace ProjetoSpaceNow.Api.Services
             {
                 Nome = user.Nome,
                 Email = user.Email,
-                Perfil = user.Perfil,
+                Perfil = user.Perfil.ToString(), 
             };
         }
 
         public async Task<IEnumerable<SalaDto>> GetSalas()
         {
-            var salas = await _salaRepo.GetAllSalas();
+            var salas = await _salaRepo.GetAllAsync();
             return salas.Select(s => new SalaDto
             {
-                Nome = s.Nome,
+                Nome = s.TableName,
                 Capacidade = s.Capacidade,
-                Recursos = s.Recursos
+                Recursos = s.Recursos != null
+                    ? string.Join(", ", s.Recursos.Select(r => r.Nome))
+                    : string.Empty,
             });
         }
 
         public async Task<IEnumerable<ReservaDto>> GetReservas(DateTime data, string periodo)
         {
             var reservas = await _reservaRepo.GetReservas(data);
-            var salas = await _salaRepo.GetAllSalas();
+            var salas = await _salaRepo.GetAllAsync();
 
             return reservas.Select(r => new ReservaDto
             {
-                SalaNome = salas.FirstOrDefault(s => s.Id == r.SalaId)?.Nome ?? "Sala desconhecida",
-                UsuarioNome = r.UsuarioNome,
-                Nome = r.Nome,
-                Tipo = r.Tipo,
+                SalaNome = salas.FirstOrDefault(s => s.Id == r.SalaId)?.Apelido ?? "SalaModel desconhecida",
+                UsuarioNome = r.Usuario.Nome,
+                Nome = r.Usuario.Nome,
+                Tipo = r.TipoReserva.ToString(),
                 Hora = r.DataInicio.ToString("HH:mm"),
                 Periodo = periodo,
                 Data = r.DataInicio.Date
