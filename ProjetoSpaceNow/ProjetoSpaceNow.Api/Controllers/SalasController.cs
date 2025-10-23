@@ -34,13 +34,17 @@ namespace ProjetoSpaceNow.Api.Controllers
         public async Task<IActionResult> Create(SalaModel sala)
         {
             var created = await _service.Create(sala);
-            return CreatedAtAction(nameof(GetById), new { id = created.SalaId }, created);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, SalaModel sala)
+        public async Task<IActionResult> Update(Guid id, SalaModel sala)
         {
-            if (id != sala.SalaId) return BadRequest();
+            if (id != sala.Id)
+            {
+                return BadRequest();
+            }
+
             var updated = await _service.Update(sala);
             if (updated == null) return NotFound();
             return Ok(updated);

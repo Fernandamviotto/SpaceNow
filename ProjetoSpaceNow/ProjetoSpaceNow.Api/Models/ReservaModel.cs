@@ -21,6 +21,9 @@ namespace ProjetoSpaceNow.Api.Models
         [Column("status")]
         public StatusReservaEnum Status { get; set; } = StatusReservaEnum.Pendente;
 
+        [Column("tipo")]
+        public TipoReservaEnum TipoReserva { get; set; }
+
         [Reference(typeof(SalaModel))]
         public SalaModel Sala { get; set; }
 

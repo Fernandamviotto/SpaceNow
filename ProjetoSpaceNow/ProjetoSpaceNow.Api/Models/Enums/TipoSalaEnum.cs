@@ -4,8 +4,8 @@
     {
         Aula = 0,
         Laboratorio = 1,
-        Reuniao = 2,
-        Evento = 3,
+        Auditorio = 2,
+        MetodologiaAtiva = 3,
         Outros = 4
     }
 }

@@ -13,7 +13,8 @@ namespace ProjetoSpaceNow.Api.Repositories
 
         public virtual async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _client.From<TEntity>().Get();
+            var response = await _client.From<TEntity>().Get();
+            return response.Models ?? new List<TEntity>();
         }
 
         public virtual async Task<TEntity> GetByIdAsync(Guid id)
@@ -24,18 +25,20 @@ namespace ProjetoSpaceNow.Api.Repositories
 
         public virtual async Task<TEntity> CreateAsync(TEntity entity)
         {
-            return await _client.From<TEntity>().Insert(entity);
+            var response = await _client.From<TEntity>().Insert(entity);
+            return response.Models.FirstOrDefault();
         }
 
         public virtual async Task<TEntity> UpdateAsync(TEntity entity)
         {
-            return await _client.From<TEntity>().Update(entity);
+            var response = await _client.From<TEntity>().Update(entity);
+            return response.Models.FirstOrDefault();
         }
 
         public virtual async Task<bool> DeleteAsync(Guid id)
         {
-            var response = await _client.From<TEntity>().Where(e => e.Id == id).Delete();
-            return response != null;
+            await _client.From<TEntity>().Where(e => e.Id == id).Delete();
+            return true;
         }
     }
 }

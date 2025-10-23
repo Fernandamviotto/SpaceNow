@@ -54,8 +54,8 @@ namespace ProjetoSpaceNow.Api.Repositories
                 .Table<SalaDisponibilidadeModel>()
                 .Filter("sala_id", Operator.Equals, salaId)
                 .Filter("dia_semana", Operator.Equals, (int)dia)
-                .Filter("hora_inicio", Operator.Lte, inicio)
-                .Filter("hora_fim", Operator.Gte, fim)
+                .Filter("hora_inicio", Operator.LessThanOrEqual, inicio)
+                .Filter("hora_fim", Operator.GreaterThanOrEqual, fim)
                 .Get();
 
             return response.Models ?? Enumerable.Empty<SalaDisponibilidadeModel>();

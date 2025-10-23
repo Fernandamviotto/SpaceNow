@@ -8,14 +8,14 @@ namespace ProjetoSpaceNow.Api.Services
 
         public Task<PredioModel> Create(PredioModel entity)
         {
-            entity.PredioId = _predios.Count + 1;
+            entity.Id = Guid.NewGuid(); 
             _predios.Add(entity);
             return Task.FromResult(entity);
         }
 
         public Task<bool> Delete(int id)
         {
-            var item = _predios.FirstOrDefault(p => p.PredioId == id);
+            var item = _predios.FirstOrDefault(p => p.Id.GetHashCode() == id);
             if (item == null) return Task.FromResult(false);
             _predios.Remove(item);
             return Task.FromResult(true);
@@ -28,13 +28,13 @@ namespace ProjetoSpaceNow.Api.Services
 
         public Task<PredioModel> GetById(int id)
         {
-            var item = _predios.FirstOrDefault(p => p.PredioId == id);
+            var item = _predios.FirstOrDefault(p => p.Id.GetHashCode() == id);
             return Task.FromResult(item);
         }
 
         public Task<PredioModel> Update(PredioModel entity)
         {
-            var existing = _predios.FirstOrDefault(p => p.PredioId == entity.PredioId);
+            var existing = _predios.FirstOrDefault(p => p.Id == entity.Id);
             if (existing == null) return Task.FromResult<PredioModel>(null);
 
             existing.Apelido = entity.Apelido;

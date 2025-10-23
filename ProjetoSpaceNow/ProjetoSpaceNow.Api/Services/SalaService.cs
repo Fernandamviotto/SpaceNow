@@ -10,18 +10,18 @@ namespace ProjetoSpaceNow.Api.Services
             Task.FromResult<IEnumerable<SalaModel>>(_salas);
 
         public Task<SalaModel> GetById(int id) =>
-            Task.FromResult(_salas.FirstOrDefault(s => s.SalaId == id));
+            Task.FromResult(_salas.FirstOrDefault(s => s.Id.GetHashCode() == id));
 
         public Task<SalaModel> Create(SalaModel sala)
         {
-            sala.SalaId = _salas.Count + 1;
+            sala.Id = Guid.NewGuid();
             _salas.Add(sala);
             return Task.FromResult(sala);
         }
 
         public Task<SalaModel> Update(SalaModel sala)
         {
-            var existing = _salas.FirstOrDefault(s => s.SalaId == sala.SalaId);
+            var existing = _salas.FirstOrDefault(s => s.Id.GetHashCode() == sala.Id.GetHashCode());
             if (existing == null) return Task.FromResult<SalaModel>(null);
 
             existing.Apelido = sala.Apelido;
@@ -34,7 +34,7 @@ namespace ProjetoSpaceNow.Api.Services
 
         public Task<bool> Delete(int id)
         {
-            var sala = _salas.FirstOrDefault(s => s.SalaId == id);
+            var sala = _salas.FirstOrDefault(s => s.Id.GetHashCode() == id);
             if (sala == null) return Task.FromResult(false);
             _salas.Remove(sala);
             return Task.FromResult(true);

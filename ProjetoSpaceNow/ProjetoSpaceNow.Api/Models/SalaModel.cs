@@ -4,7 +4,7 @@ using Supabase.Postgrest.Models;
 namespace ProjetoSpaceNow.Api.Models
 {
     [Table("sala")]
-    public class SalaModel : BaseModel
+    public class SalaModel : BaseEntity
     {
         [Column("apelido")]
         public string Apelido { get; set; }
