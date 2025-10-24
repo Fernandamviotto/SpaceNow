@@ -1,6 +1,6 @@
 home-container {
-  font-family: 'Segoe UI', sans-serif;
-  background: #10134E;
+  font-family: "Segoe UI", sans-serif;
+  background: #10134e;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@ home-container {
   justify-content: space-between;
   align-items: center;
   background: #92d2f5c9;
-  color: #10134E;
+  color: #10134e;
   padding: 12px 24px;
 
   .logo {
@@ -22,14 +22,14 @@ home-container {
 
   .menu a {
     margin: 0 12px;
-    color: #10134E;
+    color: #10134e;
     font-weight: 500;
     text-decoration: none;
     position: relative;
 
     &.alertas .badge {
       background: #fff;
-      color: #10134E;
+      color: #10134e;
       padding: 2px 6px;
       border-radius: 10px;
       font-size: 12px;
@@ -90,7 +90,7 @@ home-container {
 
       &.active {
         background: #92d2f5c9;
-        color: #10134E;
+        color: #10134e;
       }
     }
   }
@@ -101,7 +101,8 @@ home-container {
 
     th,
     td {
-      border: 1px solid #ddd;
+      /* Removida a borda conforme solicitado */
+      border: none;
       text-align: center;
       padding: 8px;
     }
@@ -119,17 +120,17 @@ home-container {
 
     .academico {
       background: #f39c12;
-      color: #10134E;
+      color: #10134e;
     }
 
     .reuniao {
       background: #8e44ad;
-      color: #10134E;
+      color: #10134e;
     }
 
     .evento {
       background: #27ae60;
-      color: #10134E;
+      color: #10134e;
     }
   }
 }
@@ -137,7 +138,7 @@ home-container {
 /* Alerta fixo */
 .alerta-fixo {
   background: #92d2f5c9;
-  color: #10134E;
+  color: #10134e;
   padding: 10px;
   text-align: center;
   font-weight: bold;

@@ -1,1 +1,41 @@
+/* Reset global margins/paddings para ocupar toda a viewport e evitar bordas brancas */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Se quiser que os elementos encostem nas extremidades visíveis sem gap,
+	 deixe o background do body igual ao do app (ou transparente). */
+body {
+  background: transparent;
+}
+
+/* Opcional: forçar que o root do app ocupe toda a área e não tenha overflow */
+app-root {
+  display: block;
+  min-height: 100%;
+}
+
+/* Você pode adicionar aqui bordas na 'tela' inteira se quiser um contorno visual */
+/* Exemplo: adicionar uma borda sutil em torno da viewport (descomente se quiser): */
+/*
+html::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	border: 2px solid rgba(0,0,0,0.06);
+	border-radius: 0;
+}
+*/
+
 /* You can add global styles to this file, and also import other style files */
