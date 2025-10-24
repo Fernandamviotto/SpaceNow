@@ -1,15 +1,15 @@
 ﻿using ProjetoSpaceNow.Api.Models;
 
-namespace ProjetoSpaceNow.Api.Interfaces
+namespace ProjetoSpaceNow.Api.Interfaces.Repository
 {
     public interface ISalaResponsavelRepository
     {
         Task<IEnumerable<SalaResponsavelModel>> GetAllAsync();
-        Task<SalaResponsavelModel> GetByIdAsync(Guid id);
+        Task<SalaResponsavelModel> GetByIdAsync(int id);
         Task<SalaResponsavelModel> CreateAsync(SalaResponsavelModel responsavel);
         Task<SalaResponsavelModel> UpdateAsync(SalaResponsavelModel responsavel);
-        Task<bool> DeleteAsync(Guid id);
-        Task<IEnumerable<SalaResponsavelModel>> GetBySalaIdAsync(Guid salaId);
+        Task<bool> DeleteAsync(int id);
+        Task<IEnumerable<SalaResponsavelModel>> GetBySalaIdAsync(int salaId);
         Task<SalaResponsavelModel> GetByNomeAsync(UsuarioModel usuario);
 
     }

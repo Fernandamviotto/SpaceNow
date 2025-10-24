@@ -25,7 +25,7 @@ namespace ProjetoSpaceNow.Api.Controllers
     //    }
 
     //    [HttpGet("{id}")]
-    //    public async Task<IActionResult> GetById(Guid id)
+    //    public async Task<IActionResult> GetById(int id)
     //    {
     //        var reserva = await _reservaService.GetByIdAsync(id);
     //        if (reserva == null)
@@ -47,7 +47,7 @@ namespace ProjetoSpaceNow.Api.Controllers
     //    }
 
     //    [HttpPut("{id}")]
-    //    public async Task<IActionResult> Update(Guid id, [FromBody] ReservaModel reserva)
+    //    public async Task<IActionResult> Update(int id, [FromBody] ReservaModel reserva)
     //    {
     //        if (id != reserva.Id)
     //            return BadRequest("ID não confere com o objeto informado.");
@@ -57,7 +57,7 @@ namespace ProjetoSpaceNow.Api.Controllers
     //    }
 
     //    [HttpDelete("{id}")]
-    //    public async Task<IActionResult> Delete(Guid id)
+    //    public async Task<IActionResult> Delete(int id)
     //    {
     //        var success = await _reservaService.DeleteAsync(id);
     //        if (!success)

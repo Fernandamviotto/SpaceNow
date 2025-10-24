@@ -6,7 +6,7 @@ namespace ProjetoSpaceNow.Api.Models
     public class SalaRecursoModel : BaseEntity
     {
         [Column("sala_id")]
-        public Guid SalaId { get; set; }
+        public int SalaId { get; set; }
 
         [Column("nome")]
         public string Nome { get; set; }

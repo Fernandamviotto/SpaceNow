@@ -6,7 +6,7 @@ namespace ProjetoSpaceNow.Api.Models
     public abstract class BaseEntity : BaseModel
     {
         [PrimaryKey("id", false)]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; }
 
         [Column("data_criacao")]
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;

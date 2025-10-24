@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 
 namespace ProjetoSpaceNow.Api.Services
@@ -15,7 +15,7 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<IEnumerable<AndarModel>> GetAllAsync() =>
             await _repository.GetAllAsync();
 
-        public async Task<AndarModel> GetByIdAsync(Guid id) =>
+        public async Task<AndarModel> GetByIdAsync(int id) =>
             await _repository.GetByIdAsync(id);
 
         public async Task<AndarModel> CreateAsync(AndarModel andar) =>
@@ -24,10 +24,10 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<AndarModel> UpdateAsync(AndarModel andar) =>
             await _repository.UpdateAsync(andar);
 
-        public async Task<bool> DeleteAsync(Guid id) =>
+        public async Task<bool> DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
 
-        public async Task<IEnumerable<AndarModel>> GetByPredioIdAsync(Guid predioId) =>
+        public async Task<IEnumerable<AndarModel>> GetByPredioIdAsync(int predioId) =>
             await _repository.GetByPredioIdAsync(predioId);
 
         public async Task<AndarModel?> GetByNomeAsync(string nome) =>

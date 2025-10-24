@@ -1,4 +1,5 @@
 ﻿using ProjetoSpaceNow.Api.DTO;
+using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Repositories;
 
 namespace ProjetoSpaceNow.Api.Services
@@ -6,17 +7,17 @@ namespace ProjetoSpaceNow.Api.Services
     public class HomeService
     {
         private readonly UsuarioRepository _userRepo;
-        private readonly SalaRepository _salaRepo;
+        private readonly ISalaRepository _salaRepo;
         private readonly ReservaRepository _reservaRepo;
 
-        public HomeService(UsuarioRepository userRepo, SalaRepository salaRepo, ReservaRepository reservaRepo)
+        public HomeService(UsuarioRepository userRepo, ISalaRepository salaRepo, ReservaRepository reservaRepo)
         {
             _userRepo = userRepo;
             _salaRepo = salaRepo;
             _reservaRepo = reservaRepo;
         }
 
-        public async Task<UsuarioDTO> GetUser(Guid id)
+        public async Task<UsuarioDTO> GetUser(int id)
         {
             var user = await _userRepo.GetUserById(id);
             return new UsuarioDTO

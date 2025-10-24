@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using ProjetoSpaceNow.Api.Models.Enums;
 using Supabase;
@@ -21,7 +21,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaDisponibilidadeModel>();
         }
 
-        public async Task<SalaDisponibilidadeModel> GetByIdAsync(Guid id)
+        public async Task<SalaDisponibilidadeModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaDisponibilidadeModel>()
@@ -30,7 +30,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Disponibilidade não encontrada.");
         }
 
-        public async Task<IEnumerable<SalaDisponibilidadeModel>> GetBySalaIdAsync(Guid salaId)
+        public async Task<IEnumerable<SalaDisponibilidadeModel>> GetBySalaIdAsync(int salaId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaDisponibilidadeModel>()
@@ -48,7 +48,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaDisponibilidadeModel>();
         }
 
-        public async Task<IEnumerable<SalaDisponibilidadeModel>> GetDisponiveisAsync(Guid salaId, TimeSpan inicio, TimeSpan fim, DiaSemanaEnum dia)
+        public async Task<IEnumerable<SalaDisponibilidadeModel>> GetDisponiveisAsync(int salaId, TimeSpan inicio, TimeSpan fim, DiaSemanaEnum dia)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaDisponibilidadeModel>()
@@ -73,7 +73,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar a disponibilidade.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var disponibilidade = await GetByIdAsync(id);
             if (disponibilidade == null) return false;

@@ -6,10 +6,10 @@ namespace ProjetoSpaceNow.Api.Models
     public class SalaResponsavelModel : BaseEntity
     {
         [Column("sala_id")]
-        public Guid SalaId { get; set; }
+        public int SalaId { get; set; }
 
         [Column("usuario_id")]
-        public Guid UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
 
         [Reference(typeof(SalaModel))]
         public SalaModel Sala { get; set; }

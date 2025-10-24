@@ -16,7 +16,7 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpGet("{usuarioId}")]
-        public async Task<IActionResult> GetHome(Guid usuarioId, [FromQuery] DateTime? data = null, [FromQuery] string periodo = "manha")
+        public async Task<IActionResult> GetHome(int usuarioId, [FromQuery] DateTime? data = null, [FromQuery] string periodo = "manha")
         {
             var user = await _homeService.GetUser(usuarioId);
             var salas = await _homeService.GetSalas();
