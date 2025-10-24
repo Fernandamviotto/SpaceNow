@@ -1,9 +1,7 @@
-/* Consulta component styles - alinhado com visual de login e home */
-
 /* Tipografia e base */
 :host {
     font-family: 'Segoe UI', Arial, sans-serif;
-    color: #10134E; /* cor principal do projeto (home) */
+    color: #10134E; 
 }
 
 .container {
@@ -24,7 +22,7 @@ h4 {
     font-size: 20px;
 }
 
-/* Painel principal parecido com card do login */
+/* Painel principal*/
 .consulta-panel {
     background: #fff;
     padding: 18px;
@@ -32,7 +30,7 @@ h4 {
     box-shadow: 0 8px 24px rgba(16,19,78,0.08);
 }
 
-/* Botões - alinhados ao estilo do login */
+/* Botões */
 .btn-insper-white-orange {
     background: linear-gradient(90deg, #fff 0%, #ffefec 100%);
     color: #d35400;
@@ -43,7 +41,7 @@ h4 {
 }
 
 .btn-insper-green {
-    background: #4a90e2; /* cor primária do login */
+    background: #4a90e2;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -62,7 +60,6 @@ h4 {
 .bold { font-weight: 600; }
 .summaryze { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Filters area - selects com cantos arredondados como inputs do login */
 .ng-select-style {
     width: 100%;
     min-height: 44px;
@@ -89,19 +86,15 @@ h4 {
 .separator-mobile { border-bottom: 1px solid #eee; padding: 10px 6px; }
 .borderless { border-bottom: none !important; }
 
-/* Linha de item com sombra leve e hover */
 .row-reserve .item-detail,
 .row-reserve { transition: background 0.18s ease, box-shadow 0.18s ease; }
 .row-reserve:hover { background: rgba(74,144,226,0.04); box-shadow: none; }
 
-/* Paginação */
 .pagination-controls, ::ng-deep pagination-controls { display: flex; justify-content: flex-end; padding: 8px 0; }
 ::ng-deep pagination-controls .current { background: #4a90e2; color: #fff; border-radius: 6px; padding: 6px 10px; }
 
-/* Modal backdrop fix (quando modal é fechado via script) */
 .modal-backdrop { display: none; }
 
-/* Focus e acessibilidade - efeitos semelhantes ao login */
 .form-control:focus, .ng-select:focus, :host ::ng-deep .ng-select .ng-select-container:focus {
     outline: none;
     box-shadow: 0 0 8px rgba(74,144,226,0.28);

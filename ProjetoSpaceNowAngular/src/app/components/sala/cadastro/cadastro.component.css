@@ -1,10 +1,3 @@
-/* Estilos para cadastro.component.html
-   Paleta e padrões visuais alinhados com login.component.css e home.component.css
-   - Cor primária azul: #4a90e2
-   - Gradiente de fundo do login quando aplicável
-   - Bordas arredondadas e sombras suaves como no card de login
-*/
-
 :host {
   font-family: 'Segoe UI', Arial, sans-serif;
   color: #10134E;
@@ -48,7 +41,7 @@
 .lbl-endereco { color: #333; font-size: 14px; margin-top: 6px; }
 .lbl-info { color: #666; margin-top: 8px; }
 
-/* Botões seguindo o padrão de login */
+/* Botões*/
 .btn-insper-green {
   background: #4a90e2;
   color: #fff;

@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+app-root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: transparent;
+}
+
+app-root {
+  display: block;
+  min-height: 100%;
+}
+
+
+html::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	border: 2px solid rgba(0,0,0,0.06);
+	border-radius: 0;
+}
