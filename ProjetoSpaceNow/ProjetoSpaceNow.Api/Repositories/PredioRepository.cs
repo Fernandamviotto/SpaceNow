@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<PredioModel>();
         }
 
-        public async Task<PredioModel> GetByIdAsync(Guid id)
+        public async Task<PredioModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<PredioModel>()
@@ -50,7 +50,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar o prédio.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var predio = await GetByIdAsync(id);
             if (predio == null) return false;

@@ -100,7 +100,7 @@ ipch/
 # TFS 2012 Local Workspace
 $tf/
 
-# Guidance Automation Toolkit
+# intance Automation Toolkit
 *.gpState
 
 # ReSharper is a .NET coding add-in
@@ -323,11 +323,8 @@ StyleCopReport.xml
 *_wpftmp.csproj
 *.tlog
 
-
-
 # Visual Studio Trace Files
 *.e2e
-
 
 # AxoCover is a Code Coverage Tool
 .axoCover/*

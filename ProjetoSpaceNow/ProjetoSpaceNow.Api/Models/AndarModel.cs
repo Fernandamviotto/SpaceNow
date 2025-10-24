@@ -10,7 +10,7 @@ namespace ProjetoSpaceNow.Api.Models
         public string Apelido { get; set; }
 
         [Column("predio_id")]
-        public Guid PredioId { get; set; }
+        public int PredioId { get; set; }
 
         [Reference(typeof(PredioModel))]
         public PredioModel Predio { get; set; }

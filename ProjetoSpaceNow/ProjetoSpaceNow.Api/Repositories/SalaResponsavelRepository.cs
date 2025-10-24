@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaResponsavelModel>();
         }
 
-        public async Task<SalaResponsavelModel> GetByIdAsync(Guid id)
+        public async Task<SalaResponsavelModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaResponsavelModel>()
@@ -29,7 +29,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Responsável não encontrado.");
         }
 
-        public async Task<IEnumerable<SalaResponsavelModel>> GetBySalaIdAsync(Guid salaId)
+        public async Task<IEnumerable<SalaResponsavelModel>> GetBySalaIdAsync(int salaId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaResponsavelModel>()
@@ -59,7 +59,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar o responsável.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var responsavel = await GetByIdAsync(id);
             if (responsavel == null) return false;

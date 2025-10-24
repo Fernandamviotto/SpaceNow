@@ -7,10 +7,10 @@ namespace ProjetoSpaceNow.Api.Models
     public class ReservaModel : BaseEntity
     {
         [Column("sala_id")]
-        public Guid SalaId { get; set; }
+        public int SalaId { get; set; }
 
         [Column("usuario_id")]
-        public Guid UsuarioId { get; set; }
+        public int UsuarioId { get; set; }
 
         [Column("data_inicio")]
         public DateTime DataInicio { get; set; }

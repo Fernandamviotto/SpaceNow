@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaTipoModel>();
         }
 
-        public async Task<SalaTipoModel> GetByIdAsync(Guid id)
+        public async Task<SalaTipoModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaTipoModel>()
@@ -50,7 +50,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar o tipo de sala.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var tipo = await GetByIdAsync(id);
             if (tipo == null) return false;

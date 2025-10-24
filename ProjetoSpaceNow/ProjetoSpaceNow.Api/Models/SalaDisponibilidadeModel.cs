@@ -7,7 +7,7 @@ namespace ProjetoSpaceNow.Api.Models
     public class SalaDisponibilidadeModel : BaseEntity
     {
         [Column("sala_id")]
-        public Guid SalaId { get; set; }
+        public int SalaId { get; set; }
 
         [Column("dia_semana")]
         public DiaSemanaEnum DiaSemana { get; set; } 

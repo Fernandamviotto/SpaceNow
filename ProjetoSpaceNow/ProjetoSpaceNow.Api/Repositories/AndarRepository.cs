@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<AndarModel>();
         }
 
-        public async Task<AndarModel> GetByIdAsync(Guid id)
+        public async Task<AndarModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<AndarModel>()
@@ -29,7 +29,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Andar não encontrado.");
         }
 
-        public async Task<IEnumerable<AndarModel>> GetByPredioIdAsync(Guid predioId)
+        public async Task<IEnumerable<AndarModel>> GetByPredioIdAsync(int predioId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<AndarModel>()
@@ -59,7 +59,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar o andar.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var andar = await GetByIdAsync(id);
             if (andar == null) return false;

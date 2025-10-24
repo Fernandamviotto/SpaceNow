@@ -17,7 +17,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? new List<TEntity>();
         }
 
-        public virtual async Task<TEntity> GetByIdAsync(Guid id)
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
             var response = await _client.From<TEntity>().Where(e => e.Id == id).Single();
             return response;
@@ -35,7 +35,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models.FirstOrDefault();
         }
 
-        public virtual async Task<bool> DeleteAsync(Guid id)
+        public virtual async Task<bool> DeleteAsync(int id)
         {
             await _client.From<TEntity>().Where(e => e.Id == id).Delete();
             return true;

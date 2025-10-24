@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 
 namespace ProjetoSpaceNow.Api.Services
@@ -15,7 +15,7 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<IEnumerable<SalaTipoModel>> GetAllAsync() =>
             await _repository.GetAllAsync();
 
-        public async Task<SalaTipoModel> GetByIdAsync(Guid id) =>
+        public async Task<SalaTipoModel> GetByIdAsync(int id) =>
             await _repository.GetByIdAsync(id);
 
         public async Task<SalaTipoModel> CreateAsync(SalaTipoModel tipo) =>
@@ -24,7 +24,7 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<SalaTipoModel> UpdateAsync(SalaTipoModel tipo) =>
             await _repository.UpdateAsync(tipo);
 
-        public async Task<bool> DeleteAsync(Guid id) =>
+        public async Task<bool> DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
 
         public async Task<SalaTipoModel> GetByDescricaoAsync(string descricao) =>

@@ -36,7 +36,7 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(int id)
         {
             var sala = await _salaService.GetByIdAsync(id);
             if (sala == null)
@@ -52,7 +52,7 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] SalaModel sala)
+        public async Task<IActionResult> Update(int id, [FromBody] SalaModel sala)
         {
             if (id != sala.Id)
                 return BadRequest("ID não confere com o objeto informado.");
@@ -62,7 +62,7 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(int id)
         {
             var success = await _salaService.DeleteAsync(id);
             if (!success)
@@ -72,21 +72,21 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpGet("{id}/disponibilidade")]
-        public async Task<IActionResult> GetDisponibilidade(Guid id)
+        public async Task<IActionResult> GetDisponibilidade(int id)
         {
             var disponibilidade = await _disponibilidadeService.GetBySalaIdAsync(id);
             return Ok(disponibilidade);
         }
 
         [HttpGet("{id}/recursos")]
-        public async Task<IActionResult> GetRecursos(Guid id)
+        public async Task<IActionResult> GetRecursos(int id)
         {
             var recursos = await _recursoService.GetBySalaIdAsync(id);
             return Ok(recursos);
         }
 
         [HttpGet("{id}/responsaveis")]
-        public async Task<IActionResult> GetResponsaveis(Guid id)
+        public async Task<IActionResult> GetResponsaveis(int id)
         {
             var responsaveis = await _responsavelService.GetBySalaIdAsync(id);
             return Ok(responsaveis);

@@ -23,7 +23,7 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TEntity>> GetById(Guid id)
+        public async Task<ActionResult<TEntity>> GetById(int id)
         {
             var response = await _client.From<TEntity>().Where(x => x.Id == id).Get();
             var entity = response.Models.Count > 0 ? response.Models[0] : null;
@@ -41,14 +41,14 @@ namespace ProjetoSpaceNow.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<TEntity>> Update(Guid id, [FromBody] TEntity entity)
+        public async Task<ActionResult<TEntity>> Update(int id, [FromBody] TEntity entity)
         {
             var response = await _client.From<TEntity>().Where(x => x.Id == id).Update(entity);
             return Ok(entity);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(int id)
         {
             await _client.From<TEntity>().Where(x => x.Id == id).Delete();
             return NoContent();

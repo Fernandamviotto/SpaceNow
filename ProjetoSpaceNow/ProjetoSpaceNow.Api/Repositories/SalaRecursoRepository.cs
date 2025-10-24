@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaRecursoModel>();
         }
 
-        public async Task<SalaRecursoModel> GetByIdAsync(Guid id)
+        public async Task<SalaRecursoModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaRecursoModel>()
@@ -29,7 +29,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Recurso não encontrado.");
         }
 
-        public async Task<IEnumerable<SalaRecursoModel>> GetBySalaIdAsync(Guid salaId)
+        public async Task<IEnumerable<SalaRecursoModel>> GetBySalaIdAsync(int salaId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaRecursoModel>()
@@ -50,7 +50,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar o recurso.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var recurso = await GetByIdAsync(id);
             if (recurso == null) return false;

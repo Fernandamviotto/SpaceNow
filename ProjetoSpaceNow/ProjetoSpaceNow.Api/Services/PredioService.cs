@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 
 namespace ProjetoSpaceNow.Api.Services
@@ -15,7 +15,7 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<IEnumerable<PredioModel>> GetAllAsync() =>
             await _repository.GetAllAsync();
 
-        public async Task<PredioModel> GetByIdAsync(Guid id) =>
+        public async Task<PredioModel> GetByIdAsync(int id) =>
             await _repository.GetByIdAsync(id);
 
         public async Task<PredioModel> CreateAsync(PredioModel predio) =>
@@ -24,7 +24,7 @@ namespace ProjetoSpaceNow.Api.Services
         public async Task<PredioModel> UpdateAsync(PredioModel predio) =>
             await _repository.UpdateAsync(predio);
 
-        public async Task<bool> DeleteAsync(Guid id) =>
+        public async Task<bool> DeleteAsync(int id) =>
             await _repository.DeleteAsync(id);
 
         public async Task<PredioModel> GetByApelidoAsync(string apelido) =>

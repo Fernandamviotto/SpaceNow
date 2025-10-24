@@ -1,4 +1,4 @@
-﻿using ProjetoSpaceNow.Api.Interfaces;
+﻿using ProjetoSpaceNow.Api.Interfaces.Repository;
 using ProjetoSpaceNow.Api.Models;
 using Supabase;
 using static Supabase.Postgrest.Constants;
@@ -20,7 +20,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaModel>();
         }
 
-        public async Task<SalaModel> GetByIdAsync(Guid id)
+        public async Task<SalaModel> GetByIdAsync(int id)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaModel>()
@@ -38,7 +38,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault();
         }
 
-        public async Task<IEnumerable<SalaModel>> GetByAndarIdAsync(Guid andarId)
+        public async Task<IEnumerable<SalaModel>> GetByAndarIdAsync(int andarId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaModel>()
@@ -47,7 +47,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaModel>();
         }
 
-        public async Task<IEnumerable<SalaModel>> GetByPredioAsync(Guid predioId)
+        public async Task<IEnumerable<SalaModel>> GetByPredioAsync(int predioId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaModel>()
@@ -56,7 +56,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models ?? Enumerable.Empty<SalaModel>();
         }
 
-        public async Task<IEnumerable<SalaModel>> GetBySalaTipoIdAsync(Guid salaTipoId)
+        public async Task<IEnumerable<SalaModel>> GetBySalaTipoIdAsync(int salaTipoId)
         {
             var response = await _supabaseClient.Postgrest
                 .Table<SalaModel>()
@@ -67,7 +67,6 @@ namespace ProjetoSpaceNow.Api.Repositories
 
         public async Task<IEnumerable<SalaModel>> GetDisponiveisAsync()
         {
-            // Aqui você pode implementar lógica de disponibilidade com join ou filtro extra conforme necessário
             var response = await _supabaseClient.Postgrest.Table<SalaModel>().Get();
             return response.Models ?? Enumerable.Empty<SalaModel>();
         }
@@ -84,7 +83,7 @@ namespace ProjetoSpaceNow.Api.Repositories
             return response.Models?.FirstOrDefault() ?? throw new Exception("Falha ao atualizar a sala.");
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var sala = await GetByIdAsync(id);
             if (sala == null) return false;
