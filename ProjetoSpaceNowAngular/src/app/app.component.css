@@ -28,7 +28,6 @@
   border-bottom: 2px solid #ffffff;
 }
 .app-container {
-  /* padding: 1rem; */
   font-family: "Segoe UI", sans-serif;
   background-color: #f7f9fc;
   min-height: calc(100vh - 80px);

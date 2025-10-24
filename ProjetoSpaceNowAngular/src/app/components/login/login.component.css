@@ -1,8 +1,7 @@
 /* Container centralizado e responsivo */
 .login-container {
-  /* Cobrir toda a viewport e evitar qualquer scroll da página */
   position: fixed;
-  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  inset: 0; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,13 +9,12 @@
   padding: 0;
   font-family: "Arial", sans-serif;
   box-sizing: border-box;
-  overflow: hidden; /* impede barras de rolagem da página */
+  overflow: hidden; 
 }
 
 /* Card de login */
 .login-card {
   background: #fff;
-  /* card compacto para caber sempre na tela sem criar barras de rolagem */
   padding: 18px 16px;
   border-radius: 12px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
@@ -25,7 +23,6 @@
   text-align: center;
   animation: fadeIn 0.45s ease;
   transition: transform 0.2s ease;
-  /* garantir que o card nunca exceda a altura da viewport; sem scroll interno */
   max-height: calc(100vh - 32px);
   overflow: visible;
 }
@@ -68,7 +65,6 @@ input {
   width: 100%;
   padding: 10px 8px;
   border-radius: 8px;
-  /* sem borda para visual limpo */
   border: none;
   background: #f6f8fb;
   font-size: 14px;
@@ -78,7 +74,6 @@ input {
 
 input:focus {
   outline: none;
-  /* foco visual leve sem expandir layout */
   box-shadow: 0 0 6px rgba(74, 144, 226, 0.18);
 }
 

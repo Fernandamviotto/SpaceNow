@@ -101,7 +101,6 @@ home-container {
 
     th,
     td {
-      /* Removida a borda conforme solicitado */
       border: none;
       text-align: center;
       padding: 8px;
@@ -133,13 +132,4 @@ home-container {
       color: #10134e;
     }
   }
-}
-
-/* Alerta fixo */
-.alerta-fixo {
-  background: #92d2f5c9;
-  color: #10134e;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
 }
