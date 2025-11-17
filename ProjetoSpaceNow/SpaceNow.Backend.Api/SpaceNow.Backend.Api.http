@@ -1,0 +1,43 @@
+@SpaceNow.Backend.Api_HostAddress = http://localhost:5000
+
+### Get all records
+GET {{SpaceNow.Backend.Api_HostAddress}}/api/records
+Accept: application/json
+
+###
+
+### Get a specific record by ID
+GET {{SpaceNow.Backend.Api_HostAddress}}/api/records/1
+Accept: application/json
+
+###
+
+### Create a new record
+POST {{SpaceNow.Backend.Api_HostAddress}}/api/records
+Content-Type: application/json
+
+{
+  "title": "Sample Record",
+  "description": "This is a sample record created via HTTP file"
+}
+
+###
+
+### Update an existing record
+PUT {{SpaceNow.Backend.Api_HostAddress}}/api/records/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "title": "Updated Record",
+  "description": "This record has been updated",
+  "createdAt": "2025-11-14T00:00:00Z"
+}
+
+###
+
+### Delete a record
+DELETE {{SpaceNow.Backend.Api_HostAddress}}/api/records/1
+
+###
+

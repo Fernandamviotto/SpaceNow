@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+/* Light theme based on Figma: whites, soft blues, neutral grays */
+:root{
+  --bg:#f7f9fc;
+  --card:#ffffff;
+  --primary:#1565d8;
+  --muted:#6b7280;
+  --accent:#e6f0ff;
+  --danger:#ff4d4f;
+  --radius:10px;
+  --gap:16px;
+  font-family: Inter, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#0f172a;font-family:Inter,system-ui,Segoe UI,Roboto;}
+.header{background:linear-gradient(90deg,var(--accent),#dceeff);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(15,23,42,0.04)}
+.brand{font-weight:700;font-size:1.1rem;color:var(--primary)}
+.nav {display:flex;gap:8px;align-items:center}
+.btn{background:var(--primary);color:#fff;padding:8px 12px;border-radius:8px;border:none;cursor:pointer}
+.card{background:var(--card);padding:16px;border-radius:var(--radius);box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+.app-shell{padding:20px;display:flex;gap:20px}
+.sidebar{width:240px}
+.content{flex:1}
+
+/* Toasts */
+.toast-wrap{position:fixed;right:20px;top:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:10px 14px;border-radius:8px;background:#0b4bd8;color:#fff;box-shadow:0 6px 12px rgba(2,6,23,0.12)}
+
+/* calendar styling tweaks */
+.fc .fc-toolbar-title{font-weight:700}
+.fc-resource { font-weight:600 }
+.conflict { background: linear-gradient(90deg, rgba(255,77,79,0.1), rgba(255,77,79,0.06)); border: 1px dashed var(--danger); padding:6px; border-radius:6px }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

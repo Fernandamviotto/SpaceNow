@@ -1,0 +1,17 @@
+<div class="p-6 w-[400px]">
+  <h2 class="text-xl font-bold mb-4">Detalhes da Sala</h2>
+
+  <div *ngIf="loading">Carregando informações...</div>
+  <div *ngIf="error">{{ error }}</div>
+
+  <div *ngIf="!loading && !error">
+    <p><strong>Nome:</strong> {{ sala.nome }}</p>
+    <p><strong>Capacidade:</strong> {{ sala.capacidade }}</p>
+    <p><strong>Localização:</strong> {{ sala.localizacao }}</p>
+    <p><strong>Tipo:</strong> {{ sala.tipo }}</p>
+  </div>
+
+  <div class="flex justify-end mt-4">
+    <button mat-raised-button color="primary" (click)="fechar()">Fechar</button>
+  </div>
+</div>

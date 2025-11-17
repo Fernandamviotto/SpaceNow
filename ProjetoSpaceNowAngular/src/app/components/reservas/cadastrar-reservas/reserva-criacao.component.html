@@ -1,0 +1,443 @@
+<div class="reserva-form-container">
+  <div class="form-card">
+    <!-- 🔹 CABEÇALHO COM GRADIENT -->
+    <div class="box-classroom">
+      <h2 class="titulo-secao">
+        <span class="icon">📅</span>
+        Nova Reserva
+      </h2>
+    </div>
+    
+    <!-- CONTEÚDO DO FORMULÁRIO -->
+    <div class="form-content">
+      <form #form="ngForm" novalidate>
+        <div class="row col-md-12">
+          <h6 class="col-md-12 tit-section-form">
+           Sobre a reserva
+          </h6>
+        </div>
+
+        <div class="row form-group col-md-12">
+          <div class="form-group col-md-6">
+            <label>Sala</label>
+            <select
+              class="form-control"
+              [(ngModel)]="reserva.salaId"
+              name="drpSala"
+              id="drpSala"
+              [ngClass]="applyCssErrorValidation(drpSala, form)"
+              (change)="onSalaChange(form)"
+              #drpSala="ngModel"
+              minlength="1"
+              required
+            >
+              <option value="0">Selecione</option>
+              <option [value]="item.salaId" *ngFor="let item of salasDisponiveis">
+                {{ item.apelido }}
+              </option>
+            </select>
+            <app-span-error-validation
+              [showError]="fieldValidTouched(drpSala, form)"
+              errorMessage="Selecione a sala"
+            ></app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label>Tipo de reserva</label>
+            <select
+              class="form-control"
+              (change)="changeTipoReserva()"
+              [(ngModel)]="reserva.reservaTipoId"
+              name="drpTipoDeReserva"
+              id="drpTipoDeReserva"
+              [ngClass]="applyCssErrorValidation(drpTipoDeReserva, form)"
+              required
+              #drpTipoDeReserva="ngModel"
+              minlength="1"
+            >
+              <option value="0">Selecione</option>
+              <option [value]="item.reservaTipoId" *ngFor="let item of reservaTipo">
+                {{ item.nome }}
+              </option>
+            </select>
+            <app-span-error-validation
+              [showError]="fieldValidTouched(drpTipoDeReserva, form)"
+              errorMessage="Selecione o tipo de reserva"
+            ></app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-6" *ngIf="reserva.reservaTipoId == 4">
+            <label>Contato Organização Estudantil</label>
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="reserva.contatoOrganizacaoEstudantil"
+              name="txtContatoOrganizacao"
+              id="txtContatoOrganizacao"
+              [ngClass]="applyCssErrorValidation(txtContatoOrganizacao, form)"
+              pattern="[A-Za-zÀ-ÿ\s]+"
+              (blur)="validateContatoOrganizacao(form)"
+              #txtContatoOrganizacao="ngModel"
+            />
+            <app-span-error-validation
+              [showError]="
+                fieldValidTouched(txtContatoOrganizacao, form) &&
+                !txtContatoOrganizacao.errors?.pattern &&
+                !txtContatoOrganizacao.errors?.invalidContato
+              "
+              errorMessage="Informe o contato da organização estudantil"
+            ></app-span-error-validation>
+            <app-span-error-validation
+              [showError]="
+                txtContatoOrganizacao.errors?.pattern ||
+                txtContatoOrganizacao.errors?.invalidContato
+              "
+              errorMessage="O contato não pode conter números ou caracteres especiais inválidos"
+            ></app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-6" *ngIf="reserva.reservaTipoId == 4">
+            <label>E-mail Organização Estudantil</label>
+            <input
+              class="form-control"
+              type="email"
+              [(ngModel)]="reserva.emailOrganizacaoEstudantil"
+              name="txtEmailOrganizacao"
+              id="txtEmailOrganizacao"
+              [ngClass]="applyCssErrorValidation(txtEmailOrganizacao, form)"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              (blur)="validateEmailOrganizacao(form)"
+              #txtEmailOrganizacao="ngModel"
+            />
+            <app-span-error-validation
+              [showError]="fieldValidTouched(txtEmailOrganizacao, form)"
+              errorMessage="Informe o e-mail da organização estudantil"
+            ></app-span-error-validation>
+            <app-span-error-validation
+              [showError]="txtEmailOrganizacao.errors?.pattern"
+              errorMessage="Formato de e-mail inválido"
+            ></app-span-error-validation>
+          </div>
+        </div>
+
+        <div class="row form-group col-md-12">
+          <div class="form-group col-md-3">
+            <label>Participantes</label>
+            <input
+              class="form-control"
+              type="number"
+              placeholder=""
+              invalidmessage="Preencha o campo Participantes"
+              [(ngModel)]="reserva.quantidadePessoas"
+              name="txtParticipante"
+              id="txtParticipante"
+              minlength="1"
+              min="1"
+              [max]="sala.capacidade"
+              (blur)="checkCapacity(txtParticipante)"
+              #txtParticipante="ngModel"
+              [ngClass]="applyCssErrorValidation(txtParticipante, form)"
+              required
+            />
+            <app-span-error-validation
+              [showError]="
+                fieldValidTouched(txtParticipante, form) ||
+                (sala.salaId != 0 && reserva.quantidadePessoas > sala.capacidade)
+              "
+              errorMessage="A sala selecionada não comporta a quantidade de pessoas informada. Por favor, verifique a disponibilidade de outras salas."
+            >
+            </app-span-error-validation>
+          </div>
+        </div>
+
+        <div class="row col-md-12">
+          <h6 class="col-md-12 tit-section-form">
+            Data e horário
+          </h6>
+        </div>
+
+        <div class="row form-group col-md-12">
+          <div class="form-group col-md-3">
+            <label>Data Início</label>
+            <input
+              class="form-control"
+              type="date"
+              id="txtDataInicio"
+              name="txtDataInicio"
+              (blur)="checkDate(form)"
+              [(ngModel)]="reserva.dataInicioReserva"
+              [ngClass]="applyCssErrorValidation(txtDataInicio, form)"
+              #txtDataInicio="ngModel"
+              required
+            />
+            <app-span-error-validation
+              *ngIf="!reservada"
+              [showError]="fieldValidTouched(txtDataInicio, form)"
+              errorMessage="Preencha o campo Data Início"
+            ></app-span-error-validation>
+            <app-span-error-validation
+              [showError]="reservada"
+              errorMessage="Sala já reservada para o horário."
+            ></app-span-error-validation>
+            <app-span-error-validation
+              [showError]="bloqueada"
+              errorMessage="Sala bloqueada para uso"
+            ></app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label>Data Fim</label>
+            <input
+              class="form-control"
+              type="date"
+              id="txtDataFim"
+              name="txtDataFim"
+              (blur)="checkDate(form)"
+              [(ngModel)]="reserva.dataFimReserva"
+              [ngClass]="applyCssErrorValidation(txtDataFim, form)"
+              #txtDataFim="ngModel"
+              required
+            />
+            <app-span-error-validation
+              *ngIf="!tempoMenor"
+              [showError]="fieldValidTouched(txtDataFim, form)"
+              errorMessage="Preencha o campo Data"
+            ></app-span-error-validation>
+            <app-span-error-validation
+              [showError]="tempoMenor"
+              errorMessage="A data final deve ser maior do que a data inicial"
+            ></app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label>Hora Início</label>
+            <input
+              class="form-control"
+              type="time"
+              id="txtHoraInicio"
+              name="txtHoraInicio"
+              [(ngModel)]="reserva.horaInicioReserva"
+              min="07:00"
+              max="22:59"
+              [ngClass]="applyCssErrorValidation(txtHoraInicio, form)"
+              (blur)="checkTime(txtHoraInicio, form)"
+              #txtHoraInicio="ngModel"
+              required
+            />
+            <app-span-error-validation
+              [showError]="fieldValidTouched(txtHoraInicio, form)"
+              errorMessage="Preencha horário entre 07:00 e 23:00, com hora fim maior que hora início."
+            >
+            </app-span-error-validation>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label>Hora Fim</label>
+            <input
+              class="form-control"
+              type="time"
+              id="txtHoraFim"
+              name="txtHoraFim"
+              (blur)="checkTime(txtHoraFim, form)"
+              min="07:01"
+              max="23:00"
+              [(ngModel)]="reserva.horaFimReserva"
+              [ngClass]="applyCssErrorValidation(txtHoraFim, form)"
+              required
+              #txtHoraFim="ngModel"
+            />
+            <app-span-error-validation
+              [showError]="fieldValidTouched(txtHoraFim, form)"
+              errorMessage="Preencha horário entre 07:00 e 23:00, com hora fim maior que hora início."
+            >
+            </app-span-error-validation>
+          </div>
+        </div>
+
+        <div class="row col-md-12" *ngIf="boolDays">
+          <div class="form-group col-md-12">
+            <label>Escolha os dias</label>
+            <div class="break-line"></div>
+
+            <input
+              #segunda
+              (click)="clickDay(segunda.checked, $event)"
+              [(ngModel)]="reserva.bitSegunda"
+              name="chkSegunda"
+              id="chkSegunda"
+              value="segunda"
+              type="checkbox"
+            /><label>Segunda </label>
+
+            <input
+              #terca
+              (click)="clickDay(terca.checked, $event)"
+              [(ngModel)]="reserva.bitTerca"
+              name="chkTerca"
+              id="optTerca"
+              value="terca"
+              type="checkbox"
+            /><label>Terça </label>
+
+            <input
+              #quarta
+              (click)="clickDay(quarta.checked, $event)"
+              [(ngModel)]="reserva.bitQuarta"
+              name="chkQuarta"
+              id="chkQuarta"
+              value="quarta"
+              type="checkbox"
+            /><label>Quarta </label>
+
+            <input
+              #quinta
+              (click)="clickDay(quinta.checked, $event)"
+              [(ngModel)]="reserva.bitQuinta"
+              name="chkQuinta"
+              id="chkQuinta"
+              value="quinta"
+              type="checkbox"
+            /><label>Quinta </label>
+
+            <input
+              #sexta
+              (click)="clickDay(sexta.checked, $event)"
+              [(ngModel)]="reserva.bitSexta"
+              name="chkSexta"
+              id="chkSexta"
+              value="sexta"
+              type="checkbox"
+            /><label>Sexta </label>
+
+            <input
+              #sabado
+              (click)="clickWeekend(sabado.checked, $event)"
+              [(ngModel)]="reserva.bitSabado"
+              name="chkSabado"
+              id="chkSabado"
+              value="sabado"
+              type="checkbox"
+            /><label>Sábado </label>
+
+            <input
+              #domingo
+              (click)="clickWeekend(domingo.checked, $event)"
+              [(ngModel)]="reserva.bitDomingo"
+              name="chkDomingo"
+              id="chkDomingo"
+              value="domingo"
+              type="checkbox"
+            /><label>Domingo </label>
+          </div>
+
+          <div class="form-group col-md-12">
+            <input
+              name="chkDiasUteis"
+              id="chkDiasUteis"
+              value="diasUteis"
+              type="checkbox"
+              [(ngModel)]="reserva.diasUteis"
+              (click)="workingDays($event.target.checked)"
+            /><label>Somente dias úteis</label>
+            <input
+              name="chkTodosDias"
+              id="chkTodosDias"
+              value="todosDias"
+              type="checkbox"
+              [(ngModel)]="reserva.todosDias"
+              (click)="allDays($event.target.checked)"
+            /><label>Todos os dias</label>
+          </div>
+        </div>
+
+        <div class="row col-md-12" *ngIf="boolDays">
+          <div class="form-group col-md-6">
+            <label>Recorrência</label>
+            <div class="break-line"></div>
+            <input
+              name="optRecorrencia"
+              id="optRecorrenciaSemanal"
+              [(ngModel)]="reserva.padraoRecorrenciaId"
+              value="1"
+              type="radio"
+            /><label>Semanal </label>
+            <input
+              name="optRecorrencia"
+              id="optRecorrenciaQuinzenal"
+              [(ngModel)]="reserva.padraoRecorrenciaId"
+              value="2"
+              type="radio"
+            /><label>Quinzenal </label>
+            <input
+              name="optRecorrencia"
+              id="optRecorrenciaMensal"
+              [(ngModel)]="reserva.padraoRecorrenciaId"
+              value="3"
+              type="radio"
+            /><label>Mensal </label>
+            <input
+              name="optRecorrencia"
+              id="optRecorrenciaSemestral"
+              [(ngModel)]="reserva.padraoRecorrenciaId"
+              value="4"
+              type="radio"
+            /><label>Semestral </label>
+          </div>
+        </div>
+
+        <div class="row col-md-12">
+          <h6 class="col-md-12 tit-section-form">
+            Complete as informações para confirmar sua reserva
+          </h6>
+        </div>
+
+        <div class="row form-group col-md-12">
+          <div class="form-group col-md-6">
+            <label>Qual o título da sua reserva?</label>
+            <input
+              class="form-control"
+              type="text"
+              [(ngModel)]="reserva.titulo"
+              name="txtTitulo"
+              id="txtTitulo"
+              maxlength="300"
+              [ngClass]="applyCssErrorValidation(txtTitulo, form)"
+              required
+              #txtTitulo="ngModel"
+            />
+            <app-span-error-validation
+              [showError]="fieldValidTouched(txtTitulo, form)"
+              errorMessage="Informe o título da reserva"
+            ></app-span-error-validation>
+          </div>
+        </div>
+
+        <div class="break-line"></div>
+
+        <div class="row form-group col-md-12">
+          <div class="offset-md-4 col-md-4">
+            <input
+              class="form-control btn btn-space-now-success"
+              name="btnSolicitarReserva"
+              id="btnSolicitarReserva"
+              (click)="bookResource(form)"
+              [disabled]="form.invalid || !reserva.canSubmit || bloqueada"
+              type="submit"
+              value="Solicitar reserva"
+            />
+          </div>
+          <div
+            class="lbl-info col-md-12"
+            *ngIf="form.invalid || !reserva.canSubmit || bloqueada"
+          >
+            O botão será habilitado após o preenchimento do formulário
+          </div>
+        </div>
+
+        <div class="break-line"></div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>

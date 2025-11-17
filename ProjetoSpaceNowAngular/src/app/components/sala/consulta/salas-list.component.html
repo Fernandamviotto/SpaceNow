@@ -1,0 +1,66 @@
+<form #form="ngForm" novalidate>
+  <div class="container consulta-panel">
+    <div class="header">
+      <h4>
+        <i class="fas fa-chalkboard-teacher space-icon-m"></i>
+        Consultar Salas
+      </h4>
+      <button
+        type="button"
+        (click)="addRoom()"
+        class="btn btn-space-now-white-orange"
+      >
+        <i class="fas fa-plus space-icon-s"></i> Criar nova sala
+      </button>
+    </div>
+
+    <div class="tabs">
+      <button (click)="onTabClicked(0)" [class.active]="currentIndex === 0">
+        Ativas
+      </button>
+      <button (click)="onTabClicked(1)" [class.active]="currentIndex === 1">
+        Inativas
+      </button>
+    </div>
+
+    <div *ngIf="salas.length > 0; else contentVazio" class="table-container">
+      <table class="salas-table">
+        <thead>
+          <tr>
+            <th>Nome da Sala</th>
+            <th>Andar</th>
+            <th>Prédio</th>
+            <th>Capacidade</th>
+            <th>Tipo</th>
+            <th class="center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of salas" (click)="getRoomDetail(item.salaId)">
+            <td class="summaryze">{{ item.apelido }}</td>
+            <td>{{ item.andar.apelido }}</td>
+            <td>{{ item.andar.predio.apelido }}</td>
+            <td>{{ item.capacidade }}</td>
+            <td>{{ item.salaTipo.nomeTipo }}</td>
+            <td class="center">
+              <button
+                type="button"
+                class="btn btn-space-now-green btn-row-time"
+                (click)="editRoom(item.salaId); $event.stopPropagation()"
+              >
+                Editar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #contentVazio>
+      <div class="empty-state">
+        <i class="fas fa-info-circle"></i>
+        <span>Nenhuma sala encontrada.</span>
+      </div>
+    </ng-template>
+  </div>
+</form>

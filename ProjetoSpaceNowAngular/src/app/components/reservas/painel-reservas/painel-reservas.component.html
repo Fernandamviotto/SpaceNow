@@ -1,0 +1,220 @@
+<form #form="ngForm" novalidate>
+  <div class="container">
+    <div class="break-line"></div>
+    <div class="row col-md-12">
+      <div class="col-md-9">
+        <h4><i class="far fa-calendar-alt space-icon-m"></i>Painel de reservas</h4>
+      </div>
+    </div>
+
+    <div class="break-line"></div>
+    <div class="break-line"></div>
+
+    <!-- Seletor de status -->
+    <div class="row col-md-12">
+      <div class="status-selector">
+        <div
+          class="item-status-selector"
+          [attr.value]="1"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == $any(agendaStatus).RESERVADA }"
+        >
+          Reservadas
+          <div class="item-circle" [hidden]="qtdReservada === 0">
+            {{ qtdReservada }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="2"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == $any(agendaStatus).CANCELADA }"
+        >
+          Canceladas
+          <div class="item-circle" [hidden]="qtdCancelada === 0">
+            {{ qtdCancelada }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="3"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == $any(agendaStatus).PENDENTE_SALA }"
+        >
+          Pendente Sala
+          <div class="item-circle" [hidden]="qtdPendenteSala === 0">
+            {{ qtdPendenteSala }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="5"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == $any(agendaStatus).PENDENTE_APROVACAO }"
+        >
+          Pendente Aprovação
+          <div class="item-circle" [hidden]="qtdPendenteAprovacao === 0">
+            {{ qtdPendenteAprovacao }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="4"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == $any(agendaStatus).NEGADA }"
+        >
+          Negadas
+          <div class="item-circle" [hidden]="qtdNegada === 0">
+            {{ qtdNegada }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="0"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == 0 }"
+        >
+          Todas
+          <div class="item-circle" [hidden]="qtdTotal === 0">
+            {{ qtdTotal }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="-1"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus == -1 }"
+        >
+          Histórico
+          <div class="item-circle" [hidden]="quantidadeHistorico === 0">
+            {{ quantidadeHistorico }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="break-line"></div>
+
+    <div *ngIf="reservas.length > 0; else contentVazio" class="table-container">
+      <table class="table-reserve">
+        <thead>
+          <tr>
+            <th><i class="far fa-comment-alt space-icon-s"></i>Título</th>
+            <th><i class="far fa-user space-icon-s"></i>Solicitante</th>
+            <th><i class="fas fa-chart-line space-icon-s"></i>Status</th>
+            <th><i class="far fa-calendar-alt space-icon-s"></i>Data</th>
+            <th><i class="far fa-clock space-icon-s"></i>Horário</th>
+            <th>Pessoas</th>
+            <th><i class="fas fa-map-marker-alt space-icon-s"></i>Sala</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of reservas">
+            <td>
+              <i
+                class="fas fa-sync-alt space-icon-s"
+                *ngIf="item.reserva?.dataInicioReserva != item.reserva?.dataFimReserva"
+              ></i>
+              {{ item.reserva?.apelido || item.title }}
+            </td>
+            <td>{{ item.nomeCadastro || 'N/A' }}</td>
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'status-reservada': item.agendaStatus?.id === agendaStatus.RESERVADA,
+                  'status-cancelada': item.agendaStatus?.id === agendaStatus.CANCELADA,
+                  'status-pendente-sala': item.agendaStatus?.id === agendaStatus.PENDENTE_SALA,
+                  'status-pendente-aprovacao': item.agendaStatus?.id === agendaStatus.PENDENTE_APROVACAO,
+                  'status-negada': item.agendaStatus?.id === agendaStatus.NEGADA
+                }"
+              >
+                {{ item.agendaStatus?.nome || item.status }}
+              </span>
+            </td>
+            <td>{{ item.data | date : 'dd/MM/yyyy' }}</td>
+            <td>{{ item.horaInicio }} - {{ item.horaFim }}</td>
+            <td>{{ item.quantidadePessoas || 0 }}</td>
+            <td>
+              {{ 
+                (agendaStatus.PENDENTE_SALA === item.agendaStatus?.id || !item.sala) 
+                  ? 'Sem Sala' 
+                  : (item.sala?.apelido || item.roomId)
+              }}
+            </td>
+            <td>
+              <button
+                class="btn btn-space-now-green btn-sm"
+                (click)="getReserveDetail(item)"
+              >
+                Detalhes
+              </button>
+              <button
+                *ngIf="isHidden('editar', item)"
+                class="btn btn-space-now-green btn-sm"
+                (click)="edit(item.agendaId || item.id)"
+              >
+                Editar
+              </button>
+              <button
+                *ngIf="isHidden('cancelar', item)"
+                class="btn btn-space-now-red btn-sm"
+                (click)="checkIsRecorrence(item, 'cancelar')"
+              >
+                Cancelar
+              </button>
+              <button
+                *ngIf="isHidden('remanejar', item)"
+                class="btn btn-space-now-orange btn-sm"
+                (click)="checkIsRecorrence(item, 'remanejar')"
+              >
+                Remanejar
+              </button>
+              <button
+                *ngIf="isHidden('aprovar', item)"
+                class="btn btn-space-now-success btn-sm"
+                (click)="checkIsRecorrence(item, 'aprovar')"
+              >
+                Aprovar
+              </button>
+              <button
+                *ngIf="isHidden('negar', item)"
+                class="btn btn-space-now-red btn-sm"
+                (click)="checkIsRecorrence(item, 'negar')"
+              >
+                Negar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #contentVazio>
+      <div class="sem-reservas">Nenhuma reserva encontrada.</div>
+    </ng-template>
+
+    <div class="break-line"></div>
+  </div>
+</form>
+<div class="clear"></div>

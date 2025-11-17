@@ -1,0 +1,362 @@
+/* Container principal */
+.reserva-form-container {
+  margin: 30px auto;
+  width: calc(100% - 60px);
+  max-width: 1200px;
+  color: #636b76;
+}
+
+/* 🔹 CARD DO FORMULÁRIO COM HEADER AZUL ESCURO */
+.form-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  margin: 1.5rem 0;
+  font-family: "Inter", sans-serif;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.box-classroom {
+  border-radius: 10px 10px 0 0;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  background: #0098DB;
+  color: white;
+}
+
+.box-classroom .titulo-secao {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+}
+
+.box-classroom .titulo-secao .icon {
+  font-size: 24px;
+  margin-right: 12px;
+}
+
+/* Conteúdo do formulário */
+.form-content {
+  padding: 2rem 2.5rem;
+}
+
+/* ======= LAYOUT ======= */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  gap: 22px;
+}
+
+.col-md-12 {
+  width: 100%;
+}
+
+.col-md-6 {
+  width: calc(50% - 11px);
+}
+
+.col-md-4 {
+  width: calc(33.33% - 14.67px);
+}
+
+.col-md-3 {
+  width: calc(25% - 16.5px);
+}
+
+.col-md-2 {
+  width: calc(16.66% - 18.33px);
+}
+
+/* ======= SEÇÕES COM DESTAQUE ======= */
+.tit-section-form {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0098DB;
+  background: linear-gradient(135deg, #f8fbff, #ffffff);
+  border-left: 4px solid #0098DB;
+  border-bottom: 2px solid #C8EAFF;
+  padding: 12px 20px;
+  margin: 35px 0 25px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 2px 8px rgba(0, 152, 219, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tit-section-form:first-child {
+  margin-top: 0;
+}
+
+.space-icon-m {
+  font-size: 16px;
+  color: #0098DB;
+  background: #C8EAFF;
+  padding: 8px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ======= FORM CONTROLS ======= */
+.form-group {
+  margin-bottom: 1.5rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+label {
+  font-size: 14px;
+  color: #636b76;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.form-control {
+  width: 100%;
+  height: 38px;
+  border-radius: 400px;
+  border: 1px solid #D7E3EC;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #636b76;
+  background-color: #E3E8ED;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #0098DB;
+  box-shadow: 0 0 0 2px rgba(0, 152, 219, 0.2);
+  background-color: #dde3e8;
+  transform: translateY(-1px);
+}
+
+.form-control.is-invalid {
+  border-color: #e53935;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.2);
+}
+
+/* ======= SELECT STYLES ======= */
+select.form-control {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23636b76' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 35px;
+}
+
+/* ======= CHECKBOXES E RADIOS ======= */
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  height: auto;
+  margin-right: 8px;
+}
+
+.form-group input[type="checkbox"] + label,
+.form-group input[type="radio"] + label {
+  display: inline-block;
+  font-weight: normal;
+  margin-left: 4px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+/* Grupo de checkboxes */
+.break-line {
+  border-bottom: 1px solid #D7E3EC;
+  margin: 1rem 0;
+  padding-bottom: 1rem;
+}
+
+/* ======= BOTÕES ======= */
+.btn {
+  border: none;
+  border-radius: 18px;
+  padding: 10px 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-space-now-success {
+  background: #0098DB;
+  color: white;
+}
+
+.btn-space-now-success:hover:not(:disabled) {
+  background: #0078b7;
+}
+
+.btn-space-now-success:disabled {
+  background: #939090;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ======= VALIDAÇÃO ======= */
+app-span-error-validation {
+  display: block;
+  font-size: 12px;
+  color: #e53935;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.is-invalid {
+  border-color: #e53935 !important;
+}
+
+/* ======= INFORMAÇÕES ======= */
+.lbl-info {
+  color: #0098DB;
+  font-size: 11px;
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+.offset-md-4 {
+  margin-left: 33.333333%;
+}
+
+/* ======= RESPONSIVIDADE ======= */
+@media (max-width: 768px) {
+  .reserva-form-container {
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .form-card {
+    border-radius: 8px;
+  }
+  
+  .box-classroom {
+    padding: 1.2rem 1.5rem;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .box-classroom .titulo-secao {
+    font-size: 22px;
+  }
+  
+  .form-content {
+    padding: 1.5rem 1rem;
+  }
+  
+  .col-md-6,
+  .col-md-4,
+  .col-md-3,
+  .col-md-2 {
+    width: 100%;
+  }
+  
+  .offset-md-4 {
+    margin-left: 0;
+  }
+  
+  .row {
+    gap: 15px;
+    margin-bottom: 1rem;
+  }
+  
+  .tit-section-form {
+    font-size: 16px;
+    margin: 25px 0 20px 0;
+    padding: 10px 15px;
+  }
+  
+  .space-icon-m {
+    font-size: 14px;
+    padding: 6px;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-group input[type="checkbox"] + label,
+  .form-group input[type="radio"] + label {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+  
+  .btn {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  
+  .box-classroom .titulo-secao {
+    font-size: 20px;
+  }
+  
+  .box-classroom .titulo-secao .icon {
+    font-size: 20px;
+  }
+  
+  .tit-section-form {
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+}
+
+/* ======= UTILITÁRIOS ======= */
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ======= ESTADOS ESPECIAIS ======= */
+input:disabled,
+select:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ======= ANIMAÇÕES ======= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
