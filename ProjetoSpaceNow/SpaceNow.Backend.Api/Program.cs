@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using SpaceNow.Backend.Api.Data;
+using SpaceNow.Backend.Infrastructure.Data;
 using SpaceNow.Backend.Application.Interfaces;
 using SpaceNow.Backend.Infrastructure.Auth;
+using SpaceNow.Backend.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,13 +18,36 @@ if (string.IsNullOrEmpty(connectionString))
         "Database connection string not found. Set SUPABASE_CONNECTION_STRING environment variable or configure DefaultConnection in appsettings.json");
 }
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+// Registra o DbContext correto (ApplicationDbContext)
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
+
+// Adiciona política de CORS para permitir chamadas do frontend em desenvolvimento
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
 
 // Add Controllers
 builder.Services.AddControllers();
 
+// Registrar provedores/serviços e repositórios
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+
+// Registrar repositórios concretos que usam ApplicationDbContext
+builder.Services.AddScoped<IPredioRepository, PredioRepository>();
+builder.Services.AddScoped<ISalaRepository, SalaRepository>();
+builder.Services.AddScoped<ITipoSalaRepository, TipoSalaRepository>();
+builder.Services.AddScoped<IResponsavelRepository, ResponsavelRepository>();
+builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
@@ -58,6 +82,9 @@ if (app.Environment.IsDevelopment() || enableSwaggerInProd)
 }
 
 app.UseHttpsRedirection();
+
+// Ative a policy de CORS antes de UseAuthorization
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

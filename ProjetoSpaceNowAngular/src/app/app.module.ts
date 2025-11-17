@@ -77,7 +77,7 @@ import { ToastService } from "./shared/services/toast.service";
     MockService,
     ToastService,
     AuthGuard,
-    { provide: ReservaService, useClass: MockReservaService },
+    // Mantém ReservaService real (não sobrescrevemos com mock por padrão)
   ],
   bootstrap: [AppComponent],
 })

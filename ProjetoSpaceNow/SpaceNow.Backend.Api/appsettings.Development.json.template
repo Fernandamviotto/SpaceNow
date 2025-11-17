@@ -7,10 +7,11 @@
     }
   },
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Database=spacenow;Username=postgres;Password=postgres;Port=5432"
+    "DefaultConnection": "postgresql://postgres:UONX1McX4mCcaLoz@db.ohxdolbdxxtbifrlglko.supabase.co:5432/postgres?sslmode=Require&trustservercertificate=true"
   },
+  "AllowedHosts": "*",
   "Jwt": {
-    "Key": "your-secret-key-here-minimum-32-characters-for-production",
+    "Key": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oeGRvbGJkeHh0YmlmcmxnbGtvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjQyNzE4MywiZXhwIjoyMDcyMDAzMTgzfQ.ayu6Elybpg77LW491yFBa5_u-4gviaCvU-3NW-2XVEY",
     "Issuer": "SpaceNowBackend",
     "Audience": "SpaceNowFrontend"
   },
