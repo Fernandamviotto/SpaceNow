@@ -1,0 +1,20 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.EntityFrameworkCore.Database.Command": "Information"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=spacenow;Username=postgres;Password=postgres;Port=5432"
+  },
+  "Jwt": {
+    "Key": "your-secret-key-here-minimum-32-characters-for-production",
+    "Issuer": "SpaceNowBackend",
+    "Audience": "SpaceNowFrontend"
+  },
+  "Frontend": {
+    "AllowedOrigin": "http://localhost:4200"
+  }
+}
