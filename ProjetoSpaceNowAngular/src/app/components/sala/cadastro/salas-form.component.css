@@ -1,0 +1,284 @@
+body {
+  background-color: #EAF7FF;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  color: #636b76;
+}
+
+/* Container principal */
+.sala-form-container {
+  margin: 50px auto;
+  width: calc(100% - 100px);
+  max-width: 950px;
+  color: #636b76;
+}
+
+/* 🔹 CARD DO FORMULÁRIO (do segundo código) */
+.form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  padding: 2rem 2.5rem;
+  margin: 1.5rem 0;
+}
+
+/* 🔹 CABEÇALHO COM GRADIENTE (do segundo código) */
+.box-classroom {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+/* Cabeçalho - Adaptado */
+.titulo-secao {
+  font-size: 26px;
+  font-weight: 600;
+  color: #fff; /* 🔹 Alterado para branco no gradient */
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.titulo-secao .icon {
+  font-size: 24px;
+  margin-right: 8px;
+}
+
+/* ======= Layout ======= */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  gap: 22px;
+}
+
+.col-md-12 {
+  width: 100%;
+}
+
+.col-md-6 {
+  width: calc(50% - 11px);
+  min-width: 0;
+}
+
+.col-md-3 {
+  width: calc(25% - 16.5px);
+  min-width: 0;
+}
+
+.col-md-2 {
+  width: calc(16.66% - 18.33px);
+  min-width: 0;
+}
+
+.col-md-6, .col-md-3, .col-md-2 {
+  padding-right: 0;
+}
+
+@media (max-width: 768px) {
+  .col-md-6, .col-md-3, .col-md-2 {
+    width: 100%;
+  }
+  
+  .row {
+    gap: 15px;
+  }
+  
+  .sala-form-container {
+    margin: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .form-card {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Seções */
+.section-divider {
+  font-size: 16px;
+  color: #0098DB;
+  border-bottom: 1px solid #C8EAFF;
+  padding-bottom: 5px;
+  margin: 30px 0 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.section-divider.small {
+  font-size: 14px;
+  margin-top: 35px;
+}
+
+.sub-info {
+  font-size: 10px;
+  color: #636b76;
+}
+
+/* Inputs */
+label {
+  font-size: 14px;
+  color: #636b76;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  height: 38px;
+  border-radius: 400px;
+  border: 1px solid #D7E3EC;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #636b76;
+  background-color: #E3E8ED;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #9aa0a6;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #0098DB;
+  box-shadow: 0 0 0 2px rgba(0, 152, 219, 0.2);
+  background-color: #dde3e8;
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+}
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-4 {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+/* Radio */
+.radio-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.radio-group input {
+  width: auto;
+  box-shadow: none;
+}
+
+/* Botões */
+.btn-outline,
+.btn-cancel,
+.btn-save {
+  border-radius: 18px;
+  padding: 8px 30px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #0098DB;
+  background: #0098DB;
+  color: white; /* 🔹 Alterado para branco */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #0098DB;
+}
+
+.btn-cancel:hover {
+  background: #C8EAFF;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: #0078b7;
+  transform: translateY(-1px);
+}
+
+/* Botão desativado */
+.btn-save:disabled {
+  background: #939090;
+  border: none;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* Informativos */
+.no-info {
+  font-size: 13px;
+  margin-left: 3px;
+}
+
+.note {
+  font-size: 11px;
+  text-align: center;
+  color: #00b37a;
+  margin-top: 5px;
+}
+
+/* Footer buttons */
+.actions {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.actions .btn {
+  width: 120px;
+}
+
+/* 🔹 ESTILOS ADICIONAIS DO SEGUNDO CÓDIGO */
+.space-icon-m {
+  margin-right: 6px;
+}
+
+.lbl-info {
+  color: #757575;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}

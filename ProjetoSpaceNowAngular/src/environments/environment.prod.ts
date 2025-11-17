@@ -1,4 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://projetosalas.onrender.com/api', // URL do Render
+  apiBaseUrl: "https://space-now-api.onrender.com",
+  useMock: true,
+  supabaseUrl: "",
+  supabaseAnonKey: "",
 };
