@@ -20,6 +20,19 @@ if (string.IsNullOrEmpty(connectionString))
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString));
 
+// Adiciona política de CORS para permitir chamadas do frontend em desenvolvimento
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200")
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
+});
+
 // Add Controllers
 builder.Services.AddControllers();
 
@@ -58,6 +71,9 @@ if (app.Environment.IsDevelopment() || enableSwaggerInProd)
 }
 
 app.UseHttpsRedirection();
+
+// Ative a policy de CORS antes de UseAuthorization
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

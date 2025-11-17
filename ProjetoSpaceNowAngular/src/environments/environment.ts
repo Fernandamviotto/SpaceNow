@@ -1,8 +1,8 @@
 export const environment = {
   production: false,
-  apiBaseUrl: "mock",
-  useMock: true,
-  supabaseUrl: "https://ohxdolbdxxtbifrlglko.supabase.co/",
-  supabaseAnonKey:
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9oeGRvbGJkeHh0YmlmcmxnbGtvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY0MjcxODMsImV4cCI6MjA3MjAwMzE4M30.uPci09990pjFGIVdSVfXzlOf7Dh14bceMP8RNyHVhp0",
+  // Use '' if estiver usando proxy.conf.json (recomendado em dev).
+  // Ou use 'http://localhost:5000' / 'https://localhost:5001' se não usar proxy.
+  apiBaseUrl: '',
+  // Se true, alguns serviços podem usar mocks (AppComponentService verifica isso).
+  useMock: false
 };
