@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseUrl: "https://space-now-api.onrender.com",
-  useMock: true,
-  supabaseUrl: "",
-  supabaseAnonKey: "",
+  // Em produção, coloque a URL pública da API (ex.: https://api.seudominio.com)
+  apiBaseUrl: '',
+  useMock: false
 };
