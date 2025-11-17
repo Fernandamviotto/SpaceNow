@@ -1,0 +1,130 @@
+<form #form="ngForm" novalidate>
+  <div class="container">
+    <div class="break-line"></div>
+    <div class="row col-md-12">
+      <div class="col-md-9">
+        <h4><i class="far fa-calendar-alt space-icon-m"></i>Minhas Reservas</h4>
+      </div>
+    </div>
+
+    <div class="break-line"></div>
+    <div class="break-line"></div>
+
+    <!-- Seletor de status -->
+    <div class="row col-md-12">
+      <div class="status-selector">
+        <div
+          class="item-status-selector"
+          [attr.value]="'reservada'"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus === 'reservada' }"
+        >
+          Reservadas
+          <div class="item-circle" [hidden]="qtdReservada === 0">
+            {{ qtdReservada }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="'cancelada'"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus === 'cancelada' }"
+        >
+          Canceladas
+          <div class="item-circle" [hidden]="qtdCancelada === 0">
+            {{ qtdCancelada }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="'pendente'"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus === 'pendente' }"
+        >
+          Pendentes
+          <div class="item-circle" [hidden]="qtdPendente === 0">
+            {{ qtdPendente }}
+          </div>
+        </div>
+
+        <span class="pipe-space"></span>
+
+        <div
+          class="item-status-selector"
+          [attr.value]="'todas'"
+          (click)="onChangeStatus($event)"
+          [ngClass]="{ active: selectedStatus === 'todas' }"
+        >
+          Todas
+          <div class="item-circle" [hidden]="qtdTotal === 0">
+            {{ qtdTotal }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="break-line"></div>
+
+    <div *ngIf="reservas.length > 0; else contentVazio" class="table-container">
+      <table class="table-reserve">
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Sala</th>
+            <th>Início</th>
+            <th>Fim</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let item of reservas">
+            <td>{{ item.title }}</td>
+            <td>{{ item.roomId }}</td>
+            <td>{{ item.start | date : "dd/MM/yyyy HH:mm" }}</td>
+            <td>{{ item.end | date : "dd/MM/yyyy HH:mm" }}</td>
+            <td>
+              <span
+                class="status-badge"
+                [ngClass]="{
+                  'status-aprovada': item.status === 'Aprovada',
+                  'status-pendente': item.status === 'Pendente',
+                  'status-negada': item.status === 'Negada',
+                  'status-reservada':
+                    item.status === 'Reservada' || !item.status
+                }"
+              >
+                {{ item.status || "Reservada" }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn btn-space-now-green btn-sm"
+                (click)="abrirDetalhes(item)"
+              >
+                Detalhes
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #contentVazio>
+      <div class="sem-reservas">Nenhuma reserva encontrada.</div>
+    </ng-template>
+
+    <ng-template #contentVazio>
+      <div class="row col-md-12 row-reserve">Nenhuma reserva encontrada.</div>
+    </ng-template>
+    <div class="break-line"></div>
+  </div>
+</form>
+<div class="clear"></div>

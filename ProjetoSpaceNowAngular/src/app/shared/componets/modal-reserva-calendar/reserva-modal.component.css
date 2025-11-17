@@ -1,0 +1,128 @@
+/* Backdrop similar ao usado no Dashboard original */
+.modal-backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.5);
+  z-index: 1050;
+}
+
+/* Modal card */
+.modal.card {
+  width: 520px;
+  max-width: calc(100% - 32px);
+  z-index: 1060;
+  border-radius: 8px;
+  padding: 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  overflow: hidden;
+  background: #fff;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.close {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 14px 18px 18px 18px;
+}
+
+.form-row {
+  margin-bottom: 12px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #42a5f5; /* ft-rose style */
+}
+
+.required { color: #d9534f; margin-left: 4px; }
+
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #dcdcdc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* two columns layout for start/end */
+.two-cols {
+  display: flex;
+  gap: 12px;
+}
+.two-cols > div { flex: 1; }
+
+/* Errors */
+.field-error { color: #d9534f; margin-top: 6px; font-size: 12px; }
+
+/* Actions */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.left-actions { display: flex; gap: 8px; }
+.right-actions { display: flex; gap: 8px; }
+
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: #f0f0f0;
+}
+
+.btn-small { padding: 6px 10px; font-size: 13px; }
+
+/* Primary success similar to sua classe */
+.btn-space-now-success {
+  background: green;
+  color: white;
+  border-color: green;
+}
+.btn-space-now-success:hover {
+  background: greenyellow;
+  border-color: greenyellow;
+  color: #fff;
+}
+.btn-outline {
+  background: transparent;
+  border: 1px solid #ccc;
+  color: black;
+}
+.btn-outline:hover {
+  background: #c82333;
+  color: #fff;
+}
+.btn-danger {
+  background: #c82333;
+  color: #fff;
+}

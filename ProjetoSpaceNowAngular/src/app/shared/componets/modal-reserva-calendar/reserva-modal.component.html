@@ -1,0 +1,71 @@
+<div *ngIf="visible" class="modal-backdrop">
+  <div class="modal card modal--wide" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        <ng-container *ngIf="modalData?.id; else novo">Editar Reserva</ng-container>
+        <ng-template #novo>Nova Reserva</ng-template>
+      </h4>
+      <button type="button" class="close" aria-label="Fechar" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSave()" autocomplete="off" novalidate>
+        <div class="form-row">
+          <label class="label">Título <span class="required">*</span></label>
+          <input class="form-control" formControlName="title" />
+          <div class="field-error" *ngIf="titleCtrl?.touched && titleCtrl?.invalid">
+            <small *ngIf="titleCtrl?.errors?.['required']">Título obrigatório.</small>
+            <small *ngIf="titleCtrl?.errors?.['maxlength']">Máx 120 caracteres.</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="label">Sala <span class="required">*</span></label>
+          <select class="form-control" formControlName="roomId">
+            <option [ngValue]="null">-- selecione --</option>
+            <option *ngFor="let r of rooms" [ngValue]="r.id">{{ r.title || r.nome || r.nomeSala || r }}</option>
+          </select>
+          <div class="field-error" *ngIf="roomCtrl?.touched && roomCtrl?.invalid">
+            <small>Sala é obrigatória.</small>
+          </div>
+        </div>
+
+        <div class="form-row two-cols">
+          <div>
+            <label class="label">Início <span class="required">*</span></label>
+            <input type="datetime-local" class="form-control" formControlName="start" />
+            <div class="field-error" *ngIf="startCtrl?.touched && startCtrl?.invalid">
+              <small>Informe a data/hora de início.</small>
+            </div>
+          </div>
+
+          <div>
+            <label class="label">Fim <span class="required">*</span></label>
+            <input type="datetime-local" class="form-control" formControlName="end" />
+            <div class="field-error" *ngIf="endCtrl?.touched && endCtrl?.invalid">
+              <small>Informe a data/hora de término.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label class="label">Observações</label>
+          <textarea rows="3" class="form-control" formControlName="notes"></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <div class="left-actions">
+            <button type="button" *ngIf="modalData?.id" class="btn btn-danger btn-small" (click)="onDelete()">Excluir</button>
+          </div>
+
+          <div class="right-actions">
+            <button type="button" class="btn btn-outline" (click)="onClose()">Cancelar</button>
+            <button type="submit" class="btn btn-space-now-success" [disabled]="form.invalid">Salvar</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

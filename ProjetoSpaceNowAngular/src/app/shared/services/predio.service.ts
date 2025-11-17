@@ -1,19 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PredioModel } from '../models/predio.model';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment.prod";
 
-@Injectable({ providedIn: 'root' })
+export interface Predio {
+  id: number;
+  nome: string;
+  endereco: string;
+}
+
+@Injectable({
+  providedIn: "root",
+})
 export class PredioService {
-  private baseUrl = 'http://localhost:5000/api/predios';
+  getFloorsByBuilding(predioId: any) {
+    throw new Error("Method not implemented.");
+  }
+  private urlApi = `${environment.apiBaseUrl}/predios`;
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<PredioModel[]> {
-    return this.http.get<PredioModel[]>(this.baseUrl);
+  getPredioByResponsavel(responsavelId: number): Observable<Predio> {
+    return this.http.get<Predio>(`${this.urlApi}/responsavel/${responsavelId}`);
   }
 
-  getById(id: number): Observable<PredioModel> {
-    return this.http.get<PredioModel>(`${this.baseUrl}/${id}`);
+  getAll(): Observable<Predio[]> {
+    return this.http.get<Predio[]>(this.urlApi);
   }
 }

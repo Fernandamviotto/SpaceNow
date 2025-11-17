@@ -1,0 +1,13 @@
+<div class="modal">
+  <h2>Detalhes da Reserva</h2>
+  <p><strong>Sala:</strong> {{ reserva?.sala }}</p>
+  <p><strong>Data:</strong> {{ reserva?.data }}</p>
+  <p><strong>Status:</strong> {{ reserva?.status }}</p>
+
+  <div class="actions">
+    <button (click)="aprovarReserva()">Aprovar</button>
+    <button (click)="negarReserva()">Negar</button>
+    <button (click)="cancelarReserva()">Cancelar</button>
+    <button (click)="fecharModal()">Fechar</button>
+  </div>
+</div>

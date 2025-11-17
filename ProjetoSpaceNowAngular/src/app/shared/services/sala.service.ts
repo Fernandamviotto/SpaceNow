@@ -1,54 +1,105 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PaginationResponseModel } from '../models/pagination-response.model';
-import { SalaModel } from '../models/sala.model';
+import { HttpClient, HttpParams } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment.prod";
+import { SalaModel } from "../models/sala.model";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: "root",
+})
 export class SalaService {
-  getAll() {
-    throw new Error('Method not implemented.');
-  }
-  private baseUrl = 'http://localhost:5000/api/salas';
+  private baseUrl = `${environment.apiBaseUrl}/sala`;
+  id?: number;
 
   constructor(private http: HttpClient) {}
 
-  getSalas(page = 1, itemsPerPage = 10, filters?: any): Observable<PaginationResponseModel<SalaModel>> {
+  /**
+   * Consulta de salas com paginação e filtros.
+   */
+  getConsultaGrid(
+    filter: any = {},
+    pageNumber = 1,
+    pageSize = 20,
+    ativo = true
+  ): Observable<any> {
     let params = new HttpParams()
-      .set('page', String(page))
-      .set('itemsPerPage', String(itemsPerPage));
+      .set("pageNumber", pageNumber.toString())
+      .set("pageSize", pageSize.toString())
+      .set("ativo", ativo.toString());
 
-    if (filters) {
-      if (filters.predios) params = params.set('predios', JSON.stringify(filters.predios));
-      if (filters.andares) params = params.set('andares', JSON.stringify(filters.andares));
-      if (filters.tiposDeSala) params = params.set('tiposDeSala', JSON.stringify(filters.tiposDeSala));
-      if (filters.salas) params = params.set('salas', JSON.stringify(filters.salas));
-      if (filters.ativas !== undefined) params = params.set('ativas', String(filters.ativas));
-    }
+    Object.keys(filter).forEach((key) => {
+      if (
+        filter[key] !== null &&
+        filter[key] !== undefined &&
+        filter[key] !== ""
+      ) {
+        params = params.set(key, filter[key]);
+      }
+    });
 
-    return this.http.get<PaginationResponseModel<SalaModel>>(this.baseUrl, { params });
+    return this.http.get<any>(`${this.baseUrl}/consulta`, { params });
   }
 
-  getById(id: number) {
+  /**
+   * Busca uma sala por ID.
+   */
+  getById(id: number): Observable<SalaModel> {
     return this.http.get<SalaModel>(`${this.baseUrl}/${id}`);
   }
 
-  create(sala: SalaModel) {
-    return this.http.post<SalaModel>(this.baseUrl, sala);
+  /**
+   * Cria uma nova sala (com suporte a upload de imagem via FormData).
+   */
+  criar(model: SalaModel | FormData): Observable<SalaModel> {
+    // Se for um objeto simples, converte em FormData automaticamente
+    if (!(model instanceof FormData)) {
+      const formData = new FormData();
+      Object.entries(model).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          formData.append(key, value as any);
+        }
+      });
+      model = formData;
+    }
+
+    return this.http.post<SalaModel>(`${this.baseUrl}`, model);
   }
 
-  update(sala: SalaModel) {
-    return this.http.put<void>(`${this.baseUrl}/${sala.salaId}`, sala);
+  /**
+   * Atualiza uma sala existente (com suporte a upload de imagem via FormData).
+   */
+  atualizar(id: number, model: SalaModel | FormData): Observable<SalaModel> {
+    if (!(model instanceof FormData)) {
+      const formData = new FormData();
+      Object.entries(model).forEach(([key, value]) => {
+        if (value !== null && value !== undefined) {
+          formData.append(key, value as any);
+        }
+      });
+      model = formData;
+    }
+
+    return this.http.put<SalaModel>(`${this.baseUrl}/${id}`, model);
   }
 
-  delete(id: number) {
+  /**
+   * Salva uma sala (mantido para compatibilidade com códigos antigos).
+   */
+  salvar(model: SalaModel): Observable<SalaModel> {
+    return this.http.post<SalaModel>(`${this.baseUrl}`, model);
+  }
+
+  /**
+   * Exclui (ou desativa) uma sala.
+   */
+  excluir(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
-  save(sala: SalaModel): Observable<any> {
-    return this.http.post(this.baseUrl, sala);
-  }
-  subscribe(arg0: (res: any) => void) {
-    
-    throw new Error('Method not implemented.');
+
+  /**
+   * Retorna lista simplificada (para dropdowns e selects).
+   */
+  getSelectList(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/select`);
   }
 }
