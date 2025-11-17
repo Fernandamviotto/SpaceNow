@@ -1,8 +1,8 @@
 import { Component, HostListener } from "@angular/core";
 import { Router, NavigationEnd } from "@angular/router";
 import { filter } from "rxjs";
-import { AuthService } from "./core/services/auth.service";
-import { ToastService } from "./core/services/toast.service";
+import { AuthService } from "./shared/services/auth.service";
+import { ToastService } from "./shared/services/toast.service";
 
 @Component({
   selector: "app-root",

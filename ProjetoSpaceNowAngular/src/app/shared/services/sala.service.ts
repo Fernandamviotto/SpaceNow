@@ -2,10 +2,10 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment.prod";
-import { SalaModel } from "../../models/sala.model";
+import { SalaModel } from "../models/sala.model";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class SalaService {
   private baseUrl = `${environment.apiBaseUrl}/sala`;
@@ -23,15 +23,15 @@ export class SalaService {
     ativo = true
   ): Observable<any> {
     let params = new HttpParams()
-      .set('pageNumber', pageNumber.toString())
-      .set('pageSize', pageSize.toString())
-      .set('ativo', ativo.toString());
+      .set("pageNumber", pageNumber.toString())
+      .set("pageSize", pageSize.toString())
+      .set("ativo", ativo.toString());
 
     Object.keys(filter).forEach((key) => {
       if (
         filter[key] !== null &&
         filter[key] !== undefined &&
-        filter[key] !== ''
+        filter[key] !== ""
       ) {
         params = params.set(key, filter[key]);
       }

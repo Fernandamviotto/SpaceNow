@@ -1,0 +1,259 @@
+<div class="container">
+  <div class="break-line"></div>
+
+  <!-- Cabeçalho -->
+  <div class="row col-md-12">
+    <div class="col-md-9">
+      <h4><i class="far fa-calendar-alt space-icon-m"></i>Calendário de Salas</h4>
+    </div>
+  </div>
+
+  <div class="break-line"></div>
+  <div class="break-line"></div>
+
+  <!-- Controles de Data -->
+  <div class="date-container">
+    <div class="box-current-day">
+      <button class="btn btn-light arrow-navigation" (click)="previousDay()">
+        <i class="fas fa-chevron-left">
+          < </i>
+      </button>
+        <div class="current-day" (click)="openDatePicker()">
+          <strong>
+            {{ selectedDate | date : "dd" }} de
+            {{ selectedDate | date : "MMMM" }} de
+            {{ selectedDate | date : "yyyy" }}
+          </strong>
+          <i class="fas fa-calendar-alt calendar-icon"></i>
+        </div>
+      <button class="btn btn-light arrow-navigation" (click)="nextDay()">
+        <i class="fas fa-chevron-right">></i>
+      </button>
+    </div>
+    
+  </div>
+
+  <!-- ✅ CALENDÁRIO (SALAS / HORÁRIOS) -->
+  <div class="calendar-wrapper card">
+    <div class="calendar-header">
+      <!-- Seleção de Períodos -->
+      <div class="periods-section">
+        <div class="period-selector">
+          <span class="item-period-selector" role="button" tabindex="0" (click)="onChangePeriod('manha')"
+            (keydown.enter)="onChangePeriod('manha')" (keydown.space)="onChangePeriod('manha')"
+            [ngClass]="{ active: selectedPeriod == 'manha' }">
+            Manhã
+          </span>
+          <span class="pipe-space">|</span>
+
+          <span class="item-period-selector" role="button" tabindex="0" (click)="onChangePeriod('tarde')"
+            (keydown.enter)="onChangePeriod('tarde')" (keydown.space)="onChangePeriod('tarde')"
+            [ngClass]="{ active: selectedPeriod == 'tarde' }">
+            Tarde
+          </span>
+          <span class="pipe-space">|</span>
+
+          <span class="item-period-selector" role="button" tabindex="0" (click)="onChangePeriod('noite')"
+            (keydown.enter)="onChangePeriod('noite')" (keydown.space)="onChangePeriod('noite')"
+            [ngClass]="{ active: selectedPeriod == 'noite' }">
+            Noite
+          </span>
+          <span class="pipe-space">|</span>
+
+          <span class="item-period-selector" role="button" tabindex="0" (click)="onChangePeriod('todos')"
+            (keydown.enter)="onChangePeriod('todos')" (keydown.space)="onChangePeriod('todos')"
+            [ngClass]="{ active: selectedPeriod == 'todos' }">
+            Todo o período
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Grade de horários -->
+    <div class="schedule-wrapper" [class.dragging]="isDragging">
+      <table class="table-reserve schedule-table">
+        <thead>
+          <tr>
+            <th class="room-header">Sala</th>
+            <th *ngFor="let slot of timeSlots" class="time-header">
+              {{ slot }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let room of rooms">
+            <th class="room-cell sticky-col">
+              <div class="room-info" (click)="openRoomDetails(room)">
+                <i class="fas fa-door-open space-icon-s"></i>
+                {{ room.title }}
+              </div>
+            </th>
+            <td *ngFor="let slot of timeSlots" class="time-slot" (mousedown)="onCellMouseDown(room.id, slot, $event)"
+              (mouseenter)="onCellMouseEnter(room.id, slot)" (click)="openCellReserve(room.id, slot)"
+              [class.selected]="isSlotInSelection(room.id, slot)" [class.reserved]="isSlotReserved(room.id, slot)">
+              <ng-container *ngIf="isSlotReserved(room.id, slot) as res">
+                <div class="reservation-block" [style.background]="res.corPredio"
+                  [title]="res.salaNome + ' — ' + (res.inicio | date:'shortTime') + ' - ' + (res.fim | date:'shortTime')">
+                  <div class="reservation-title">{{ res.salaNome }}</div>
+                  <div class="reservation-time">
+                    {{ res.inicio | date:'HH:mm' }} - {{ res.fim | date:'HH:mm' }}
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!isSlotReserved(room.id, slot)">
+                <div class="empty-slot">&nbsp;</div>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="break-line"></div>
+  <div class="fillFooter"></div>
+
+  <!-- Modal do DatePicker -->
+  <div *ngIf="showDatePicker" class="modal-backdrop datepicker-backdrop" (click)="closeDatePicker()">
+    <div class="modal-card datepicker-card" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fas fa-calendar-alt space-icon-s"></i>
+          Selecione uma data
+        </h5>
+        <button type="button" class="close-btn" (click)="closeDatePicker()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+        <div class="datepicker-container">
+          <!-- Navegação do mês -->
+          <div class="datepicker-header">
+            <button class="btn btn-light btn-sm" (click)="previousMonth()">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="current-month-year">
+              {{ currentMonthYear | date : "MMMM yyyy" }}
+            </span>
+            <button class="btn btn-light btn-sm" (click)="nextMonth()">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          
+          <!-- Dias da semana -->
+          <div class="datepicker-weekdays">
+            <div class="weekday" *ngFor="let weekday of weekdays">{{ weekday }}</div>
+          </div>
+          
+          <!-- Dias do mês -->
+          <div class="datepicker-days">
+            <div 
+              *ngFor="let day of calendarDays" 
+              class="day"
+              [class.other-month]="!day.isCurrentMonth"
+              [class.current-day]="day.isToday"
+              [class.selected-day]="day.isSelected"
+              (click)="selectDate(day.date)"
+            >
+              {{ day.day }}
+            </div>
+          </div>
+          
+          <!-- Botão de hoje -->
+          <div class="datepicker-actions">
+            <button class="btn btn-space-now-success" (click)="selectToday()">
+              <i class="fas fa-clock space-icon-s"></i>
+              Hoje
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ MODAL DETALHE SALA -->
+  <div *ngIf="showSalaModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="fas fa-door-open space-icon-s"></i>
+          Sala {{ salaSelecionada?.nome }}
+        </h5>
+        <button type="button" class="close-btn" (click)="closeSalaModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="info-grid">
+          <div class="info-item">
+            <label class="info-label">
+              <i class="fas fa-building space-icon-s"></i>Andar
+            </label>
+            <div class="info-value">
+              {{ salaSelecionada?.andar?.apelido || salaSelecionada?.andar || 'N/A' }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <label class="info-label">
+              <i class="fas fa-university space-icon-s"></i>Prédio
+            </label>
+            <div class="info-value">
+              {{ salaSelecionada?.andar?.predio?.apelido || salaSelecionada?.predio?.nome || 'N/A' }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <label class="info-label">
+              <i class="fas fa-map-marker-alt space-icon-s"></i>Endereço
+            </label>
+            <div class="info-value">
+              {{ salaSelecionada?.andar?.predio?.endereco || salaSelecionada?.predio?.endereco || 'N/A' }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <label class="info-label">
+              <i class="fas fa-tag space-icon-s"></i>Tipo de sala
+            </label>
+            <div class="info-value">
+              {{ salaSelecionada?.salaTipo?.nomeTipo || salaSelecionada?.tipo || 'N/A' }}
+            </div>
+          </div>
+
+          <div class="info-item">
+            <label class="info-label">
+              <i class="fas fa-users space-icon-s"></i>Capacidade
+            </label>
+            <div class="info-value">
+              {{ salaSelecionada?.capacidade || 0 }} pessoas
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn btn-space-now-success btn-lg" (click)="createReserve()">
+            <i class="fas fa-calendar-plus space-icon-s"></i>
+            Solicitar reserva deste espaço
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Reserva -->
+<app-reserva-modal [visible]="showModal" [modalData]="modalData" [rooms]="rooms" (save)="onModalSave($event)"
+  (close)="closeModal()" (delete)="onModalDelete($event)"></app-reserva-modal>
+
+<app-reserva-modal
+  [visible]="showModal"
+  [modalData]="modalData"
+  [rooms]="rooms"
+  (save)="onModalSave($event)"
+  (close)="closeModal()"
+  (delete)="onModalDelete($event)"
+></app-reserva-modal>

@@ -1,4 +1,3 @@
-export interface SalaTipoModel {
-  salaTipoId: number;
-  nomeTipo: string;
+export class SalaTipoModel {
+  constructor(public id: number, public nomeTipo: string) {}
 }

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { PersonalDataModel } from "src/app/models/personal-data.model";
+import { PersonalDataModel } from "../models/personal-data.model";
 
 @Injectable({
   providedIn: "root",

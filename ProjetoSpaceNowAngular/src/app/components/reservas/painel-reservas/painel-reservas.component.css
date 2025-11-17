@@ -1,0 +1,230 @@
+/* ===== Layout base ===== */
+.container {
+  padding: 20px;
+}
+
+.break-line {
+  border-bottom: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+.table-reserve {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table-reserve th {
+  background: var(--primary, #008f7a);
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
+  text-align: left;
+}
+
+.table-reserve td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.table-reserve tr:hover {
+  background: #f9f9f9;
+  transition: background 0.2s ease-in-out;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+/* ===== Botões ===== */
+.btn-sm {
+  font-size: 12px;
+  padding: 4px 8px;
+  margin: 2px;
+}
+
+.btn-space-now-green {
+  background-color: #008f7a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-space-now-green:hover {
+  background-color: #007462;
+}
+
+.btn-space-now-red {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-space-now-red:hover {
+  background-color: #c82333;
+}
+
+.btn-space-now-orange {
+  background-color: #fd7e14;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-space-now-orange:hover {
+  background-color: #e36c0b;
+}
+
+.btn-space-now-success {
+  background-color: #20c997;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-space-now-success:hover {
+  background-color: #17a589;
+}
+
+/* ===== Badge de status ===== */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 90px;
+}
+
+/* Cores por status */
+.status-reservada {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-cancelada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.status-pendente-sala {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-pendente-aprovacao {
+  background-color: #ffeaa7;
+  color: #856404;
+}
+
+.status-negada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* ===== Mensagem de tabela vazia ===== */
+.sem-reservas {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+  font-size: 16px;
+}
+
+/* ===== Seletor de Status ===== */
+.status-selector {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.item-status-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  position: relative;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s;
+  line-height: 1;
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.item-status-selector.active {
+  background-color: #006b5e;
+  color: white;
+}
+
+.item-circle {
+  background: #f15a24;
+  color: white;
+  border-radius: 50%;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pipe-space {
+  display: none;
+}
+
+/* Clearfix */
+.clear {
+  clear: both;
+}
+
+/* Ícones */
+.space-icon-s {
+  margin-right: 5px;
+}
+
+.space-icon-m {
+  margin-right: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .table-container {
+    font-size: 12px;
+  }
+  
+  .status-selector {
+    gap: 8px;
+  }
+  
+  .item-status-selector {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+  }
+}

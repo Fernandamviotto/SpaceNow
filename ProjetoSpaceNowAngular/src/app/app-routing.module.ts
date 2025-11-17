@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { LoginComponent } from "./auth/login/login.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
+import { LoginComponent } from "./components/login/login.component";
+import { DashboardComponent } from "./components/home/dashboard.component";
 import { AuthGuard } from "./guards/auth.guard";
-import { MinhasReservasComponent } from "./reservas/minhas-reservas/minhas-reservas.component";
-import { PainelReservasComponent } from "./reservas/painel-reservas/painel-reservas.component";
-import { SalasFormComponent } from "./salas/salas-form/salas-form.component";
-import { ReservaCriacaoComponent } from "./reservas/cadastrar-reservas/reserva-criacao.component";
-import { SalasListComponent } from "./salas/salas-list/salas-list.component";
+import { MinhasReservasComponent } from "./components/reservas/minhas-reservas/minhas-reservas.component";
+import { PainelReservasComponent } from "./components/reservas/painel-reservas/painel-reservas.component";
+import { SalasFormComponent } from "./components/sala/cadastro/salas-form.component";
+import { ReservaCriacaoComponent } from "./components/reservas/cadastrar-reservas/reserva-criacao.component";
+import { SalasListComponent } from "./components/sala/consulta/salas-list.component";
 
 const routes: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
