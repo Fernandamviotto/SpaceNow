@@ -6,3 +6,7 @@
 /ProjetoSpaceNow/.vs/ProjetoSpaceNow/v17
 /ProjetoSpaceNow/.vs/ProjetoSpaceNow
 /ProjetoSpaceNow/.vs/ProjectEvaluation
+
+# Ignore Visual Studio cache folders
+.vs/
+ProjetoSpaceNow/.vs/
