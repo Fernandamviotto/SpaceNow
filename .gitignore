@@ -6,3 +6,12 @@
 /ProjetoSpaceNow/.vs/ProjetoSpaceNow/v17
 /ProjetoSpaceNow/.vs/ProjetoSpaceNow
 /ProjetoSpaceNow/.vs/ProjectEvaluation
+
+# Angular
+/ProjetoSpaceNowAngular/node_modules
+/ProjetoSpaceNowAngular/dist
+/ProjetoSpaceNowAngular/.angular
+
+# .NET
+/ProjetoSpaceNow/ProjetoSpaceNow.Api/bin
+/ProjetoSpaceNow/ProjetoSpaceNow.Api/obj
