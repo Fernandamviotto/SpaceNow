@@ -1,3 +1,29 @@
-<main class="app-container">
-  <router-outlet></router-outlet>
-</main>
+<div class="header" *ngIf="mostrarHeader">
+  <div class="brand">SpaceNow</div>
+  <div class="nav">
+    <button class="btn" routerLink="/dashboard">Dashboard</button>
+    <button class="btn" routerLink="/salas">Salas</button>
+
+    <!-- Submenu de Reservas -->
+    <div class="submenu-container">
+      <button class="btn" (click)="toggleSubmenuReservas()">Reservas</button>
+      <div *ngIf="mostrarSubmenuReservas" class="submenu">
+        <button class="submenu-item" routerLink="/reservas/cadastrar">Cadastrar reservas</button>
+        <button class="submenu-item" routerLink="/reservas/minhas">Minhas reservas</button>
+        <button class="submenu-item" routerLink="/reservas/gestao">Gestão de reservas</button>
+      </div>
+    </div>
+
+    <button class="btn" *ngIf="auth.isLoggedIn()" (click)="logout()">Sair</button>
+  </div>
+</div>
+
+<div class="app-shell">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<div class="toast-wrap">
+  <div *ngFor="let t of toast.toasts" class="toast">{{ t }}</div>
+</div>
