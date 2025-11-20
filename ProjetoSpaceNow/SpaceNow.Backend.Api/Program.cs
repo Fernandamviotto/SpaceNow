@@ -4,6 +4,7 @@ using SpaceNow.Backend.Infrastructure.Data;
 using SpaceNow.Backend.Application.Interfaces;
 using SpaceNow.Backend.Infrastructure.Auth;
 using SpaceNow.Backend.Infrastructure.Repositories;
+using SpaceNow.Backend.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +48,7 @@ builder.Services.AddScoped<ISalaRepository, SalaRepository>();
 builder.Services.AddScoped<ITipoSalaRepository, TipoSalaRepository>();
 builder.Services.AddScoped<IResponsavelRepository, ResponsavelRepository>();
 builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
+builder.Services.AddScoped<IReservaService, ReservaService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Configure Swagger/OpenAPI
@@ -67,8 +69,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure Swagger UI
-// Enable in Development always, and in Production only if ENABLE_SWAGGER_IN_PROD=true
+
 var enableSwaggerInProd = Environment.GetEnvironmentVariable("ENABLE_SWAGGER_IN_PROD")?.ToLower() == "true";
 
 if (app.Environment.IsDevelopment() || enableSwaggerInProd)

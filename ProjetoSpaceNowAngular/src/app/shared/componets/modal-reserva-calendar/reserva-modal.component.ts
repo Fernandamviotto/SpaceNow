@@ -5,33 +5,39 @@ import {
   EventEmitter,
   OnChanges,
   SimpleChanges,
+  OnInit,
 } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { SalaModel } from "../../models/sala.model";
+import { SalaService } from "../../services/sala.service";
 
 @Component({
   selector: "app-reserva-modal",
   templateUrl: "./reserva-modal.component.html",
   styleUrls: ["./reserva-modal.component.css"],
 })
-export class ReservaModalComponent implements OnChanges {
+export class ReservaModalComponent implements OnChanges, OnInit {
   @Input() visible: boolean = false;
-  @Input() modalData: any = {}; // { id, title, roomId, start, end, ... }
-  @Input() rooms: any[] = []; // [{ id, title }, ...]
-
+  @Input() modalData: any = {};
+  @Input() rooms: SalaModel[] = [];
   @Output() save = new EventEmitter<any>();
   @Output() close = new EventEmitter<void>();
   @Output() delete = new EventEmitter<any>();
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private salaService: SalaService) {
     this.form = this.fb.group({
       title: ["", [Validators.required, Validators.maxLength(120)]],
       roomId: [null, Validators.required],
-      start: ["", Validators.required], // ISO / datetime-local
-      end: ["", Validators.required], // ISO / datetime-local
+      start: ["", Validators.required],
+      end: ["", Validators.required],
       notes: [""],
     });
+  }
+
+  ngOnInit() {
+    this.loadRooms();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -39,20 +45,29 @@ export class ReservaModalComponent implements OnChanges {
       this.patchForm(this.modalData);
     }
 
-    // quando abrir, garantir que o form esteja consistente
     if (changes["visible"] && this.visible && this.modalData) {
       this.patchForm(this.modalData);
     }
   }
 
+  private loadRooms() {
+    this.salaService.getSelectList().subscribe({
+      next: (res) => {
+        this.rooms = res;
+      },
+      error: (err) => {
+        console.error("Erro ao carregar salas:", err);
+      },
+    });
+  }
+
   private patchForm(data: any) {
-    // Conversões simples para inputs type=datetime-local (yyyy-MM-ddTHH:mm)
     const startLocal = data?.start ? this.toInputDatetimeLocal(data.start) : "";
     const endLocal = data?.end ? this.toInputDatetimeLocal(data.end) : "";
 
     this.form.patchValue({
       title: data?.title ?? "",
-      roomId: data?.roomId ?? data?.roomId ?? null,
+      roomId: data?.roomId ?? null,
       start: startLocal,
       end: endLocal,
       notes: data?.notes ?? "",
@@ -60,41 +75,37 @@ export class ReservaModalComponent implements OnChanges {
   }
 
   private toInputDatetimeLocal(iso: string): string {
-    // Se já estiver em formato 'YYYY-MM-DDTHH:mm' retorna como está; caso contrário tenta converter
     if (!iso) return "";
     const d = new Date(iso);
-    if (isNaN(d.getTime())) return iso;
     const pad = (n: number) => String(n).padStart(2, "0");
-    const yyyy = d.getFullYear();
-    const mm = pad(d.getMonth() + 1);
-    const dd = pad(d.getDate());
-    const hh = pad(d.getHours());
-    const min = pad(d.getMinutes());
-    return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(
+      d.getDate()
+    )}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   }
 
   private fromInputDatetimeLocal(value: string): string {
-    // retorna ISO (com timezone local)
     if (!value) return "";
-    const d = new Date(value);
-    return d.toISOString();
+    return new Date(value).toISOString();
   }
 
   onSave() {
+    // Valida o formulário
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
 
+    // Monta o payload com os dados do formulário
     const payload = {
-      ...this.modalData,
+      ...this.modalData, // mantém ID e outros campos existentes
       title: this.form.value.title,
-      roomId: this.form.value.roomId,
+      roomId: this.form.value.roomId, // id da sala selecionada
       start: this.fromInputDatetimeLocal(this.form.value.start),
       end: this.fromInputDatetimeLocal(this.form.value.end),
       notes: this.form.value.notes,
     };
 
+    // Emite para o componente pai tratar a persistência
     this.save.emit(payload);
   }
 
@@ -103,13 +114,11 @@ export class ReservaModalComponent implements OnChanges {
   }
 
   onDelete() {
-    // confirmação mínima
     if (confirm("Deseja realmente excluir esta reserva?")) {
       this.delete.emit(this.modalData);
     }
   }
 
-  // Helpers p/ template
   get titleCtrl() {
     return this.form.get("title");
   }

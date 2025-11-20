@@ -47,39 +47,25 @@ export class SalaService {
     return this.http.get<SalaModel>(`${this.baseUrl}/${id}`);
   }
 
-  /**
-   * Cria uma nova sala (com suporte a upload de imagem via FormData).
-   */
-  criar(model: SalaModel | FormData): Observable<SalaModel> {
-    // Se for um objeto simples, converte em FormData automaticamente
-    if (!(model instanceof FormData)) {
-      const formData = new FormData();
-      Object.entries(model).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          formData.append(key, value as any);
-        }
-      });
-      model = formData;
-    }
-
-    return this.http.post<SalaModel>(`${this.baseUrl}`, model);
+  atualizar(payload: {
+    id: number;
+    nome: string;
+    capacidade: number;
+    predioId: number;
+    tipoDeSalaId: number;
+    status: boolean;
+  }) {
+    return this.http.put(`/api/salas/${payload.id}`, payload);
   }
 
-  /**
-   * Atualiza uma sala existente (com suporte a upload de imagem via FormData).
-   */
-  atualizar(id: number, model: SalaModel | FormData): Observable<SalaModel> {
-    if (!(model instanceof FormData)) {
-      const formData = new FormData();
-      Object.entries(model).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          formData.append(key, value as any);
-        }
-      });
-      model = formData;
-    }
-
-    return this.http.put<SalaModel>(`${this.baseUrl}/${id}`, model);
+  criar(payload: {
+    nome: string;
+    capacidade: number;
+    predioId: number;
+    tipoDeSalaId: number;
+    status: boolean;
+  }) {
+    return this.http.post(`/api/salas`, payload);
   }
 
   /**

@@ -2,7 +2,7 @@ import { PersonalDataModel } from "./personal-data.model";
 import { ReservaTipoModel } from "./reserva-tipo.model";
 import { SalaModel } from "./sala.model";
 import { SolicitacaoAgendaStatusModel } from "./solicitacao-agenda-status.model";
-import { SolicitacaoReservaModel } from "./solicitacao-reserva.model";
+import { CreateReservaRequest } from "./solicitacao-reserva.model";
 
 export class SolicitacaoAgendaModel {
   agendaId: number;
@@ -26,7 +26,7 @@ export class SolicitacaoAgendaModel {
   dtAprovacao: string;
   aliasCadastro: string;
   dtCadastro: string;
-  reserva: SolicitacaoReservaModel;
+  reserva: CreateReservaRequest;
   status: boolean;
   tipoString: string;
   perfil: string;
@@ -35,7 +35,7 @@ export class SolicitacaoAgendaModel {
     this.sala = new SalaModel();
     this.tipo = new ReservaTipoModel();
     this.agendaStatus = new SolicitacaoAgendaStatusModel();
-    this.reserva = new SolicitacaoReservaModel();
+    this.reserva = new CreateReservaRequest();
     this.motivoNegacao = "";
     this.motivoReserva = "";
   }
@@ -51,9 +51,8 @@ export class SolicitacaoAgendaModel {
     this.nomeCadastro = solicitacaoAgenda.nomeCadastro;
     this.dtCadastro = solicitacaoAgenda.dtCadastro;
     this.data = solicitacaoAgenda.data;
-    this.reserva.dataInicioReserva =
-      solicitacaoAgenda.reserva.dataInicioReserva;
-    this.reserva.dataFimReserva = solicitacaoAgenda.reserva.dataFimReserva;
+    this.reserva.dataInicio = solicitacaoAgenda.reserva.dataInicio;
+    this.reserva.dataFim = solicitacaoAgenda.reserva.dataFim;
     this.horaInicio = solicitacaoAgenda.horaInicio.substr(0, 5);
     this.horaFim = solicitacaoAgenda.horaFim.substr(0, 5);
     this.motivoReserva = solicitacaoAgenda.motivoReserva;
@@ -69,31 +68,25 @@ export class SolicitacaoAgendaModel {
   }
 
   updateAgenda(
-    solicitacaoReserva: SolicitacaoReservaModel,
+    solicitacaoReserva: CreateReservaRequest,
     agenda: SolicitacaoAgendaModel,
-    personalInfo: PersonalDataModel
+    personalInfo: PersonalDataModel,
+    tipoReserva: ReservaTipoModel
   ) {
-    solicitacaoReserva.dataFimReserva = solicitacaoReserva.dataInicioReserva;
+    solicitacaoReserva.dataFim = solicitacaoReserva.dataInicio;
     this.agendaId = agenda.agendaId;
-    this.aliasCadastro = solicitacaoReserva.aliasCadastro;
-    this.nomeCadastro = solicitacaoReserva.nomeCadastro;
+    this.aliasCadastro = solicitacaoReserva.solicitante;
     this.aliasAlteracao = personalInfo.login;
     this.nomeAlteracao = personalInfo.fullName;
-    this.dtCadastro = solicitacaoReserva.dtCadastro;
-    this.data = solicitacaoReserva.dataInicioReserva;
-    this.horaInicio = solicitacaoReserva.horaInicioReserva.substr(0, 5);
-    this.horaFim = solicitacaoReserva.horaFimReserva.substr(0, 5);
-    this.motivoReserva = solicitacaoReserva.motivo;
+    this.data = solicitacaoReserva.dataInicio;
+    this.horaInicio = solicitacaoReserva.horaInicio.substr(0, 5);
+    this.horaFim = solicitacaoReserva.horaFim.substr(0, 5);
+    this.motivoReserva = solicitacaoReserva.titulo;
     this.quantidadePessoas = solicitacaoReserva.quantidadePessoas;
-    this.reservaId = solicitacaoReserva.reservaId;
-    this.dtAlteracao = solicitacaoReserva.dtAlteracao;
+    this.reservaId = solicitacaoReserva.id;
     this.salaId = solicitacaoReserva.salaId;
     this.reserva = solicitacaoReserva;
-    this.reservaTipoId = solicitacaoReserva.reservaTipoId;
-
-    this.motivoNegacao = agenda.motivoNegacao;
-    this.dtAprovacao = agenda.dtAprovacao;
+    this.reservaTipoId = tipoReserva.reservaTipoId;
     this.status = true;
-    this.perfil = solicitacaoReserva.perfil;
   }
 }

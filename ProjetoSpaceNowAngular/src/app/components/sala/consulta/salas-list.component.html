@@ -28,7 +28,6 @@
         <thead>
           <tr>
             <th>Nome da Sala</th>
-            <th>Andar</th>
             <th>Prédio</th>
             <th>Capacidade</th>
             <th>Tipo</th>
@@ -36,17 +35,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of salas" (click)="getRoomDetail(item.salaId)">
-            <td class="summaryze">{{ item.apelido }}</td>
-            <td>{{ item.andar.apelido }}</td>
-            <td>{{ item.andar.predio.apelido }}</td>
-            <td>{{ item.capacidade }}</td>
-            <td>{{ item.salaTipo.nomeTipo }}</td>
+          <tr *ngFor="let item of salas" (click)="getRoomDetail(item.id)">
+            <td class="summaryze">{{ item.nome || "-" }}</td>
+            <td>{{ item.predioNome || "-" }}</td>
+            <td>{{ item.capacidade || "-" }}</td>
+            <td>{{ item.tipoDeSalaNome || "Não definido" }}</td>
+
             <td class="center">
               <button
                 type="button"
                 class="btn btn-space-now-green btn-row-time"
-                (click)="editRoom(item.salaId); $event.stopPropagation()"
+                (click)="editRoom(item.id); $event.stopPropagation()"
               >
                 Editar
               </button>

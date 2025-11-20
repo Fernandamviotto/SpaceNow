@@ -6,9 +6,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppRoutingModule } from "./app-routing.module";
 
 import { FullCalendarModule } from "@fullcalendar/angular";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
 
 // Angular Material
 import { MatDialogModule } from "@angular/material/dialog";
@@ -35,8 +32,6 @@ import { ModalComponent } from "./shared/componets/modal/modal.component";
 import { SpanErrorValidationComponent } from "./shared/componets/span-error-validation/span-error-validation.component";
 import { MockService } from "./shared/mock/mock.service";
 import { AuthService } from "./shared/services/auth.service";
-import { MockReservaService } from "./shared/services/mock-reserva.service";
-import { ReservaService } from "./shared/services/reserva.service";
 import { ToastService } from "./shared/services/toast.service";
 
 @NgModule({
@@ -72,6 +67,7 @@ import { ToastService } from "./shared/services/toast.service";
     NgxPaginationModule,
     CommonModule,
   ],
+  exports: [DashboardComponent],
   providers: [
     AuthService,
     MockService,

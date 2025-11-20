@@ -20,36 +20,26 @@ public class SalaController : ControllerBase
 
     [HttpGet("consulta")]
     public async Task<ActionResult<SalaConsultaResponse>> GetConsulta(
-        [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = 20,
-        [FromQuery] bool ativo = true,
-        [FromQuery] string? nome = null,
-        [FromQuery] int? predioId = null,
-        [FromQuery] int? tipoDeSalaId = null)
+    [FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 20,
+    [FromQuery] bool ativo = true,
+    [FromQuery] string? nome = null,
+    [FromQuery] int? predioId = null,
+    [FromQuery] int? tipoDeSalaId = null)
     {
         var (items, totalCount) = await _salaRepository.GetConsultaAsync(
-            pageNumber, pageSize, ativo, nome, predioId, tipoDeSalaId);
+            pageNumber, pageSize, ativo, nome, predioId, tipoDeSalaId
+        );
 
-        var dtos = items.Select(s => new SalaDto
+        return Ok(new SalaConsultaResponse
         {
-            SalaId = s.Id,
-            Nome = s.Nome,
-            Capacidade = s.Capacidade,
-            PredioId = s.PredioId,
-            TipoDeSalaId = s.TipoDeSalaId,
-            Status = s.Status
-        }).ToList();
-
-        var response = new SalaConsultaResponse
-        {
-            Items = dtos,
+            Items = items.ToList(),
             TotalCount = totalCount,
             PageNumber = pageNumber,
             PageSize = pageSize
-        };
-
-        return Ok(response);
+        });
     }
+
 
     [HttpGet("{id}")]
     public async Task<ActionResult<SalaDto>> GetById(int id)
@@ -70,6 +60,20 @@ public class SalaController : ControllerBase
 
         return Ok(dto);
     }
+
+    [HttpGet("select")]
+    public async Task<ActionResult<IEnumerable<SalaDto>>> GetSelect()
+    {
+        var salas = await _salaRepository.GetAllAsync(); // ou um método específico para dropdown
+        var dtos = salas.Select(s => new SalaDto
+        {
+            SalaId = s.Id,
+            Nome = s.Nome
+        }).ToList();
+
+        return Ok(dtos);
+    }
+
 
     [HttpPost]
     public async Task<ActionResult<SalaDto>> Create([FromBody] CreateSalaRequest request)
