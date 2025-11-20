@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
+import { CreateReservaRequest, ReservaDto } from "../models/solicitacao-reserva.model";
 
 export interface Reserva {
   id: number;
@@ -29,8 +30,8 @@ export class ReservaService {
     return this.http.get<Reserva>(`${this.apiUrl}/${id}`);
   }
 
-  criarReserva(reserva: Omit<Reserva, "id" | "status">): Observable<Reserva> {
-    return this.http.post<Reserva>(this.apiUrl, reserva);
+  criarReserva(payload: CreateReservaRequest): Observable<ReservaDto> {
+    return this.http.post<ReservaDto>(this.apiUrl, payload);
   }
 
   atualizarReserva(id: number, reserva: Partial<Reserva>): Observable<Reserva> {

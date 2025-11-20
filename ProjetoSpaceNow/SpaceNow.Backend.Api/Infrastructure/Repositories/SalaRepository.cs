@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SpaceNow.Backend.Application.DTOs;
 using SpaceNow.Backend.Application.Interfaces;
 using SpaceNow.Backend.Domain.Entities;
 using SpaceNow.Backend.Infrastructure.Data;
@@ -14,20 +15,23 @@ public class SalaRepository : ISalaRepository
         _context = context;
     }
 
-    public async Task<(IEnumerable<Sala> Items, int TotalCount)> GetConsultaAsync(
-        int pageNumber, 
-        int pageSize, 
-        bool? ativo = null,
-        string? nome = null,
-        int? predioId = null,
-        int? tipoDeSalaId = null)
+    public async Task<(IEnumerable<SalaDto> Items, int TotalCount)> GetConsultaAsync(
+    int pageNumber,
+    int pageSize,
+    bool? ativo = null,
+    string? nome = null,
+    int? predioId = null,
+    int? tipoDeSalaId = null)
     {
-        var query = _context.Salas.AsQueryable();
+        var query = _context.Salas
+            .Include(s => s.Predio)
+            .Include(s => s.TipoDeSala)
+            .AsQueryable();
 
         if (ativo.HasValue)
             query = query.Where(s => s.Status == ativo.Value);
 
-        if (!string.IsNullOrEmpty(nome))
+        if (!string.IsNullOrWhiteSpace(nome))
             query = query.Where(s => s.Nome.Contains(nome));
 
         if (predioId.HasValue)
@@ -37,17 +41,44 @@ public class SalaRepository : ISalaRepository
             query = query.Where(s => s.TipoDeSalaId == tipoDeSalaId.Value);
 
         var totalCount = await query.CountAsync();
+
         var items = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
+            .Select(s => new SalaDto
+            {
+                SalaId = s.Id,
+                Nome = s.Nome,
+                Capacidade = s.Capacidade,
+                PredioId = s.PredioId,
+                PredioNome = s.Predio.Nome,
+                TipoDeSalaId = s.TipoDeSalaId,
+                TipoDeSalaNome = s.TipoDeSala.NomeTipo,
+                Status = s.Status
+            })
             .ToListAsync();
 
         return (items, totalCount);
     }
 
+
+
+
     public async Task<Sala?> GetByIdAsync(int id)
     {
         return await _context.Salas.FindAsync(id);
+    }
+
+    public async Task<IEnumerable<Sala>> GetAllAsync()
+    {
+        return await _context.Salas
+            .Where(s => s.Status)
+            .Select(s => new Sala
+            {
+                Id = s.Id,
+                Nome = s.Nome
+            })
+            .ToListAsync();
     }
 
     public async Task<Sala> CreateAsync(Sala sala)

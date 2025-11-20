@@ -2,7 +2,7 @@
   <div class="box-classroom">
     <h2 class="titulo-secao">
       <span class="icon">💻</span>
-      {{ sala.nome ? sala.nome : 'Nova Sala' }}
+      {{ sala.nome ? sala.nome : "Nova Sala" }}
     </h2>
   </div>
 
@@ -11,7 +11,13 @@
       <!-- Nome -->
       <div class="form-section">
         <label>Nome</label>
-        <input type="text" name="nome" [(ngModel)]="sala.nome" required placeholder="Ex: Sala 101" />
+        <input
+          type="text"
+          name="nome"
+          [(ngModel)]="sala.nome"
+          required
+          placeholder="Ex: Sala 101"
+        />
       </div>
 
       <!-- LOCALIZAÇÃO -->
@@ -22,17 +28,11 @@
       <div class="grid-2">
         <div>
           <label>Prédio</label>
-          <select name="predio" [(ngModel)]="sala.predio_id" required>
+          <select name="predio" [(ngModel)]="sala.predioNome" required>
             <option value="" disabled selected>Selecione</option>
-            <option *ngFor="let p of predios" [value]="p.id">{{ p.nome }}</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Andar</label>
-          <select name="andar" [(ngModel)]="sala.andar">
-            <option value="" disabled selected>Selecione</option>
-            <option *ngFor="let andar of [1,2,3,4,5]">{{ andar }}</option>
+            <option *ngFor="let p of predios" [value]="p.id">
+              {{ p.nome }}
+            </option>
           </select>
         </div>
       </div>
@@ -45,24 +45,36 @@
       <div class="grid-4">
         <div>
           <label>Capacidade</label>
-          <input type="number" name="capacidade" [(ngModel)]="sala.capacidade" min="1" required />
+          <input
+            type="number"
+            name="capacidade"
+            [(ngModel)]="sala.capacidade"
+            min="1"
+            required
+          />
         </div>
 
         <div>
           <label>Tipo de sala</label>
-          <select name="tipo" [(ngModel)]="sala.tipo_sala_id" required>
+          <select name="tipo" [(ngModel)]="sala.tipoDeSalaNome" required>
             <option value="" disabled selected>Selecione</option>
-            <option *ngFor="let t of tiposSala" [value]="t.id">{{ t.descricao }}</option>
+            <option *ngFor="let t of tiposSala" [value]="t.id">
+              {{ t.descricao }}
+            </option>
           </select>
         </div>
       </div>
 
       <div class="actions">
         <button type="button" class="btn-cancel">Cancelar</button>
-        <button type="submit" class="btn-save" [disabled]="salaForm.invalid">Salvar</button>
+        <button type="submit" class="btn-save" [disabled]="salaForm.invalid">
+          Salvar
+        </button>
       </div>
 
-      <p class="note">O botão será habilitado após o preenchimento do formulário</p>
+      <p class="note">
+        O botão será habilitado após o preenchimento do formulário
+      </p>
     </div>
   </form>
 </div>

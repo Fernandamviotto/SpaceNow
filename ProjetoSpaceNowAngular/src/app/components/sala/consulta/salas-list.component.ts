@@ -1,161 +1,111 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from "@angular/router";
+import { SalaService } from "../../../shared/services/sala.service";
+import { SalaModel } from "../../../shared/models/sala.model";
+import { SalaTipoModel } from "../../../shared/models/sala-tipo.model";
 import { ModalDetalhesSalaComponent } from "../../../shared/componets/modal-detalhes-sala/modal-detalhes-sala.component";
 import { ModalComponent } from "../../../shared/componets/modal/modal.component";
-import { AppSettings } from "../../../shared/componets/app-settings";
-import { SalaService } from "../../../shared/services/sala.service";
-import { MockSalaService } from "../../../shared/services/mock-sala.service";
-import { UtilComponent } from "../../../shared/componets/util.component";
-import { SalaTipoModel } from "../../../shared/models/sala-tipo.model";
-import { SalaModel } from "../../../shared/models/sala.model";
-import { SelectOption } from "../../../shared/models/select-option.model";
-import { SolicitacaoAgendaModel } from "../../../shared/models/solicitacao-agenda.model";
 
 @Component({
   selector: "app-salas-list",
   templateUrl: "./salas-list.component.html",
   styleUrls: ["./salas-list.component.css"],
 })
-export class SalasListComponent implements OnInit, OnDestroy {
-  agenda: SolicitacaoAgendaModel = new SolicitacaoAgendaModel();
-  sala: SalaModel = new SalaModel();
+export class SalasListComponent implements OnInit {
   salas: SalaModel[] = [];
-  admin: boolean = false;
-
-  currentPage: number = 1;
   currentIndex: number = 0;
+  currentPage: number = 1;
   totalItems: number = 0;
-
-  util = UtilComponent;
-  appSettings = AppSettings;
-
-  tiposDeSala: SelectOption[] = [];
-  predios: SelectOption[] = [];
-  listRoomType: SalaTipoModel[] = [];
+  predios: any[] = [];
+  tiposSala: any[] = [];
 
   constructor(
-    private route: Router,
+    private router: Router,
     private _dialog: MatDialog,
-    private _salaService: SalaService,
-    private _mockSalaService: MockSalaService // 👈 injete o mock
+    private _salaService: SalaService
   ) {}
 
-  ngOnInit() {
-    this.getRooms();
+  ngOnInit(): void {
+    this.getRooms(true); // inicia mostrando salas ativas
   }
 
-  ngOnDestroy() {}
-
-  /** 🔹 Busca as salas (ativas ou inativas) */
   getRooms(ativas: boolean = true) {
     this._salaService
-      .getConsultaGrid(this.prepararFiltroSala(), this.currentPage, 20, ativas)
+      .getConsultaGrid({ ativo: ativas }, this.currentPage, 20, ativas)
       .subscribe({
-        next: (response) => {
-          if (response?.result?.length) {
-            // Normalize API shape to match SalaModel[] so TypeScript compiles
-            this.salas = (response.result as any[]).map((r: any) => {
-              return {
-                ...r,
-                // ensure properties expected by SalaModel exist
-                responsaveis: r.responsaveis ?? [],
-                predioId: r.predioId ?? r.andar?.predio?.predioId ?? null,
-                tipoDeSalaId: r.tipoDeSalaId ?? r.salaTipo?.id ?? null,
-                tipoDeSala:
-                  r.tipoDeSala ??
-                  (r.salaTipo
-                    ? { id: r.salaTipo.id, nomeTipo: r.salaTipo.nomeTipo }
-                    : null),
-              } as SalaModel;
-            });
-            this.totalItems = response.pagination.totalRows;
-            this.currentPage = response.pagination.pageNumber;
+        next: (response: any) => {
+          if (response?.items?.length) {
+            // Preenche predio e tipo de sala para exibição
+            this.salas = response.items.map((r: any) => ({
+              salaId: r.salaId,
+              nome: r.nome,
+              capacidade: r.capacidade,
+              predioId: r.predioId,
+              predioNome: r.predioNome, // já vem do backend
+              tipoDeSalaId: r.tipoDeSalaId,
+              tipoDeSalaNome: r.tipoDeSalaNome, // já vem do backend
+              status: r.status,
+            }));
+            this.totalItems = response.totalCount;
+            this.currentPage = response.pageNumber ?? 1;
           } else {
-            console.warn("API retornou vazio, usando dados mockados...");
-            this.carregarMock(ativas);
+            this.salas = [];
+            this.totalItems = 0;
           }
         },
         error: (err) => {
           console.error("Erro ao buscar salas da API:", err);
-          this.carregarMock(ativas); // fallback automático
+          this.salas = [];
+          this.totalItems = 0;
         },
       });
   }
 
-  /** 🔹 Fallback para dados mockados */
-  carregarMock(ativas: boolean) {
-    this._mockSalaService
-      .getConsultaGrid(this.prepararFiltroSala(), this.currentPage, 20, ativas)
-      .subscribe((response) => {
-        this.salas = (response.result as any[]).map((r: any) => {
-          return {
-            ...r,
-            // ensure properties expected by SalaModel exist
-            responsaveis: r.responsaveis ?? [],
-            predioId: r.predioId ?? r.andar?.predio?.predioId ?? null,
-            tipoDeSalaId: r.tipoDeSalaId ?? r.salaTipo?.id ?? null,
-            tipoDeSala:
-              r.tipoDeSala ??
-              (r.salaTipo
-                ? { id: r.salaTipo.id, nomeTipo: r.salaTipo.nomeTipo }
-                : null),
-          } as SalaModel;
-        });
-        this.totalItems = response.pagination.totalRows;
-        this.currentPage = response.pagination.pageNumber;
-      });
+  /** 🔹 Tabs: Ativas/Inativas */
+  onTabClicked(index: number): void {
+    this.currentIndex = index;
+    this.getRooms(index === 0); // 0 = ativas, 1 = inativas
   }
 
-  /** 🔹 Detalhes da sala (abre modal) */
+  /** 🔹 Abrir modal detalhes da sala */
   getRoomDetail(salaId: number) {
     const dialogRef = this._dialog.open(ModalDetalhesSalaComponent, {
       data: { salaId },
     });
-
-    dialogRef.afterClosed().subscribe(() => {
-      document.querySelectorAll(".modal-backdrop").forEach((e) => e.remove());
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe(() =>
+        document.querySelectorAll(".modal-backdrop").forEach((e) => e.remove())
+      );
   }
 
   /** 🔹 Paginação */
   changePage(event: number) {
     this.currentPage = event;
-    this.getRooms();
+    this.getRooms(this.currentIndex === 0);
   }
 
+  /** 🔹 Adicionar nova sala */
   addRoom() {
     this._salaService.id = null;
     sessionStorage.removeItem("roomId");
-    this.route.navigate(["/salas/novo"]);
+    this.router.navigate(["/salas/novo"]);
   }
 
   /** 🔹 Editar sala */
   editRoom(id: number) {
     this._salaService.id = id;
-    this.route.navigate(["/salas/novo"]);
+    this.router.navigate(["/salas/novo"]);
   }
 
+  /** 🔹 Mostrar mensagem genérica */
   showMessage(message?: string) {
     const dialogRef = this._dialog.open(ModalComponent, {
-      data: {
-        title: "Space Now",
-        message: message || "Space Now",
-      },
+      data: { title: "Space Now", message: message || "Space Now" },
     });
-
-    dialogRef.afterClosed().subscribe(() => this.getRooms());
-  }
-
-  /** 🔹 Clique nas abas (ativas/inativas) */
-  onTabClicked(index: number): void {
-    this.currentIndex = index;
-    if (index === 0) this.getRooms(true);
-    if (index === 1) this.getRooms(false);
-  }
-
-  /** 🔹 Monta filtro de sala (placeholder para sua lógica) */
-  prepararFiltroSala() {
-    return {}; // Adapte se houver filtros aplicáveis
+    dialogRef
+      .afterClosed()
+      .subscribe(() => this.getRooms(this.currentIndex === 0));
   }
 }

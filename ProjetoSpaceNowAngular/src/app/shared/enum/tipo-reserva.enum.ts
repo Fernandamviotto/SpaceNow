@@ -1,6 +1,7 @@
 export enum TipoReserva {
-  EVENTO = "Evento",
-  AULA = "Aula",
-  REUNIAO = "Reunião",
-  OUTRO = "Outro",
+  Reunião = 1,
+  Aula = 2,
+  Atendimento = 3,
+  Evento = 4,
+  Outros = 5,
 }

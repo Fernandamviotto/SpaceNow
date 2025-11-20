@@ -1,15 +1,24 @@
 import { Injectable } from "@angular/core";
-import { of } from "rxjs";
-import { delay } from "rxjs/operators";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
+
+export interface TipoSala {
+  id: number;
+  nomeTipo: string;
+}
 
 @Injectable({ providedIn: "root" })
 export class SalaTipoService {
-  getAll() {
-    const tipos = [
-      { nomeTipo: "Laboratório" },
-      { nomeTipo: "Sala de Aula" },
-      { nomeTipo: "Auditório" },
-    ];
-    return of(tipos).pipe(delay(300));
+  private apiUrl = `${environment.apiBaseUrl}/salas/tipos`;
+
+  constructor(private http: HttpClient) {}
+
+  getAll(): Observable<TipoSala[]> {
+    return this.http.get<TipoSala[]>(this.apiUrl);
+  }
+
+  getById(id: number): Observable<TipoSala> {
+    return this.http.get<TipoSala>(`${this.apiUrl}/${id}`);
   }
 }

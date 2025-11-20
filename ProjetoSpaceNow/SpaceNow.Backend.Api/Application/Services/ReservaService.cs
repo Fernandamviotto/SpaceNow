@@ -1,6 +1,7 @@
 using SpaceNow.Backend.Application.DTOs;
 using SpaceNow.Backend.Application.Interfaces;
 using SpaceNow.Backend.Domain.Entities;
+using SpaceNow.Backend.Domain.Enums;
 
 namespace SpaceNow.Backend.Application.Services;
 
@@ -27,14 +28,23 @@ public class ReservaService : IReservaService
 
     public async Task<ReservaDto> CreateReservaAsync(CreateReservaRequest request)
     {
+        // Converte string → enum
+        if (!Enum.TryParse<ReservaTipoEnum>(request.Tipo, true, out var tipoEnum))
+            throw new ArgumentException($"Tipo inválido: {request.Tipo}");
+
         var reserva = new Reserva
         {
             SalaId = request.SalaId,
             Sala = request.Sala,
-            Tipo = request.Tipo,
+
+            Tipo = tipoEnum, // <─ ENUM OK
+
             Solicitante = request.Solicitante,
-            DataInicio = request.DataInicio,
-            DataFim = request.DataFim,
+
+            // Sem conversão:
+            DataInicio = request.DataInicio, // string
+            DataFim = request.DataFim,       // string
+
             Status = "Pendente",
             QuantidadePessoas = request.QuantidadePessoas,
             CreatedAt = DateTime.UtcNow
@@ -43,6 +53,9 @@ public class ReservaService : IReservaService
         var created = await _reservaRepository.CreateAsync(reserva);
         return MapToDto(created);
     }
+
+
+
 
     public async Task<ReservaDto> AprovarReservaAsync(int id)
     {
@@ -86,12 +99,16 @@ public class ReservaService : IReservaService
         {
             Id = reserva.Id,
             Sala = reserva.Sala,
-            Tipo = reserva.Tipo,
+
+            Tipo = reserva.Tipo.ToString(),
+
             Solicitante = reserva.Solicitante,
-            DataInicio = reserva.DataInicio,
-            DataFim = reserva.DataFim,
+            DataInicio = reserva.DataInicio, 
+            DataFim = reserva.DataFim, 
             Status = reserva.Status,
             QuantidadePessoas = reserva.QuantidadePessoas
         };
     }
+
+
 }

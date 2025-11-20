@@ -10,7 +10,7 @@ import { ReservaCriacaoComponent } from "./components/reservas/cadastrar-reserva
 import { SalasListComponent } from "./components/sala/consulta/salas-list.component";
 
 const routes: Routes = [
-  { path: "", redirectTo: "dashboard", pathMatch: "full" },
+  { path: "", redirectTo: "login", pathMatch: "full" },
 
   { path: "login", component: LoginComponent },
 
@@ -39,7 +39,7 @@ const routes: Routes = [
     ],
   },
 
-  { path: "**", redirectTo: "dashboard" }, // rota fallback
+  { path: "**", redirectTo: "login" }, // rota fallback
 ];
 
 @NgModule({

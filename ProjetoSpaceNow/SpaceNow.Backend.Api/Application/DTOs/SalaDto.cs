@@ -6,10 +6,12 @@ public class SalaDto
     public string Nome { get; set; } = string.Empty;
     public int Capacidade { get; set; }
     public int PredioId { get; set; }
+    public string PredioNome { get; set; } = string.Empty;
     public int TipoDeSalaId { get; set; }
-    public TipoDeSalaDto? TipoDeSala { get; set; }
+    public string TipoDeSalaNome { get; set; } = string.Empty;
     public bool Status { get; set; }
 }
+
 
 public class SalaConsultaResponse
 {
